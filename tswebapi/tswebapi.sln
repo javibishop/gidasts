@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2043
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "tswebapi", "tswebapi\tswebapi.csproj", "{F23047D0-E892-4373-855C-BBCB59945449}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TSModel", "TSModel\TSModel.csproj", "{B543E9AE-4056-44F4-961B-BD6848E428FA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F23047D0-E892-4373-855C-BBCB59945449}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F23047D0-E892-4373-855C-BBCB59945449}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F23047D0-E892-4373-855C-BBCB59945449}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F23047D0-E892-4373-855C-BBCB59945449}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B543E9AE-4056-44F4-961B-BD6848E428FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B543E9AE-4056-44F4-961B-BD6848E428FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B543E9AE-4056-44F4-961B-BD6848E428FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B543E9AE-4056-44F4-961B-BD6848E428FA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8F34D71A-7E46-491F-89BB-6CCFFD9A875D}
+	EndGlobalSection
+EndGlobal
