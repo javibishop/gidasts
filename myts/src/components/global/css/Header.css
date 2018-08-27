@@ -1,0 +1,47 @@
+.Header {
+  text-align: center;
+  background-color: #222;
+  height: 160px;
+  padding: 20px;
+  color: white;
+}
+
+.Header-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.Header-title {
+  font-size: 1.5em;
+}
+
+.Header-intro {
+  font-size: large;
+}
+
+.Menu{
+  margin:0;
+  padding: 0;
+  list-style: none;
+}
+
+.Menu li{
+  display: inline-block;
+  padding-right: 10px;
+
+  padding-right: 10px;
+}
+
+.Menu li a{
+  color: grey;
+  text-decoration: none;
+}
+
+.Menu li a:hover{
+  color: #EEE;
+}
+
+@keyframes Header-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
