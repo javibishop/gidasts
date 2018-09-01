@@ -1,0 +1,24 @@
+al generar la migration.
+	elegir proyecto model.
+	add-migration xxx
+	update-database
+
+Hay dos archivos q definen el modelo.
+	TsModelo
+	TsModeloModelSnapshot
+	
+resetear toda la migracion.
+https://weblog.west-wind.com/posts/2016/Jan/13/Resetting-Entity-Framework-Migrations-to-a-clean-Slate
+
+
+mysql core ef
+https://github.com/jasonsturges/mysql-dotnet-core
+
+
+mysql nh
+configurar
+https://www.codeproject.com/Tips/1243873/Work-with-Fluent-NHibernate-in-Core 
+ejemplo basico.
+https://www.c-sharpcorner.com/article/work-with-fluent-nhibernate-in-core-2-0/
+Herencia
+https://www.codeproject.com/Articles/232034/Inheritance-mapping-strategies-in-Fluent-Nhibernat

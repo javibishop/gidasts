@@ -1,0 +1,30 @@
+index.js punto de entrada de react.
+propstypes 
+	es para el uso de props que es lo que se usa para pasar variables desde el la vista donde se usa el componente al componente.
+
+	
+state
+	cambia el objeto state -> ejecuta el metodo render de todos los componentes.
+	
+	
+	
+	https://www.thegreatcodeadventure.com/react-redux-tutorial-part-v-the-show-feature/
+	
+	
+	
+	0720132188000023159990
+	
+	27059338833
+	
+	Apellido y Nombre TANTUCCI RAQUEL ALICIA	Documento DU 5933883	CUIL 27059338833
+Fecha de Nacimiento 25/01/1949	Género Femenino
+
+
+y si un dia dejamos un mani sin comen? que pasara con el? se sentira mal hasta el dia de su muerte por no haber sido comido? ayyy pobre mani! por eso, siempre siempre, revisar la bolsa y asegurarse de que todos hayan sidos
+abiertos de su bolsita de dormir y comidos! ellos no pueden ser desperdiciados cuando son tan ricos! ay mani mani, hazme feliz, hazme feliz pasando por mi boca, jugando entre mis dientes, mojandote en mi lengua y viajando 
+hacia mi estomago! ay mani mani, hazme feliz!
+
+
+https://www.ebay.com/itm/9004-PHILIPS-X-treme-Vision-100-More-Light-More-Vision-Halogen-bulbs-DOT-12V/253598348750?epid=218581930&hash=item3b0ba3b5ce%3Ag%3AhBQAAOSwP25a6emG&_sacat=0&_nkw=NEW+PHILIPS+CRYSTAL+VISION+9004+xvb2&_from=R40&rt=nc&_trksid=m570.l1313
+
+R-5474-00027790
