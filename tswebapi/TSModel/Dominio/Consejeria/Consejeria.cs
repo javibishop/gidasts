@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace TSModel.Dominio
+namespace TSModel.Dominio.Consejeria
 {
-    public class Consejeria
+    public class Consejeria : EntidadBase
     {
-        public int Numero { get; set; }
-        public int PacienteId { get; set; }
-        public DateTime FechaIngreso { get; set; }
-        public int Residente1Id { get; set; }
-        public int Residente2Id { get; set; }
-        public string Observacion { get; set; }
+        public virtual  int Numero { get; set; }
+        public virtual  DateTime FechaIngreso { get; set; }
+        public virtual  Usuarie Usuarie1 { get; set; }
+        public virtual  Usuarie Usuarie2 { get; set; }
+        public virtual  Usuaria Usuaria { get; set; }
+        public virtual  string Observacion { get; set; }
     }
 }

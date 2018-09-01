@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
-using TSModel;
+using NHibernate;
+using tswebapi.NH;
 
 namespace tswebapi
 {
@@ -27,11 +20,20 @@ namespace tswebapi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-            services.AddDbContext<TsModelo>(options =>options.UseMySql("server=localhost;port=3306;database=ts;uid=root;password=mysql;",
-            mysqlOptions =>
-            {
-                mysqlOptions.ServerVersion(new Version(5, 6, 17), ServerType.MySql); // replace with your Server Version and Type
-            }));
+            services.AddSingleton<SessionFactory>();
+
+            services.AddSingleton<ISessionFactory>((provider) => {
+                var cfg = provider.GetService<SessionFactory>();
+                return cfg.BuildSessionFactory();
+            });
+
+            services.AddScoped<ISession>((provider) => {
+                var factory = provider.GetService<ISessionFactory>();
+                return factory.OpenSession();
+            });
+
+
+            //services.AddScoped(x => x.GetService<SessionFactory>().OpenSession());
 
             services.AddMvc();
         }

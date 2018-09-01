@@ -2,38 +2,36 @@
 
 namespace TSModel.Dominio.Consejeria
 {
-    public class GestaActual
+    public class GestaActual: EntidadBase
     {
-        public int ConsejeriaId { get; set; }
-        public Consejeria Consejeria { get; set; }
+        public virtual Consejeria Consejeria { get; set; }
+        public virtual bool EnteroPorTestOrina { get; set; }
+        public virtual bool EnteroPorTestSangre { get; set; }
+        public virtual bool EnteroPorEcografia{ get; set; }
+        public virtual DateTime EnteroFecha { get; set; }
+        public virtual string FUM { get; set; }
+        public virtual string EGFUM { get; set; }
+        public virtual bool IntentoSuprimir { get; set; }
+        public virtual string IntentoSuprimirObservaciones { get; set; }
+        public virtual bool Lactancia { get; set; }
+        public virtual bool LoComento { get; set; }
+        public virtual string LoComentoAQuien { get; set; }
+        public virtual bool ILE { get; set; }
+        public virtual bool CausaViolacion { get; set; }
+        public virtual bool CausaSaludFisica{ get; set; }
+        public virtual bool CausaSaludPSI { get; set; }
+        public virtual bool CausaSaludSocial { get; set; }
+        public virtual bool CausaSinVE { get; set; }
 
-        public bool EnteroPorTestOrina { get; set; }
-        public bool EnteroPorTestSangre { get; set; }
-        public bool EnteroPorEcografia{ get; set; }
-        public DateTime EnteroFecha { get; set; }
-        public string FUM { get; set; }
-        public string EGFUM { get; set; }
-        public bool IntentoSuprimir { get; set; }
-        public string IntentoSuprimirObservaciones { get; set; }
-        public bool Lactancia { get; set; }
-        public bool LoComento { get; set; }
-        public string LoComentoAQuien { get; set; }
-        public bool ILE { get; set; }
-        public bool CausaViolacion { get; set; }
-        public bool CausaSaludFisica{ get; set; }
-        public bool CausaSaludPSI { get; set; }
-        public bool CausaSaludSocial { get; set; }
-        public bool CausaSinVE { get; set; }
+        public virtual bool CUMSPACO { get; set; }
+        public virtual bool CUMSPDisfuncionHepaticaSevera { get; set; }
+        public virtual bool CUMSPEmbarazoEctopico { get; set; }
+        public virtual bool CUMSPAlergiaMisoDiclo { get; set; }
 
-        public bool CUMSPACO { get; set; }
-        public bool CUMSPDisfuncionHepaticaSevera { get; set; }
-        public bool CUMSPEmbarazoEctopico { get; set; }
-        public bool CUMSPAlergiaMisoDiclo { get; set; }
-
-        public bool FactorRiesgoHb7 { get; set; }
-        public bool FactorRiesgoCardiopatia { get; set; }
-        public bool FactorRiesgoDIU { get; set; }
-        public bool FactorRiesgoCardiovascular { get; set; }
-        public bool FactorRiesgoCorticoterapia { get; set; }
+        public virtual bool FactorRiesgoHb7 { get; set; }
+        public virtual bool FactorRiesgoCardiopatia { get; set; }
+        public virtual bool FactorRiesgoDIU { get; set; }
+        public virtual bool FactorRiesgoCardiovascular { get; set; }
+        public virtual bool FactorRiesgoCorticoterapia { get; set; }
     }
 }

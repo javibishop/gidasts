@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TSModel.Dominio;
 using TSModel;
 using System.Linq;
+using TSModel.Dominio.Consejeria;
 
 namespace tswebapi.Controllers
 {
@@ -10,11 +11,11 @@ namespace tswebapi.Controllers
     public class PacientesController : Controller
     {
         private List<Usuaria> pacientes = new List<Usuaria>();
-        private readonly TsModelo _context;
+        //private readonly TsModelo _context;
 
-        public PacientesController(TsModelo context)
+        public PacientesController()
         {
-            this._context = context;
+            //this._context = context;
 
             //pacientes.Add(new Paciente { Id = 1, Apellido = "Cruz", Edad = 55, FechaNacimiento = new System.DateTime(), Nombre = "Celia" });
             //pacientes.Add(new Paciente { Id = 2, Apellido = "Juana", Edad = 55, FechaNacimiento = new System.DateTime(), Nombre = "Molina" });
@@ -27,7 +28,9 @@ namespace tswebapi.Controllers
         [HttpGet]
         public IEnumerable<Usuaria> Get()
         {
-            return this._context.Pacientes.ToList();
+            return null;
+
+            //return this._context.Pacientes.ToList();
         }
 
         // GET api/pacientes/5

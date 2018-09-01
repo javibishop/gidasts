@@ -83,6 +83,6 @@ namespace TSModel
 
         }
 
-        public DbSet<Dominio.Usuaria> Pacientes { get; set; }
+        public DbSet<Dominio.Consejeria.Usuaria> Pacientes { get; set; }
     }
 }

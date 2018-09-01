@@ -1,29 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TSModel.Dominio.Consejeria
+﻿namespace TSModel.Dominio.Consejeria
 {
-    public class Antecedente
+    public class Antecedente : EntidadBase
     {
-        public int ConsejeriaId { get; set; }
-        public Consejeria Consejeria { get; set; }
-        public bool Gestas { get; set; }
-        public bool PartosVaginal { get; set; }
-        public bool Cesareas { get; set; }
-        public bool AbortoEspontaneo { get; set; }
-        public bool AbortoVoluntario { get; set; }
-        public bool MACNoUsa { get; set; }
-        public bool MACACO { get; set; }
-        public bool MACACI { get; set; }
-        public bool MACDIU { get; set; }
-        public bool MACPreservativo { get; set; }
-        public bool MACImplanteHormonal { get; set; }
+        public virtual  Consejeria Consejeria { get; set; }
+        public virtual  bool Gestas { get; set; }
+        public virtual  bool PartosVaginal { get; set; }
+        public virtual  bool Cesareas { get; set; }
+        public virtual  bool AbortoEspontaneo { get; set; }
+        public virtual  bool AbortoVoluntario { get; set; }
+        //MAC = Metodos anticonceptivos.
+        public virtual  bool MACNoUsa { get; set; }
+        /// <summary>
+        /// Antic oral.
+        /// </summary>
+        public virtual  bool MACACO { get; set; }
+        /// <summary>
+        /// Antic inyectable
+        /// </summary>
+        public virtual  bool MACACI { get; set; }
+        /// <summary>
+        /// Antic diu, disp uterino.
+        /// </summary>
+        public virtual  bool MACDIU { get; set; }
+        /// <summary>
+        /// Antic preserv.
+        /// </summary>
+        public virtual  bool MACPreservativo { get; set; }
+        /// <summary>
+        /// Antic chip sub dermico.
+        /// </summary>
+        public virtual  bool MACImplanteHormonal { get; set; }
+        /// <summary>
+        /// Fallo el metodo
+        /// </summary>
+        public virtual  bool FalloMAC { get; set; }
+        /// <summary>
+        /// No uso
+        /// </summary>
+        public virtual  bool NoUsoMAC { get; set; }
+        /// <summary>
+        /// anticoncepción hormonal de emergencia 
+        /// </summary>
+        public virtual  bool AHEMAC { get; set; }
 
-        public bool FalloMAC { get; set; }
-        public bool NoUsoMAC { get; set; }
-        public bool AHEMAC { get; set; }
-
-        public string Observaciones { get; set; }
+        public virtual  string Observaciones { get; set; }
     }
 }

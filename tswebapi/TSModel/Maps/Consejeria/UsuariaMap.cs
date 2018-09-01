@@ -1,7 +1,7 @@
 ﻿using FluentNHibernate.Mapping;
-using TSModel.Dominio;
+using TSModel.Dominio.Consejeria;
 
-namespace TSModel.Maps
+namespace TSModel.Maps.Consejeria
 {
     public class UsuariaMap : SubclassMap<Usuaria>
     {

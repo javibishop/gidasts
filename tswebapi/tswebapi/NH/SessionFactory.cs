@@ -9,9 +9,9 @@ namespace tswebapi.NH
 {
     public class SessionFactory
     {
-        public ISessionFactory sessionFactory { get; protected set; }
+        public virtual  ISessionFactory sessionFactory { get; protected set; }
         //https://www.codeproject.com/Tips/1243873/Work-with-Fluent-NHibernate-in-Core https://www.c-sharpcorner.com/article/work-with-fluent-nhibernate-in-core-2-0/
-        public ISessionFactory BuildSessionFactory() //Microsoft.Extensions.Logging.ILoggerFactory loggerFactory
+        public virtual  ISessionFactory BuildSessionFactory() //Microsoft.Extensions.Logging.ILoggerFactory loggerFactory
         {
             bool create = false, update = false;
 
@@ -40,7 +40,7 @@ namespace tswebapi.NH
             }
         }
 
-        public ISession OpenSession()
+        public virtual  ISession OpenSession()
         {
             return sessionFactory.OpenSession();
         }
