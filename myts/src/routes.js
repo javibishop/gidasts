@@ -15,7 +15,7 @@ const AppRoutes = () =>
         {/* <Route exact (y saco el switch) path="/about" component= {About} /> */}
             <Route exact path="/about" component= {About} />
             <Route exact path="/contact" component= {Contact} />
-            <Route exact path="/paciente/:id" component= {PacientesView} /> 
+            <Route exact path="/paciente/ver/:id" component= {PacientesView} /> 
             <Route exact path="/pacientes/" component= {PacientesList} />
             <Route exact path="/" component= {Home} />
             <Route component= {Page404} />

@@ -2,7 +2,6 @@
 {
     public class Usuaria : Persona
     {
-        //public virtual int PersonaId { get; set; } 
         public virtual bool UsuarioCentroSalud { get; set; }
         public virtual bool ParejaConViviente { get; set; }
         public virtual bool ParejaNoConViviente { get; set; }

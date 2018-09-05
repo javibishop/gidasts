@@ -12,7 +12,7 @@ namespace tswebapi.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
-        ISession session;
+        ISession session; //resolver de la forma de bitgm
         public ValuesController(ISession session)
         {
             this.session = session;

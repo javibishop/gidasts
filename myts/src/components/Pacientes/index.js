@@ -10,11 +10,37 @@ class PacientesList extends Component {
         fetch('http://localhost:58764/api/pacientes')
         .then(response => response.json())
         .then(pacientes => this.setState({pacientes}))
-      }
-
-      editar(id) {
-          this.setState({redirect:true, id:id});
+        
+        this.handleDelete = this.handleDelete.bind(this);  
+        this.handleEdit = this.handleEdit.bind(this);  
     }
+
+
+    //   editar(id) {
+    //       this.setState({redirect:true, id:id});
+    // }
+
+    // Handle Delete request for an employee  
+    handleDelete(id) {  
+        // if (!confirm("Do you want to delete employee with Id: " + id))  
+        //     return;  
+        // else {  
+            fetch('api/Employee/Delete/' + id, {  
+                method: 'delete'  
+            }).then(data => {  
+                this.setState(  
+                    {  
+                        empList: this.state.empList.filter((rec) => {  
+                            return (rec.employeeId != id);  
+                        })  
+                    });  
+            });  
+        // }  
+    }  
+  
+    handleEdit(id) {  
+        this.props.history.push("/paciente/ver/" + id);  
+    }  
 
     render(){
         
@@ -39,7 +65,10 @@ class PacientesList extends Component {
                             <tr key={item.id}>
                             <td>{item.nombre} </td>
                             <td>{item.apellido}</td>
-                            <td><a>Edit</a>|<a>Delete</a></td>
+                            <td>
+                                <a className="action" onClick={(id) => this.handleEdit(item.id)}>Edit</a>  |  
+                                <a className="action" onClick={(id) => this.handleDelete(item.id)}>Delete</a>  
+                            </td>
                             </tr>
                         )}
                         </tbody>

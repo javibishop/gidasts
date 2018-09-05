@@ -22,3 +22,9 @@ ejemplo basico.
 https://www.c-sharpcorner.com/article/work-with-fluent-nhibernate-in-core-2-0/
 Herencia
 https://www.codeproject.com/Articles/232034/Inheritance-mapping-strategies-in-Fluent-Nhibernat
+
+package.
+Install-Package FluentNHibernate
+Install-Package Mysql.Data
+
+
