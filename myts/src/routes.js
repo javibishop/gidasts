@@ -8,6 +8,7 @@ import Contact from './components/Contact';
 import Page404 from './components/Page404';
 import PacientesList from './components/Pacientes/index';
 import PacientesView from './components/Pacientes/view';
+import PacientesNew from './components/Pacientes/new';
 
 const AppRoutes = () => 
     <App>
@@ -15,7 +16,8 @@ const AppRoutes = () =>
         {/* <Route exact (y saco el switch) path="/about" component= {About} /> */}
             <Route exact path="/about" component= {About} />
             <Route exact path="/contact" component= {Contact} />
-            <Route exact path="/paciente/ver/:id" component= {PacientesView} /> 
+            <Route exact path="/paciente/view/:id" component= {PacientesView} /> 
+            <Route exact path="/paciente/new" component= {PacientesNew} /> 
             <Route exact path="/pacientes/" component= {PacientesList} />
             <Route exact path="/" component= {Home} />
             <Route component= {Page404} />

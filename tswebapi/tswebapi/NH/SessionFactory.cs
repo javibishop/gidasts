@@ -13,7 +13,7 @@ namespace tswebapi.NH
         //https://www.codeproject.com/Tips/1243873/Work-with-Fluent-NHibernate-in-Core https://www.c-sharpcorner.com/article/work-with-fluent-nhibernate-in-core-2-0/
         public virtual  ISessionFactory BuildSessionFactory() //Microsoft.Extensions.Logging.ILoggerFactory loggerFactory
         {
-            bool create = false, update = false;
+            bool create = false, update = true;
 
             // NHibernate.NHibernateLogger.SetLoggersFactory(new NHibernateToMicrosoftLoggerFactory(loggerFactory));
             //https://github.com/nhibernate/nhibernate-core/blob/master/src/NHibernate.Example.Web/Infrastructure/AppSessionFactory.cs

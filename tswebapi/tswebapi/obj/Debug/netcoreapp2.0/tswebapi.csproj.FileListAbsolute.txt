@@ -1,0 +1,14 @@
+F:\Development\gidasts\tswebapi\tswebapi\bin\Debug\netcoreapp2.0\tswebapi.deps.json
+F:\Development\gidasts\tswebapi\tswebapi\bin\Debug\netcoreapp2.0\tswebapi.runtimeconfig.json
+F:\Development\gidasts\tswebapi\tswebapi\bin\Debug\netcoreapp2.0\tswebapi.runtimeconfig.dev.json
+F:\Development\gidasts\tswebapi\tswebapi\bin\Debug\netcoreapp2.0\tswebapi.dll
+F:\Development\gidasts\tswebapi\tswebapi\bin\Debug\netcoreapp2.0\tswebapi.pdb
+F:\Development\gidasts\tswebapi\tswebapi\bin\Debug\netcoreapp2.0\TSModel.dll
+F:\Development\gidasts\tswebapi\tswebapi\bin\Debug\netcoreapp2.0\TSModel.pdb
+F:\Development\gidasts\tswebapi\tswebapi\obj\Debug\netcoreapp2.0\tswebapi.csprojAssemblyReference.cache
+F:\Development\gidasts\tswebapi\tswebapi\obj\Debug\netcoreapp2.0\tswebapi.csproj.CoreCompileInputs.cache
+F:\Development\gidasts\tswebapi\tswebapi\obj\Debug\netcoreapp2.0\tswebapi.AssemblyInfoInputs.cache
+F:\Development\gidasts\tswebapi\tswebapi\obj\Debug\netcoreapp2.0\tswebapi.AssemblyInfo.cs
+F:\Development\gidasts\tswebapi\tswebapi\obj\Debug\netcoreapp2.0\tswebapi.csproj.CopyComplete
+F:\Development\gidasts\tswebapi\tswebapi\obj\Debug\netcoreapp2.0\tswebapi.dll
+F:\Development\gidasts\tswebapi\tswebapi\obj\Debug\netcoreapp2.0\tswebapi.pdb
