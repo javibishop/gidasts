@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Modelo.cs" />
+    <Compile Remove="ModeloMeta.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Maps\Consejeria\EntrevistaPostAbortoMap.cs~RF2ae5e933.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentNHibernate" Version="2.1.2" />
+  </ItemGroup>
+
+</Project>
