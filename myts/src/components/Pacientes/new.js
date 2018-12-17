@@ -10,12 +10,24 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
 import classNames from 'classnames';
-import Typography from '@material-ui/core/Typography';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import AppBar from '@material-ui/core/AppBar';
+import SwipeableViews from 'react-swipeable-views'
+import Typography from "@material-ui/core/Typography";
 
+function TabContainer({ children, dir }) {
+    return (
+      <Typography component="div" dir={dir} style={{ padding: 8 * 3 }}>
+        {children}
+      </Typography>
+    );
+  }
+  
+  TabContainer.propTypes = {
+    children: PropTypes.node.isRequired,
+    dir: PropTypes.string.isRequired
+  };
 
 const styles = theme => ({
     container: {
@@ -27,13 +39,18 @@ const styles = theme => ({
       marginRight: theme.spacing.unit,
       width: 600,
     },
-
     textField400: {
         marginLeft: theme.spacing.unit * 10,
         marginRight: theme.spacing.unit,
         width: 400,
       },
-
+      textField200: {
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        width: 200,
+        display: 'flex',
+        flexWrap: 'wrap'
+      },
     textFieldObs: {
         flexBasis: 600,
         marginLeft: theme.spacing.unit,
@@ -56,6 +73,10 @@ const styles = theme => ({
       },
       margin: {
         margin: theme.spacing.unit,
+      },
+      tab: {
+        backgroundColor: theme.palette.background.paper,
+        width: 500,
       },
   });
   const currencies = [
@@ -95,6 +116,14 @@ class PacientesNew extends Component {
         super(props);
         this.state = {paciente : null};
       }
+      
+      handleChange = (event, value) => {
+        this.setState({ value });
+      };
+    
+      handleChangeIndex = index => {
+        this.setState({ value: index });
+      };
 
       componentDidMount(){
           const {match : {params}} = this.props;
@@ -113,10 +142,9 @@ class PacientesNew extends Component {
 
     render(){
         
-        const { classes } = this.props;
+        const { classes,theme } = this.props;
 
         return(
-            // this.state.paciente && this.state.paciente.nombre
 <div className={classes.root}>
     <Grid container spacing={24}>
     <form className={classes.container} noValidate autoComplete="off">
@@ -151,14 +179,17 @@ class PacientesNew extends Component {
               margin="normal"
             />
         </Grid>
-        <Grid item xs={4}>
-        <TextField
-            //   error
-              id="fechaNacimiento"
-              label="Fecha de Nacimiento"
-              className={classes.textField400}
-              value={this.state.paciente && this.state.paciente.fechaNacimiento}
-              margin="normal"
+        <Grid item xs={4} >
+            <TextField className={classes.container}
+                id="fechaNacimiento"
+                label="fechaNacimiento"
+                type="date"
+                defaultValue="2017-05-24"
+                value={this.state.paciente && this.state.paciente.fechaNacimiento}
+                className={classes.textField200}
+                InputLabelProps={{
+                shrink: true,
+                }}
             />
         </Grid>
         <Grid item xs={4}>
@@ -262,7 +293,28 @@ class PacientesNew extends Component {
                 />
         </Grid>
            
-            
+        <AppBar position="static" color="default">
+          <Tabs
+            value={this.state.value}
+            onChange={this.handleChange}
+            indicatorColor="primary"
+            textColor="primary"
+            fullWidth
+          >
+            <Tab label="Item One" />
+            <Tab label="Item Two" />
+            <Tab label="Item Three" />
+          </Tabs>
+        </AppBar>
+        <SwipeableViews
+          axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+          index={this.state.value}
+          onChangeIndex={this.handleChangeIndex}
+        >
+          <TabContainer dir={theme.direction}>Item One</TabContainer>
+          <TabContainer dir={theme.direction}>Item Two</TabContainer>
+          <TabContainer dir={theme.direction}>Item Three</TabContainer>
+        </SwipeableViews>
                
                
                <FormControlLabel
