@@ -71,6 +71,10 @@ class ConsejeriaEdit extends Component {
         renderConsejeria(this.props);
     }
 
+    onPickColor(e) {
+        console.log('[onPickColor]', this.inputEl)
+        this.setState({ color: this.inputEl.value });
+    }
 
     render() {
         //const { saveConsejeria, hola } = this.props;
@@ -102,7 +106,7 @@ class ConsejeriaEdit extends Component {
 }
 
 function renderConsejeria(props) {
-    const { handleChangeState } = props;
+    const { handleChangeUsuaria } = props;
     return (
         <Grid className='form'>
             <Row>
@@ -119,7 +123,7 @@ function renderConsejeria(props) {
                                             label="Nombre"
                                             placeholder="Ingrese su nombre"
                                             value={props.consejeria.usuariaDto.nombre || ''}
-                                            onChange={handleChangeState}
+                                            onChange={handleChangeUsuaria}
                                         />
                                     </Col>
                                     <Col xs={6} md={6}>
@@ -130,7 +134,7 @@ function renderConsejeria(props) {
                                             label="Apellido"
                                             placeholder="Ingrese su apellido"
                                             value={props.consejeria.usuariaDto.apellido || ''}
-                                            onChange={handleChangeState}
+                                            onChange={handleChangeUsuaria}
                                         />
                                     </Col>
                                 </Row>
@@ -143,7 +147,7 @@ function renderConsejeria(props) {
                                             label="edad"
                                             placeholder="Ingrese su Edad"
                                             value={props.consejeria.usuariaDto.edad || 0}
-                                            onChange={handleChangeState}
+                                            onChange={handleChangeUsuaria}
                                         />
                                     </Col>
                                     <Col xs={4} md={4}>
@@ -154,17 +158,20 @@ function renderConsejeria(props) {
                                             label="Fecha Nacimiento"
                                             placeholder="Ingrese su Fecha Nacimiento"
                                             value={props.consejeria.usuariaDto.fechaNacimiento || ''}
-                                            onChange={handleChangeState}
+                                            onChange={handleChangeUsuaria}
                                         />
                                     </Col>
                                     <Col xs={4} md={4}>
-                                        <DropdownButton
-                                            title="Nacionalidad"
-                                            id="dropdown-size-large">
-                                            <MenuItem eventKey="1" active>Argentine</MenuItem>
-                                            <MenuItem eventKey="2">Paraguaye</MenuItem>
-                                            <MenuItem eventKey="3">Boliviane</MenuItem>
-                                        </DropdownButton>
+                                        <ControlLabel>Nacionalidad</ControlLabel>
+                                        <FormControl
+                                            value={props.consejeria.usuariaDto.nacionalidadId || ''}
+                                            id="nacionalidadId"
+                                            onChange={handleChangeUsuaria}
+                                            componentClass="select" placeholder="select">
+                                            <option value="1">Argentine</option>
+                                            <option value="2">Paraguaye</option>
+                                            <option value="3">Boliviane</option>
+                                        </FormControl>
                                     </Col>
                                 </Row>
                                 <Row className="show-grid">
@@ -176,7 +183,7 @@ function renderConsejeria(props) {
                                             label="Telefono"
                                             placeholder="Ingrese su Telefono"
                                             value={props.consejeria.usuariaDto.telefono || ''}
-                                            onChange={handleChangeState}
+                                            onChange={handleChangeUsuaria}
                                         />
                                     </Col>
                                     <Col xs={8} md={8}>
@@ -187,21 +194,21 @@ function renderConsejeria(props) {
                                             label="direccion"
                                             placeholder="Ingrese su Direccion"
                                             value={props.consejeria.usuariaDto.direccion || ''}
-                                            onChange={handleChangeState}
+                                            onChange={handleChangeUsuaria}
                                         />
                                     </Col>
                                 </Row>
                                 <Row className="show-grid">
                                     <Col xs={4} md={4}>
                                         <FormGroup>
-                                            <Checkbox value={props.consejeria.usuariaDto.usuarioCentroSalud || ''} onChange={handleChangeState}>Usuaria del Centro de Salud</Checkbox>
+                                            <Checkbox checked={props.consejeria.usuariaDto.usuarioCentroSalud || ''} onChange={handleChangeUsuaria}>Usuaria del Centro de Salud</Checkbox>
                                         </FormGroup>
 
                                         <FormGroup>
                                             <ControlLabel>Situacion de Pareja</ControlLabel>
-                                            <Checkbox value={props.consejeria.usuariaDto.parejaConViviente || ''} onChange={handleChangeState}>Pareja Conviviente</Checkbox>
-                                            <Checkbox value={props.consejeria.usuariaDto.sinPareja || ''} onChange={handleChangeState}>Sin Pareja</Checkbox>
-                                            <Checkbox value={props.consejeria.usuariaDto.parejaNoConViviente || ''} onChange={handleChangeState}>Pareja no Conviviente</Checkbox>
+                                            <Checkbox id="parejaConViviente" checked={props.consejeria.usuariaDto.parejaConViviente || ''} onChange={handleChangeUsuaria}>Pareja Conviviente</Checkbox>
+                                            <Checkbox id="sinPareja" checked={props.consejeria.usuariaDto.sinPareja || ''} onChange={handleChangeUsuaria}>Sin Pareja</Checkbox>
+                                            <Checkbox id="parejaNoConViviente" checked={props.consejeria.usuariaDto.parejaNoConViviente || ''} onChange={handleChangeUsuaria}>Pareja no Conviviente</Checkbox>
                                         </FormGroup>
 
 
@@ -209,58 +216,64 @@ function renderConsejeria(props) {
                                     <Col xs={4} md={4}>
                                         <ControlLabel>Como conoce la Consejeria</ControlLabel>
                                         <FormGroup>
-                                            <Checkbox value={props.consejeria.usuariaDto.conocePorConocido || ''} onChange={handleChangeState}>Pareja/Familiar/Amigo</Checkbox>
-                                            <Checkbox value={props.consejeria.usuariaDto.conocePorUS || ''} onChange={handleChangeState}>Personal de la US</Checkbox>
-                                            <Checkbox value={props.consejeria.usuariaDto.conocePorOrganizacion || ''} onChange={handleChangeState}>Organizacion Social</Checkbox>
-                                            <Checkbox value={props.consejeria.usuariaDto.conocePorReferente || ''} onChange={handleChangeState}>Referente Comunitario</Checkbox>
-                                            <Checkbox value={props.consejeria.usuariaDto.conocePorMedios || ''} onChange={handleChangeState}>Medios de Comunicacion</Checkbox>
-                                            <Checkbox value={props.consejeria.usuariaDto.conocePorUsuarioConcejeria || ''} onChange={handleChangeState}>Otra usuaria de la Consejeria</Checkbox>
+                                            <Checkbox id="conocePorConocido" checked={props.consejeria.usuariaDto.conocePorConocido || ''} onChange={handleChangeUsuaria}>Pareja/Familiar/Amigo</Checkbox>
+                                            <Checkbox id="conocePorUS" checked={props.consejeria.usuariaDto.conocePorUS || ''} onChange={handleChangeUsuaria}>Personal de la US</Checkbox>
+                                            <Checkbox id="conocePorOrganizacion" checked={props.consejeria.usuariaDto.conocePorOrganizacion || ''} onChange={handleChangeUsuaria}>Organizacion Social</Checkbox>
+                                            <Checkbox id="conocePorReferente" checked={props.consejeria.usuariaDto.conocePorReferente || ''} onChange={handleChangeUsuaria}>Referente Comunitario</Checkbox>
+                                            <Checkbox id="conocePorMedios" checked={props.consejeria.usuariaDto.conocePorMedios || ''} onChange={handleChangeUsuaria}>Medios de Comunicacion</Checkbox>
+                                            <Checkbox id="conocePorUsuarioConcejeria" checked={props.consejeria.usuariaDto.conocePorUsuarioConcejeria || ''} onChange={handleChangeUsuaria}>Otra usuaria de la Consejeria</Checkbox>
                                         </FormGroup>
                                     </Col>
                                     <Col xs={4} md={4}>
                                         <ControlLabel></ControlLabel>
                                         <FormGroup>
-                                            <Checkbox value={props.consejeria.usuariaDto.conocePorInsititucionSalud || ''} onChange={handleChangeState}>Otra Institucion de Salud</Checkbox>
+                                            <Checkbox id="conocePorInsititucionSalud" checked={props.consejeria.usuariaDto.conocePorInsititucionSalud || ''} onChange={handleChangeUsuaria}>Otra Institucion de Salud</Checkbox>
                                             <FormControl
-                                                id="telefono"
+                                                id="conocePorInsititucionSaludObs"
                                                 type="text"
                                                 label=""
                                                 placeholder="Otra Institucion de Salud?"
                                                 value={props.consejeria.usuariaDto.conocePorInsititucionSaludObs || ''}
-                                                onChange={handleChangeState}
+                                                onChange={handleChangeUsuaria}
                                             />
                                             <ControlLabel>Otros</ControlLabel>
                                             <FormControl
                                                 componentClass="textarea"
-                                                id="telefono"
+                                                id="conocePorOtro"
                                                 type="text"
                                                 label=""
                                                 placeholder="Otra Institucion de Salud?"
                                                 value={props.consejeria.usuariaDto.conocePorOtro || ''}
-                                                onChange={handleChangeState}
+                                                onChange={handleChangeUsuaria}
                                             />
                                         </FormGroup>
                                     </Col>
                                 </Row>
                                 <Row className="show-grid">
-                                    <Col xs={8} md={8}>
-                                        <DropdownButton
-                                            title="Mayor Nivel de Instruccion"
-                                            id="dropdown-size-large"
-                                            value={props.consejeria.usuariaDto.ivelInstruccion || ''}>
-                                            <MenuItem eventKey="1" active>Primario</MenuItem>
-                                            <MenuItem eventKey="2">Secundario</MenuItem>
-                                            <MenuItem eventKey="3">Terciario</MenuItem>
-                                            <MenuItem eventKey="4">Universitario</MenuItem>
-                                        </DropdownButton>
-                                        <DropdownButton
-                                            title="Alcance"
-                                            id="dropdown-size-large"
-                                            value={props.consejeria.usuariaDto.nivelInstruccionEstado || ''}>
-                                            <MenuItem eventKey="1" active>Completo</MenuItem>
-                                            <MenuItem eventKey="2">Incompleto</MenuItem>
-                                            <MenuItem eventKey="3">En Curso</MenuItem>
-                                        </DropdownButton>
+                                    <Col xs={6} md={6}>
+                                        <ControlLabel>Mayor Nivel de Instruccion</ControlLabel>
+                                        <FormControl
+                                            value={props.consejeria.usuariaDto.nivelInstruccion || ''}
+                                            id="nivelInstruccion"
+                                            onChange={handleChangeUsuaria}
+                                            componentClass="select" placeholder="select">
+                                            <option value="1">Primario</option>
+                                            <option value="2">Secundario</option>
+                                            <option value="3">Terciario</option>
+                                            <option value="4">Universitario</option>
+                                        </FormControl>
+                                    </Col>
+                                    <Col xs={6} md={6}>
+                                        <ControlLabel>Alcance</ControlLabel>
+                                        <FormControl
+                                            value={props.consejeria.usuariaDto.nivelInstruccionEstado || ''}
+                                            id="nivelInstruccionEstado"
+                                            onChange={handleChangeUsuaria}
+                                            componentClass="select" placeholder="select">
+                                            <option value="1">Completo</option>
+                                            <option value="2">En Curso</option>
+                                            <option value="3">Incompleto</option>
+                                        </FormControl>
                                     </Col>
                                 </Row>
                             </Panel>

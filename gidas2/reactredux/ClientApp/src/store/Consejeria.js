@@ -13,6 +13,25 @@ const afterConsejeria = 'AFTER_SAVE_CONCEJERIA';
 const editConsejeria = 'EDIT_CONCEJERIA';
 const receiveConsejeria = 'RECIVE_CONCEJERIAS';
 
+const changeStateBeforeUsuaria = 'ChangeStateBeforeUsuaria';
+const changingStateUsuaria = 'ChangingStateUsuaria';
+const changeStateAfterUsuaria = 'ChangeStateAfterUsuaria';
+
+const changeStateBeforeAntecedente = 'ChangeStateBeforeAntecedente';
+const changingStateAntecedente = 'ChangingStateAntecedente';
+const changeStateAfterAntecedente = 'ChangeStateAfterAntecedente';
+
+const changeStateBeforeGestaActual = 'ChangeStateBeforeGestaActual';
+const changingStateGestaActual = 'ChangingStateGestaActual';
+const changeStateAfterGestaActual = 'ChangeStateAfterGestaActual';
+
+const changeStateBeforeEstudioComplementario = 'ChangeStateBeforeEstudioComplementario';
+const changingStateEstudioComplementario = 'ChangingStateEstudioComplementario';
+const changeStateAfterEstudioComplementario = 'ChangeStateAfterEstudioComplementario';
+
+const changeStateBeforeEntrevista = 'ChangeStateBeforeEntrevista';
+const changingStateEntrevista = 'ChangingStateEntrevista';
+const changeStateAfterEntrevista = 'ChangeStateAfterEntrevista';
 
 
 const initState = {
@@ -129,10 +148,35 @@ export const actionCreators = {
 
         dispatch({ type: getConsejeriaSuccess, id, consejeria });
     },
-    handleChangeState: valor => (dispatch, getState) => {
-        dispatch({ type: 'ChangeStateBefore', valor });
-        dispatch({ type: 'ChangingState', valor });
-        dispatch({ type: 'ChangeStateAfter', valor });
+    
+    handleChangeUsuaria: valor => (dispatch, getState) => {
+        dispatch({ type: changeStateBeforeUsuaria, valor });
+        dispatch({ type: changingStateUsuaria, valor });
+        dispatch({ type: changeStateAfterUsuaria, valor });
+    },
+
+    handleChangeAntecedente: valor => (dispatch, getState) => {
+        dispatch({ type: changeStateBeforeAntecedente, valor });
+        dispatch({ type: changingStateAntecedente, valor });
+        dispatch({ type: changeStateAfterAntecedente, valor });
+    },
+
+    handleChangeGestaActual: valor => (dispatch, getState) => {
+        dispatch({ type: changeStateBeforeGestaActual, valor });
+        dispatch({ type: changingStateGestaActual, valor });
+        dispatch({ type: changeStateAfterGestaActual, valor });
+    },
+
+    handleChangeEstudioComplementario: valor => (dispatch, getState) => {
+        dispatch({ type: changeStateBeforeEstudioComplementario, valor });
+        dispatch({ type: changingStateEstudioComplementario, valor });
+        dispatch({ type: changeStateAfterEstudioComplementario, valor });
+    },
+
+    handleChangeEntrevista: valor => (dispatch, getState) => {
+        dispatch({ type: changeStateBeforeEntrevista, valor });
+        dispatch({ type: changingStateEntrevista, valor });
+        dispatch({ type: changeStateAfterEntrevista, valor });
     },
 
     hola:id =>  async (dispatch, getState) => {
@@ -160,21 +204,134 @@ export const actionCreators = {
 export const reducer = (state, action) => {
   state = state || initialState;
 
-    if (action.type === 'ChangeStateBefore') {
+    if (action.type === changeStateBeforeUsuaria) {
         return {
             ...state,
             isChanging: true
         };
     }
-    if (action.type === 'ChangingState') {
-        state.consejeria[action.valor.target.id] = action.valor.target.value;
+    if (action.type === changingStateUsuaria) {
+        if (action.valor.target.type === "checkbox") {
+            state.consejeria.usuariaDto[action.valor.target.id] = action.valor.target.checked;
+        } else {
+            state.consejeria.usuariaDto[action.valor.target.id] = action.valor.target.value;
+        }
+        
         return {
             ...state,
             isChanging: true,
             consejeria: state.consejeria
         }
     }
-    if (action.type === 'ChangeStateAfter') { 
+    if (action.type === changeStateAfterUsuaria) { 
+        return {
+            ...state,
+            consejeria: state.consejeria,
+            isChanging: false
+        };
+    }
+
+    if (action.type === changeStateBeforeAntecedente) {
+        return {
+            ...state,
+            isChanging: true
+        };
+    }
+    if (action.type === changingStateAntecedente) {
+        if (action.valor.target.type === "checkbox") {
+            state.consejeria.antecedenteDto[action.valor.target.id] = action.valor.target.checked;
+        } else {
+            state.consejeria.antecedenteDto[action.valor.target.id] = action.valor.target.value;
+        }
+
+        return {
+            ...state,
+            isChanging: true,
+            consejeria: state.consejeria
+        }
+    }
+    if (action.type === changeStateAfterAntecedente) {
+        return {
+            ...state,
+            consejeria: state.consejeria,
+            isChanging: false
+        };
+    }
+
+    if (action.type === changeStateBeforeGestaActual) {
+        return {
+            ...state,
+            isChanging: true
+        };
+    }
+    if (action.type === changingStateGestaActual) {
+        if (action.valor.target.type === "checkbox") {
+            state.consejeria.gestaActualDto[action.valor.target.id] = action.valor.target.checked;
+        } else {
+            state.consejeria.gestaActualDto[action.valor.target.id] = action.valor.target.value;
+        }
+
+        return {
+            ...state,
+            isChanging: true,
+            consejeria: state.consejeria
+        }
+    }
+    if (action.type === changeStateAfterGestaActual) {
+        return {
+            ...state,
+            consejeria: state.consejeria,
+            isChanging: false
+        };
+    }
+
+    if (action.type === changeStateBeforeEstudioComplementario) {
+        return {
+            ...state,
+            isChanging: true
+        };
+    }
+    if (action.type === changingStateEstudioComplementario) {
+        if (action.valor.target.type === "checkbox") {
+            state.consejeria.estudioComplementarioDto[action.valor.target.id] = action.valor.target.checked;
+        } else {
+            state.consejeria.estudioComplementarioDto[action.valor.target.id] = action.valor.target.value;
+        }
+
+        return {
+            ...state,
+            isChanging: true,
+            consejeria: state.consejeria
+        }
+    }
+    if (action.type === changeStateAfterEstudioComplementario) {
+        return {
+            ...state,
+            consejeria: state.consejeria,
+            isChanging: false
+        };
+    }
+
+    if (action.type === changeStateBeforeEntrevista) {
+        return {
+            ...state,
+            isChanging: true
+        };
+    }
+    if (action.type === changingStateEntrevista) {
+        if (action.valor.target.type === "checkbox") {
+            state.consejeria.entrevistaDto[action.valor.target.id] = action.valor.target.checked;
+        } else {
+            state.consejeria.entrevistaDto[action.valor.target.id] = action.valor.target.value;
+        }
+
+        return {
+            ...state,
+            isChanging: true,
+            consejeria: state.consejeria
+        }
+    }
+    if (action.type === changeStateAfterEntrevista) {
         return {
             ...state,
             consejeria: state.consejeria,
