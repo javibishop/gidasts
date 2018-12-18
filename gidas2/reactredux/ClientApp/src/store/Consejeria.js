@@ -118,6 +118,33 @@ const initState = {
         "factorRiesgoDIU": false,
         "factorRiesgoCardiovascular": false,
         "factorRiesgoCorticoterapia": false
+    },
+    "gestaActualDto": {
+        "eco1Observacion": "",
+        "eco1Fecha": new Date(),
+        "eco1EG": "",
+        "eco1LFC": false,
+        "eco1Embrion": false,
+        "eco1Saco": false,
+        "eco1Ubicacion": "",
+        "eco1Normoincerto": false,
+        "eco1Ectopico": false,
+        "eco2Observacion": "",
+        "eco2Fecha": new Date(),
+        "eco2EG": false,
+        "eco2LFC": false,
+        "eco2Embrion": false,
+        "eco2Saco": false,
+        "eco2Ubicacion": "",
+        "eco2Normoincerto": false,
+        "eco2Ectopico": false,
+        "labFecha": new Date(),
+        "labGB": "",
+        "labGR": "",
+        "labHb": "",
+        "labHto": "",
+        "labGrupo": "",
+        "labRh": ""
     }
 };
 const initialState = {

@@ -50,6 +50,9 @@ namespace tswebapi.Controllers
             ConsejeriaDto consejeriaDto = new ConsejeriaDto();
             GestaActualDto gestaActualDto = new GestaActualDto();
             UsuariaDto usuariaDto = new UsuariaDto();
+            AntecedenteDto antecedenteDto = new AntecedenteDto();
+            EstudioComplementarioDto estudioComplementarioDto = new EstudioComplementarioDto();
+            EntrevistaPostAbortoDto entrevistaPostAbortoDto = new EntrevistaPostAbortoDto();
 
             var criteria = session.CreateCriteria<ConsejeriaEntidad>();
             criteria.Add(Restrictions.Eq("Id", id));
@@ -65,26 +68,43 @@ namespace tswebapi.Controllers
             if (gestaActual != null)
             {
                 this.consejeriaDtoMapper.MapGestaActualToDto(gestaActualDto, gestaActual);
-                consejeriaDatosDto.GestaActualDto = gestaActualDto;
             }
+            consejeriaDatosDto.GestaActualDto = gestaActualDto;
 
             if (consejeria.Usuaria != null)
             {
                 this.consejeriaDtoMapper.MapUsuariaToDto(usuariaDto, consejeria.Usuaria);
-                consejeriaDatosDto.UsuariaDto = usuariaDto;
             }
+            consejeriaDatosDto.UsuariaDto = usuariaDto;
 
-            //criteria = session.CreateCriteria<Antecedente>();
-            //criteria.Add(Restrictions.Eq("Consejeria.Id", consejeria.Id));
-            //var antecedente = criteria.UniqueResult<Antecedente>();
+            criteria = session.CreateCriteria<Antecedente>();
+            criteria.Add(Restrictions.Eq("Consejeria.Id", consejeria.Id));
+            var antecedente = criteria.UniqueResult<Antecedente>();
 
-            //criteria = session.CreateCriteria<EstudioComplementario>();
-            //criteria.Add(Restrictions.Eq("Consejeria.Id", consejeria.Id));
-            //var estudioComplementario = criteria.UniqueResult<EstudioComplementario>();
+            if (antecedente != null)
+            {
+                this.consejeriaDtoMapper.MapAntecedenteToDto(antecedenteDto, antecedente);
+            }
+            consejeriaDatosDto.AntecedenteDto = antecedenteDto;
 
-            //criteria = session.CreateCriteria<EntrevistaPostAborto>();
-            //criteria.Add(Restrictions.Eq("Consejeria.Id", consejeria.Id));
-            //var entrevistaPostAborto = criteria.UniqueResult<EntrevistaPostAborto>();
+            criteria = session.CreateCriteria<EstudioComplementario>();
+            criteria.Add(Restrictions.Eq("Consejeria.Id", consejeria.Id));
+            var estudioComplementario = criteria.UniqueResult<EstudioComplementario>();
+            if (estudioComplementario != null)
+            {
+                this.consejeriaDtoMapper.MapEstudioComplementarioDto(estudioComplementarioDto, estudioComplementario);
+            }
+            consejeriaDatosDto.EstudioComplementarioDto = estudioComplementarioDto;
+
+            criteria = session.CreateCriteria<EntrevistaPostAborto>();
+            criteria.Add(Restrictions.Eq("Consejeria.Id", consejeria.Id));
+            var entrevistaPostAborto = criteria.UniqueResult<EntrevistaPostAborto>();
+
+            if (entrevistaPostAborto != null)
+            {
+                this.consejeriaDtoMapper.MapEntrevistaPostAbortoDto(entrevistaPostAbortoDto, entrevistaPostAborto);
+            }
+            consejeriaDatosDto.EntrevistaPostAbortoDto = entrevistaPostAbortoDto;
 
             return consejeriaDatosDto;
         }

@@ -104,5 +104,92 @@ namespace tswebapi.Mapper
             dto.UsuarioCentroSalud = usuaria.UsuarioCentroSalud;
             return dto;
         }
+
+        public EstudioComplementarioDto MapEstudioComplementarioDto(EstudioComplementarioDto dto, EstudioComplementario estudioComplementario)
+        {
+            dto.Id = estudioComplementario.Id;
+            dto.ConsejeriaId = estudioComplementario.Consejeria.Id;
+            dto.Eco1Ectopico = estudioComplementario.Eco1Ectopico;
+            dto.Eco1EG = estudioComplementario.Eco1EG;
+            dto.Eco1Embrion = estudioComplementario.Eco1Embrion;
+            dto.Eco1Fecha = estudioComplementario.Eco1Fecha;
+            dto.Eco1LFC = estudioComplementario.Eco1LFC;
+            dto.Eco1Normoincerto = estudioComplementario.Eco1Normoincerto;
+            dto.Eco1Observacion = estudioComplementario.Eco1Observacion;
+            dto.Eco1Saco = estudioComplementario.Eco1Saco;
+            dto.Eco1Ubicacion = estudioComplementario.Eco1Ubicacion;
+
+            dto.Eco2Ectopico = estudioComplementario.Eco2Ectopico;
+            dto.Eco2EG = estudioComplementario.Eco2EG;
+            dto.Eco2Embrion = estudioComplementario.Eco2Embrion;
+            dto.Eco2Fecha = estudioComplementario.Eco2Fecha;
+            dto.Eco2LFC = estudioComplementario.Eco2LFC;
+            dto.Eco2Normoincerto = estudioComplementario.Eco2Normoincerto;
+            dto.Eco2Observacion = estudioComplementario.Eco2Observacion;
+            dto.Eco2Saco = estudioComplementario.Eco2Saco;
+            dto.Eco2Ubicacion = estudioComplementario.Eco2Ubicacion;
+
+            dto.LabFecha = estudioComplementario.LabFecha;
+            dto.LabGB = estudioComplementario.LabGB;
+            dto.LabGR = estudioComplementario.LabGR;
+            dto.LabGrupo = estudioComplementario.LabGrupo;
+            dto.LabHb = estudioComplementario.LabHb;
+            dto.LabHto = estudioComplementario.LabHto;
+            dto.LabRh = estudioComplementario.LabRh;
+            return dto;
+        }
+
+        public EntrevistaPostAbortoDto MapEntrevistaPostAbortoDto(EntrevistaPostAbortoDto dto, EntrevistaPostAborto entrevistaPostAborto)
+        {
+            dto.Id = entrevistaPostAborto.Id;
+            dto.ConsejeriaId = entrevistaPostAborto.Consejeria.Id;
+            dto.AccedioPorConocido = entrevistaPostAborto.AccedioPorConocido;
+            dto.AccedioPorFarmacia = entrevistaPostAborto.AccedioPorFarmacia;
+            dto.AccedioPorInternet = entrevistaPostAborto.AccedioPorInternet;
+            dto.AccedioPorOrgSocial = entrevistaPostAborto.AccedioPorOrgSocial;
+            dto.ComplicacionHemorragia = entrevistaPostAborto.ComplicacionHemorragia;
+            dto.ComplicacionInfeccion = entrevistaPostAborto.ComplicacionInfeccion;
+            dto.ComplicacionNo = entrevistaPostAborto.ComplicacionNo;
+            dto.ComplicacionOtro = entrevistaPostAborto.ComplicacionOtro;
+            dto.ConsejeriaMACACI = entrevistaPostAborto.ConsejeriaMACACI;
+            dto.ConsejeriaMACACO = entrevistaPostAborto.ConsejeriaMACACO;
+            dto.ConsejeriaMACDIU = entrevistaPostAborto.ConsejeriaMACDIU;
+            dto.ConsejeriaMACImplanteHormonal = entrevistaPostAborto.ConsejeriaMACImplanteHormonal;
+            dto.ConsejeriaMACNo = entrevistaPostAborto.ConsejeriaMACNo;
+            dto.ConsejeriaMACPreservativo = entrevistaPostAborto.ConsejeriaMACPreservativo;
+            dto.EcografiaPostAbortoCompleto = entrevistaPostAborto.EcografiaPostAbortoCompleto;
+            dto.EcografiaPostAbortoIncompleto = entrevistaPostAborto.EcografiaPostAbortoIncompleto;
+            dto.EcografiaPostConductaExpectante = entrevistaPostAborto.EcografiaPostConductaExpectante;
+            dto.EcografiaPostDerivacion2Nivel = entrevistaPostAborto.EcografiaPostDerivacion2Nivel;
+            dto.EcografiaPostEmbrionViable = entrevistaPostAborto.EcografiaPostEmbrionViable;
+            dto.EcografiaPostFecha = entrevistaPostAborto.EcografiaPostFecha;
+            dto.EcografiaPostHMR = entrevistaPostAborto.EcografiaPostHMR;
+            dto.EcografiaPostNoRealizo = entrevistaPostAborto.EcografiaPostNoRealizo;
+            dto.EcografiaPostNuevaConsejeria = entrevistaPostAborto.EcografiaPostNuevaConsejeria;
+            dto.EfectoAdversoCafalea = entrevistaPostAborto.EfectoAdversoCafalea;
+            dto.EfectoAdversoGastro = entrevistaPostAborto.EfectoAdversoGastro;
+
+            dto.EfectoAdversoNo = entrevistaPostAborto.EfectoAdversoNo;
+            dto.EfectoAdversoOtro = entrevistaPostAborto.EfectoAdversoOtro;
+            dto.EfectoAdversoTemperatura = entrevistaPostAborto.EfectoAdversoTemperatura;
+            dto.Fecha = entrevistaPostAborto.Fecha;
+            dto.IndicacionGammaglobulina = entrevistaPostAborto.IndicacionGammaglobulina;
+            dto.PresentacionCaja16 = entrevistaPostAborto.PresentacionCaja16;
+            dto.PresentacionCaja20 = entrevistaPostAborto.PresentacionCaja20;
+            dto.PresentacionSuelto = entrevistaPostAborto.PresentacionSuelto;
+            dto.ProcedimientoHecho = entrevistaPostAborto.ProcedimientoHecho;
+            dto.ProcedimientoNoAbortoEspontaneo = entrevistaPostAborto.ProcedimientoNoAbortoEspontaneo;
+            dto.ProcedimientoNoContinua = entrevistaPostAborto.ProcedimientoNoContinua;
+            dto.ProcedimientoNoOtro = entrevistaPostAborto.ProcedimientoNoOtro;
+            dto.ProcedimientoObservaciones = entrevistaPostAborto.ProcedimientoObservaciones;
+            dto.ProcedimientoSiInformado = entrevistaPostAborto.ProcedimientoSiInformado;
+            dto.ProcedimientoSiOtra = entrevistaPostAborto.ProcedimientoSiOtra;
+            dto.ProcedimientoSiOtro = entrevistaPostAborto.ProcedimientoSiOtro;
+            dto.ProcedimientoSiViaSL = entrevistaPostAborto.ProcedimientoSiViaSL;
+            dto.ProcedimientoSiViaV = entrevistaPostAborto.ProcedimientoSiViaV;
+            return dto;
+        }
+
+        
     }
 }

@@ -106,14 +106,14 @@ class ConsejeriaEdit extends Component {
 }
 
 function renderConsejeria(props) {
-    const { handleChangeUsuaria } = props;
+    const { handleChangeUsuaria, handleChangeAntecedente, handleChangeGestaActual, handleChangeEstudioComplementario } = props;
     return (
         <Grid className='form'>
             <Row>
                 <Col xs={12} md={12}>
                     <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
                         <Tab eventKey={1} title="Datos Filiatorios">
-                            <Panel header={'Borderless table Example'}>
+                            <Panel header={'Datos correspondiente a la Usuaria'}>
                                 <Row className="show-grid">
                                     <Col xs={6} md={6}>
                                         <ControlLabel>Nombre</ControlLabel>
@@ -279,23 +279,318 @@ function renderConsejeria(props) {
                             </Panel>
                         </Tab>
                         <Tab eventKey={2} title="Antecedentes">
-                            <Panel header={'Borderless table Example'}>
-                                <Col xs={4} md={4}>
-                                    <ControlLabel>Como conoce la Consejeria</ControlLabel>
-
-                                </Col>
-
+                            <Panel header={'Antecedentes Personales y Ginecologicos'}>
+                                <Row className="show-grid">
+                                    <Col xs={4} md={4}>
+                                        <ControlLabel></ControlLabel>
+                                        <FormGroup>
+                                            <Checkbox id="gestas" checked={props.consejeria.antecedenteDto.gestas || ''} onChange={handleChangeAntecedente}>Gestas</Checkbox> 
+                                            <Checkbox id="partosVaginal" checked={props.consejeria.antecedenteDto.partosVaginal || ''} onChange={handleChangeAntecedente}>Parto Vaginal</Checkbox>
+                                            <Checkbox id="cesareas" checked={props.consejeria.antecedenteDto.cesareas || ''} onChange={handleChangeAntecedente}>Cesareas</Checkbox>
+                                            <Checkbox id="abortoEspontaneo" checked={props.consejeria.antecedenteDto.abortoEspontaneo || ''} onChange={handleChangeAntecedente}>Aborto Espontaneo</Checkbox>
+                                            <Checkbox id="abortoVoluntario" checked={props.consejeria.antecedenteDto.abortoVoluntario || ''} onChange={handleChangeAntecedente}>Aborto Voluntario</Checkbox>
+                                        </FormGroup>
+                                    </Col>
+                                    <Col xs={4} md={4}>
+                                        <ControlLabel>Mac Habitual</ControlLabel>
+                                        <FormGroup>
+                                            <Checkbox id="mACNoUsa" checked={props.consejeria.antecedenteDto.mACNoUsa || ''} onChange={handleChangeAntecedente}>No Usa</Checkbox>
+                                            <Checkbox id="mACACO" checked={props.consejeria.antecedenteDto.mACACO || ''} onChange={handleChangeAntecedente}>ACO</Checkbox>
+                                            <Checkbox id="mACACI" checked={props.consejeria.antecedenteDto.mACACI || ''} onChange={handleChangeAntecedente}>ACI</Checkbox>
+                                            <Checkbox id="mACDIU" checked={props.consejeria.antecedenteDto.mACDIU || ''} onChange={handleChangeAntecedente}>DIU</Checkbox>
+                                            <Checkbox id="mACPreservativo" checked={props.consejeria.antecedenteDto.mACPreservativo || ''} onChange={handleChangeAntecedente}>Preservativo</Checkbox>
+                                            <Checkbox id="mACImplanteHormonal" checked={props.consejeria.antecedenteDto.mACImplanteHormonal || ''} onChange={handleChangeAntecedente}>Implante Hormonal</Checkbox>
+                                        </FormGroup>
+                                    </Col>
+                                    <Col xs={4} md={4}>
+                                        <ControlLabel>Causa</ControlLabel>
+                                        <FormGroup>
+                                            <Checkbox id="noUsoMAC" checked={props.consejeria.antecedenteDto.noUsoMAC || ''} onChange={handleChangeAntecedente}>No Uso</Checkbox>
+                                            <Checkbox id="falloMAC" checked={props.consejeria.antecedenteDto.falloMAC || ''} onChange={handleChangeAntecedente}>Fallo</Checkbox>
+                                            <Checkbox id="aHEMAC" checked={props.consejeria.antecedenteDto.aHEMAC || ''} onChange={handleChangeAntecedente}>AHE?</Checkbox>
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
+                                <Row className="show-grid">
+                                    <Col xs={12} md={12}>
+                                        <ControlLabel>Antecedentes de relevancia</ControlLabel>
+                                        <FormControl
+                                            componentClass="textarea"
+                                            id="observaciones"
+                                            type="text"
+                                            label=""
+                                            placeholder="Otra Institucion de Salud?"
+                                            value={props.consejeria.antecedenteDto.observaciones || ''}
+                                            onChange={handleChangeAntecedente}
+                                        />
+                                    </Col>
+                                </Row>
                             </Panel>
                         </Tab>
                         <Tab eventKey={3} title="Gesta Actual">
-                            <Panel header={'Borderless table Example'}>
-                                ssss
+                            <Panel header={'Datos correspondientes a la Gesta Actual'}>
+                                <Row className="show-grid">
+                                    <Col xs={4} md={4}>
+                                        <ControlLabel>Como se entero</ControlLabel>
+                                        <FormGroup>
+                                            <Checkbox id="enteroPorTestOrina" checked={props.consejeria.gestaActualDto.enteroPorTestOrina || ''} onChange={handleChangeGestaActual}>Test de orina</Checkbox>
+                                            <Checkbox id="enteroPorTestSangre" checked={props.consejeria.gestaActualDto.enteroPorTestSangre || ''} onChange={handleChangeGestaActual}>Test de sangre</Checkbox>
+                                            <Checkbox id="enteroPorEcografia" checked={props.consejeria.gestaActualDto.enteroPorEcografia || ''} onChange={handleChangeGestaActual}>Ecografia</Checkbox>
+                                            <FormControl
+                                                id="fUM"
+                                                type="text"
+                                                label="fUM"
+                                                placeholder="fUM"
+                                                value={props.consejeria.gestaActualDto.fUM || ''}
+                                                onChange={handleChangeGestaActual}
+                                            />
 
+                                            <FormControl
+                                                id="eGFUM"
+                                                type="text"
+                                                label="eGFUM"
+                                                placeholder="eGFUM"
+                                                value={props.consejeria.gestaActualDto.eGFUM || ''}
+                                                onChange={handleChangeGestaActual}
+                                            />
+                                            <FormControl
+                                                id="enteroFecha"
+                                                type="date"
+                                                label="Fecha"
+                                                placeholder="Fecha"
+                                                value={props.consejeria.gestaActualDto.enteroFecha || ''}
+                                                onChange={handleChangeGestaActual}
+                                            />
+                                        </FormGroup>
+                                    </Col>
+                                    <Col xs={4} md={4}>
+                                        <ControlLabel>Intento suprimir embarazo?</ControlLabel>
+                                        <FormGroup>
+                                            <Checkbox id="intentoSuprimir" checked={props.consejeria.gestaActualDto.intentoSuprimir || ''} onChange={handleChangeGestaActual}>Si/No</Checkbox>
+                                            <FormControl
+                                                componentClass="textarea"
+                                                id="intentoSuprimirObservaciones"
+                                                type="text"
+                                                label=""
+                                                placeholder="Como lo intento?"
+                                                value={props.consejeria.gestaActualDto.intentoSuprimirObservaciones || ''}
+                                                onChange={handleChangeGestaActual}
+                                            />
+                                            <Checkbox id="lactancia" checked={props.consejeria.gestaActualDto.lactancia || ''} onChange={handleChangeGestaActual}>Lactancia?</Checkbox>
+                                        </FormGroup>
+                                    </Col>
+                                    <Col xs={4} md={4}>
+                                        <ControlLabel>Pudo contarle a alguien?</ControlLabel>
+                                        <FormGroup>
+                                            <Checkbox id="loComento" checked={props.consejeria.gestaActualDto.loComento || ''} onChange={handleChangeGestaActual}>Si/No</Checkbox>
+                                            <FormControl
+                                                componentClass="textarea"
+                                                id="loComentoAQuien"
+                                                type="text"
+                                                label=""
+                                                placeholder="A quien?"
+                                                value={props.consejeria.gestaActualDto.loComentoAQuien || ''}
+                                                onChange={handleChangeGestaActual}
+                                            />
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
+                                <Row className="show-grid">
+                                    <Col xs={4} md={4}>
+                                        <ControlLabel>Causal????</ControlLabel>
+                                        <FormGroup>
+                                            <Checkbox id="iLE" checked={props.consejeria.gestaActualDto.iLE || ''} onChange={handleChangeGestaActual}>ILE?</Checkbox>
+                                            <Checkbox id="causaViolacion" checked={props.consejeria.gestaActualDto.causaViolacion || ''} onChange={handleChangeGestaActual}>Violacion</Checkbox>
+                                        </FormGroup>
+                                    </Col>
+                                    <Col xs={4} md={4}>
+                                        <ControlLabel>Causal Salud</ControlLabel>
+                                        <FormGroup>
+                                            <Checkbox id="causaSaludFisica" checked={props.consejeria.gestaActualDto.causaSaludFisica || ''} onChange={handleChangeGestaActual}>Salud Fisica</Checkbox>
+                                            <Checkbox id="causaSaludPSI" checked={props.consejeria.gestaActualDto.causaSaludPSI || ''} onChange={handleChangeGestaActual}>Salud PSI</Checkbox>
+                                            <Checkbox id="causaSaludSocial" checked={props.consejeria.gestaActualDto.causaSaludSocial || ''} onChange={handleChangeGestaActual}>Salud Social</Checkbox>
+                                        </FormGroup>
+                                    </Col>
+                                    <Col xs={4} md={4}>
+                                        <ControlLabel>Causal sin visibilidad extra.</ControlLabel>
+                                        <FormGroup>
+                                            <Checkbox id="causaSinVE" checked={props.consejeria.gestaActualDto.causaSinVE || ''} onChange={handleChangeGestaActual}>causaSinVE</Checkbox>
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
+
+                                <Row className="show-grid">
+                                    <Col xs={6} md={6}>
+                                        <ControlLabel>Contraindicacion uso MSP</ControlLabel>
+                                        <FormGroup>
+                                            <Checkbox id="cUMSPACO" checked={props.consejeria.gestaActualDto.cUMSPACO || ''} onChange={handleChangeGestaActual}>Trastorno coagulacion/ACO</Checkbox>
+                                            <Checkbox id="cUMSPDisfuncionHepaticaSevera" checked={props.consejeria.gestaActualDto.cUMSPDisfuncionHepaticaSevera || ''} onChange={handleChangeGestaActual}>Disfuncion hepatica severa</Checkbox>
+                                            <Checkbox id="cUMSPEmbarazoEctopico" checked={props.consejeria.gestaActualDto.cUMSPEmbarazoEctopico || ''} onChange={handleChangeGestaActual}>Embarazo ectopico</Checkbox>
+                                            <Checkbox id="cUMSPAlergiaMisoDiclo" checked={props.consejeria.gestaActualDto.cUMSPAlergiaMisoDiclo || ''} onChange={handleChangeGestaActual}>Alergia a miso/diclo</Checkbox>
+                                        </FormGroup>
+                                    </Col>
+                                    <Col xs={6} md={6}>
+                                        <ControlLabel>Factor de riesgo para realizar procedimiento</ControlLabel>
+                                        <FormGroup>
+                                            <Checkbox id="factorRiesgoHb7" checked={props.consejeria.gestaActualDto.factorRiesgoHb7 || ''} onChange={handleChangeGestaActual}>Hb 7</Checkbox>
+                                            <Checkbox id="factorRiesgoCardiopatia" checked={props.consejeria.gestaActualDto.factorRiesgoCardiopatia || ''} onChange={handleChangeGestaActual}>Cardiopatia</Checkbox>
+                                            <Checkbox id="factorRiesgoDIU" checked={props.consejeria.gestaActualDto.factorRiesgoDIU || ''} onChange={handleChangeGestaActual}>DIU</Checkbox>
+                                            <Checkbox id="factorRiesgoCardiovascular" checked={props.consejeria.gestaActualDto.factorRiesgoCardiovascular || ''} onChange={handleChangeGestaActual}>Riesgo cardiovascular</Checkbox>
+                                            <Checkbox id="factorRiesgoCorticoterapia" checked={props.consejeria.gestaActualDto.factorRiesgoCorticoterapia || ''} onChange={handleChangeGestaActual}>Corticoterapia prolongada</Checkbox>
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
                             </Panel>
                         </Tab>
                         <Tab eventKey={4} title="Estudios Complementarios">
-                            <Panel header={'Borderless table Example'}>
-                                ssss
+                            <Panel header={'Otros estudios realizados'}>
+                                <Row className="show-grid">
+                                    <Col xs={4} md={4}>
+                                        <ControlLabel>Eco 1</ControlLabel>
+                                        <FormGroup>
+                                            <FormControl
+                                                id="eco1Fecha"
+                                                type="date"
+                                                label="Fecha"
+                                                placeholder="Fecha"
+                                                value={props.consejeria.gestaActualDto.eco1Fecha || ''}
+                                                onChange={handleChangeEstudioComplementario}
+                                            />
+                                            <FormControl
+                                                id="eco1EG"
+                                                type="text"
+                                                label="eco1EG"
+                                                placeholder="eco1EG"
+                                                value={props.consejeria.gestaActualDto.eco1EG || ''}
+                                                onChange={handleChangeEstudioComplementario}
+                                            />
+                                            <Checkbox id="eco1LFC" checked={props.consejeria.gestaActualDto.eco1LFC || ''} onChange={handleChangeEstudioComplementario}>eco1LFC</Checkbox>
+                                            <Checkbox id="eco1Embrion" checked={props.consejeria.gestaActualDto.eco1Embrion || ''} onChange={handleChangeEstudioComplementario}>eco1Embrion</Checkbox>
+                                            <Checkbox id="eco1Saco" checked={props.consejeria.gestaActualDto.eco1Saco || ''} onChange={handleChangeEstudioComplementario}>eco1Saco</Checkbox>
+                                            <FormControl
+                                                id="eco1Ubicacion"
+                                                type="text"
+                                                label="eco1Ubicacion"
+                                                placeholder="eco1Ubicacion"
+                                                value={props.consejeria.gestaActualDto.eco1Ubicacion || ''}
+                                                onChange={handleChangeUsuaria}
+                                            />
+                                            <Checkbox id="eco1Normoincerto" checked={props.consejeria.gestaActualDto.eco1Normoincerto || ''} onChange={handleChangeEstudioComplementario}>eco1Normoincerto</Checkbox>
+                                            <Checkbox id="eco1Ectopico" checked={props.consejeria.gestaActualDto.eco1Ectopico || ''} onChange={handleChangeEstudioComplementario}>eco1Ectopico</Checkbox>
+                                        </FormGroup>
+                                    </Col>
+                                    <Col xs={4} md={4}>
+                                        <ControlLabel>Eco 2</ControlLabel>
+                                        <FormGroup>
+                                            <FormControl
+                                                id="eco2Fecha"
+                                                type="date"
+                                                label="Fecha"
+                                                placeholder="Fecha"
+                                                value={props.consejeria.gestaActualDto.eco2Fecha || ''}
+                                                onChange={handleChangeEstudioComplementario}
+                                            />
+                                            <FormControl
+                                                id="eco2EG"
+                                                type="text"
+                                                label="eco2EG"
+                                                placeholder="eco2EG"
+                                                value={props.consejeria.gestaActualDto.eco2EG || ''}
+                                                onChange={handleChangeEstudioComplementario}
+                                            />
+                                            <Checkbox id="eco2LFC" checked={props.consejeria.gestaActualDto.eco2LFC || ''} onChange={handleChangeEstudioComplementario}>eco2LFC</Checkbox>
+                                            <Checkbox id="eco2Embrion" checked={props.consejeria.gestaActualDto.eco2Embrion || ''} onChange={handleChangeEstudioComplementario}>eco2Embrion</Checkbox>
+                                            <Checkbox id="eco2Saco" checked={props.consejeria.gestaActualDto.eco2Saco || ''} onChange={handleChangeEstudioComplementario}>eco2Saco</Checkbox>
+                                            <FormControl
+                                                id="eco2Ubicacion"
+                                                type="text"
+                                                label="eco2Ubicacion"
+                                                placeholder="eco2Ubicacion"
+                                                value={props.consejeria.gestaActualDto.eco2Ubicacion || ''}
+                                                onChange={handleChangeUsuaria}
+                                            />
+                                            <Checkbox id="eco2Normoincerto" checked={props.consejeria.gestaActualDto.eco2Normoincerto || ''} onChange={handleChangeEstudioComplementario}>eco2Normoincerto</Checkbox>
+                                            <Checkbox id="eco2Ectopico" checked={props.consejeria.gestaActualDto.eco2Ectopico || ''} onChange={handleChangeEstudioComplementario}>eco2Ectopico</Checkbox>
+                                        </FormGroup>
+                                    </Col>
+                                    <Col xs={4} md={4}>
+                                        <ControlLabel>Laboratorio</ControlLabel>
+                                        <FormGroup>
+                                            <FormControl
+                                                id="labFecha"
+                                                type="date"
+                                                label="Fecha"
+                                                placeholder="Fecha"
+                                                value={props.consejeria.gestaActualDto.labFecha || ''}
+                                                onChange={handleChangeEstudioComplementario}
+                                            />
+                                            <FormControl
+                                                id="labGB"
+                                                type="text"
+                                                label="labGB"
+                                                placeholder="labGB"
+                                                value={props.consejeria.gestaActualDto.labGB || ''}
+                                                onChange={handleChangeEstudioComplementario}
+                                            />
+                                            <FormControl
+                                                id="labGR"
+                                                type="text"
+                                                label="labGR"
+                                                placeholder="labGR"
+                                                value={props.consejeria.gestaActualDto.labGR || ''}
+                                                onChange={handleChangeEstudioComplementario}
+                                            />
+                                            <FormControl
+                                                id="labHb"
+                                                type="text"
+                                                label="labHb"
+                                                placeholder="labHb"
+                                                value={props.consejeria.gestaActualDto.labHb || ''}
+                                                onChange={handleChangeEstudioComplementario}
+                                            />
+                                            <FormControl
+                                                id="labGB"
+                                                type="text"
+                                                label="labGB"
+                                                placeholder="labGB"
+                                                value={props.consejeria.gestaActualDto.labGB || ''}
+                                                onChange={handleChangeEstudioComplementario}
+                                            />
+                                            <FormControl
+                                                id="labGB"
+                                                type="text"
+                                                label="labGB"
+                                                placeholder="labGB"
+                                                value={props.consejeria.gestaActualDto.labGB || ''}
+                                                onChange={handleChangeEstudioComplementario}
+                                            />
+                                            <FormControl
+                                                id="labHto"
+                                                type="text"
+                                                label="labHto"
+                                                placeholder="labHto"
+                                                value={props.consejeria.gestaActualDto.labHto || ''}
+                                                onChange={handleChangeEstudioComplementario}
+                                            />
+                                            <FormControl
+                                                id="labGrupo"
+                                                type="text"
+                                                label="labGrupo"
+                                                placeholder="labGrupo"
+                                                value={props.consejeria.gestaActualDto.labGrupo || ''}
+                                                onChange={handleChangeEstudioComplementario}
+                                            />
+                                            <FormControl
+                                                id="labRh"
+                                                type="text"
+                                                label="labRh"
+                                                placeholder="labRh"
+                                                value={props.consejeria.gestaActualDto.labRh || ''}
+                                                onChange={handleChangeEstudioComplementario}
+                                            />
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
 
                             </Panel>
                         </Tab>
