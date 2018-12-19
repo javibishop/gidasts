@@ -119,7 +119,7 @@ const initState = {
         "factorRiesgoCardiovascular": false,
         "factorRiesgoCorticoterapia": false
     },
-    "gestaActualDto": {
+    "estudioComplementarioDto": {
         "eco1Observacion": "",
         "eco1Fecha": new Date(),
         "eco1EG": "",
@@ -145,7 +145,53 @@ const initState = {
         "labHto": "",
         "labGrupo": "",
         "labRh": ""
+    },
+    "entrevistaPostAbortoDto": {
+        "procedimientoObservaciones": "",
+        "fecha": new Date(),
+        "procedimientoHecho": false,
+        "procedimientoNoContinua": false,
+        "procedimientoNoAbortoEspontaneo": false,
+        "procedimientoNoOtro": "",
+        "procedimientoSiInformado": false,
+        "procedimientoSiOtra": false,
+        "procedimientoSiViaV": false,
+        "procedimientoSiViaSL": false,
+        "procedimientoSiOtro": "",
+        "accedioPorFarmacia": false,
+        "accedioPorConocido": false,
+        "accedioPorInternet": false,
+        "accedioPorOrgSocial": false,
+        "presentacionSuelto": false,
+        "presentacionCaja20": false,
+        "presentacionCaja16": false,
+        "efectoAdversoNo": false,
+        "efectoAdversoGastro": false,
+        "efectoAdversoTemperatura": false,
+        "efectoAdversoCafalea": false,
+        "efectoAdversoOtro": "",
+        "complicacionNo": false,
+        "complicacionHemorragia": false,
+        "complicacionInfeccion": false,
+        "complicacionOtro": "",
+        "indicacionGammaglobulina": false,
+        "ecografiaPostFecha": new Date(),
+        "ecografiaPostNoRealizo": false,
+        "ecografiaPostAbortoCompleto": false,
+        "ecografiaPostHMR": false,
+        "ecografiaPostAbortoIncompleto": false,
+        "ecografiaPostEmbrionViable": false,
+        "ecografiaPostNuevaConsejeria": false,
+        "ecografiaPostDerivacion2Nivel": false,
+        "ecografiaPostConductaExpectante": false,
+        "consejeriaMACNo": false,
+        "consejeriaMACACO": false,
+        "consejeriaMACACI": false,
+        "consejeriaMACDIU": false,
+        "consejeriaMACPreservativo": false,
+        "consejeriaMACImplanteHormonal": false
     }
+    
 };
 const initialState = {
     consejeria: initState, isLoading: false, isChanging: false
@@ -347,9 +393,9 @@ export const reducer = (state, action) => {
     }
     if (action.type === changingStateEntrevista) {
         if (action.valor.target.type === "checkbox") {
-            state.consejeria.entrevistaDto[action.valor.target.id] = action.valor.target.checked;
+            state.consejeria.entrevistaPostAbortoDto[action.valor.target.id] = action.valor.target.checked;
         } else {
-            state.consejeria.entrevistaDto[action.valor.target.id] = action.valor.target.value;
+            state.consejeria.entrevistaPostAbortoDto[action.valor.target.id] = action.valor.target.value;
         }
 
         return {
