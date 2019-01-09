@@ -39,8 +39,9 @@ class ConsejeriaEdit extends Component {
     
 
     handleSubmit(event) {
-        alert('A name was submitted: ' + this.state.value);
+        
         event.preventDefault();
+        this.props.saveUsuaria(this.props.consejeria.usuariaDto);
     }
 
     handleClick1() {
@@ -78,7 +79,7 @@ class ConsejeriaEdit extends Component {
 
     render() {
         //const { saveConsejeria, hola } = this.props;
-        const { hola } = this.props;
+        const { saveUsuaria } = this.props;
     return (
         <div>
             <h1>Weather consejeria</h1>
@@ -95,8 +96,8 @@ class ConsejeriaEdit extends Component {
 
                 <Row className="show-grid">
                     <Col xs={6} md={6}>
+
                     
-                    <Button onClick={hola}>  Submit2 </Button>
                     </Col>
                 </Row>
            
@@ -106,7 +107,7 @@ class ConsejeriaEdit extends Component {
 }
 
 function renderConsejeria(props) {
-    const { handleChangeUsuaria, handleChangeAntecedente, handleChangeGestaActual, handleChangeEstudioComplementario, handleChangeEntrevista } = props;
+    const { handleChangeUsuaria, handleChangeAntecedente, handleChangeGestaActual, handleChangeEstudioComplementario, handleChangeEntrevista, saveDatosFiliatorios } = props;
     return (
         <Grid className='form'>
             <Row>
@@ -276,6 +277,10 @@ function renderConsejeria(props) {
                                         </FormControl>
                                     </Col>
                                 </Row>
+                                <Row>
+                                    <Button onClick={() => saveDatosFiliatorios(props.consejeria.usuariaDto)}>  Submit2 </Button>
+                                </Row>
+                                
                             </Panel>
                         </Tab>
                         <Tab eventKey={2} title="Antecedentes">
@@ -369,6 +374,7 @@ function renderConsejeria(props) {
                                         <ControlLabel>Intento suprimir embarazo?</ControlLabel>
                                         <FormGroup>
                                             <Checkbox id="intentoSuprimir" checked={props.consejeria.gestaActualDto.intentoSuprimir || ''} onChange={handleChangeGestaActual}>Si/No</Checkbox>
+                                            <Label>Como lo intento?</Label>
                                             <FormControl
                                                 componentClass="textarea"
                                                 id="intentoSuprimirObservaciones"
@@ -385,6 +391,7 @@ function renderConsejeria(props) {
                                         <ControlLabel>Pudo contarle a alguien?</ControlLabel>
                                         <FormGroup>
                                             <Checkbox id="loComento" checked={props.consejeria.gestaActualDto.loComento || ''} onChange={handleChangeGestaActual}>Si/No</Checkbox>
+                                            <Label>A quien se lo comento?</Label>
                                             <FormControl
                                                 componentClass="textarea"
                                                 id="loComentoAQuien"

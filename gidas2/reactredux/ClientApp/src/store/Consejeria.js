@@ -1,11 +1,11 @@
 ﻿const newConsejeria = 'NEW_CONCEJERIA';
 const initNewConsejeria = 'INIT_NEW_CONCEJERIA';
 
-const getConsejeriaRequest = 'GET_CONCEJERIA_RUEQUES';
+const getConsejeriaRequest = 'GET_CONCEJERIA_RUEQUEST';
 const getConsejeriaFailure = 'GET_CONCEJERIA_FAILURE';
 const getConsejeriaSuccess = 'GET_CONCEJERIA_SUCCESS';
 
-const saveConsejeriaRequest = 'SAVE_CONCEJERIA_RUEQUES';
+const saveConsejeriaRequest = 'SAVE_CONCEJERIA_RUEQUEST';
 const saveConsejeriaFailure = 'SAVE_CONCEJERIA_FAILURE';
 const saveConsejeriaSuccess = 'SAVE_CONCEJERIA_SUCCESS';
 const afterConsejeria = 'AFTER_SAVE_CONCEJERIA';
@@ -207,7 +207,7 @@ export const actionCreators = {
         dispatch({ type: initNewConsejeria, getState });
     },
 
-    editConsejeria: id => async (dispatch, getState) => {    
+    editConsejeria: id => async (dispatch, getState) => {
         if (id <= 0) {
             // no hay id
             return;
@@ -221,7 +221,34 @@ export const actionCreators = {
 
         dispatch({ type: getConsejeriaSuccess, id, consejeria });
     },
-    
+
+    /*try - catch async
+     * https://medium.com/@kkomaz/react-to-async-await-553c43f243e2
+     * model binding mvc core.
+     * https://andrewlock.net/model-binding-json-posts-in-asp-net-core/
+     */
+
+    saveDatosFiliatorios: usuariaDto => async (dispatch) => {
+        const url = `api/Consejerias/PostUsuaria`;
+        const settings = {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json;',
+            },
+            body: JSON.stringify(usuariaDto)
+        };
+
+        dispatch({ type: saveConsejeriaRequest });
+
+        try {
+            const response = await fetch(url, settings);
+            const consejeria = await response.json();
+            dispatch({ type: saveConsejeriaSuccess, consejeria });
+        } catch (error) {
+            dispatch({ type: saveConsejeriaFailure});
+        }
+    },
+      
     handleChangeUsuaria: valor => (dispatch, getState) => {
         dispatch({ type: changeStateBeforeUsuaria, valor });
         dispatch({ type: changingStateUsuaria, valor });
@@ -251,27 +278,6 @@ export const actionCreators = {
         dispatch({ type: changingStateEntrevista, valor });
         dispatch({ type: changeStateAfterEntrevista, valor });
     },
-
-    hola:id =>  async (dispatch, getState) => {
-        dispatch({ type: 'hola', id });
-    },
-
-    //saveConsejeria: id => async (dispatch) => {
-
-    //    const url = `api/Consejerias/Post`;
-    //    const settings = {
-    //        method: 'POST',
-    //        headers: {
-    //            Accept: 'application/json',
-    //            'Content-Type': 'application/json',
-    //        }
-    //    };
-
-    //    const response = await fetch(url, settings);
-    //    const consejeria = await response.json();
-
-    //    dispatch({ type: saveConsejeriaRequest, consejeria });
-    //}
 };
 
 export const reducer = (state, action) => {
@@ -412,14 +418,6 @@ export const reducer = (state, action) => {
         };
     }
 
-    if (action.type === 'hola') {
-        return {
-            ...state,
-            consejeria: state.consejeria,
-            isLoading: true
-        };
-    }
-
     if (action.type === getConsejeriaRequest) {
         return {
             ...state,
@@ -452,21 +450,19 @@ export const reducer = (state, action) => {
     if (action.type === saveConsejeriaRequest) {
         return {
             ...state,
-            consejeria: {},
             isLoading: false
         };
     }
     if (action.type === saveConsejeriaFailure) {
         return {
             ...state,
-            consejeria: {},
             isLoading: false
         };
     }
     if (action.type === saveConsejeriaSuccess) {
         return {
             ...state,
-            consejeria: {},
+            consejeria: action.consejeria,
             isLoading: false
         };
     }
