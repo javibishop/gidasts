@@ -107,7 +107,8 @@ class ConsejeriaEdit extends Component {
 }
 
 function renderConsejeria(props) {
-    const { handleChangeUsuaria, handleChangeAntecedente, handleChangeGestaActual, handleChangeEstudioComplementario, handleChangeEntrevista, saveDatosFiliatorios } = props;
+    const { handleChangeUsuaria, handleChangeAntecedente, handleChangeGestaActual, handleChangeEstudioComplementario, handleChangeEntrevista,
+        saveUsuaria, saveAntecedente, saveGestaActual, saveEstudioComplementario, saveEntrevista } = props;
     return (
         <Grid className='form'>
             <Row>
@@ -278,7 +279,7 @@ function renderConsejeria(props) {
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Button onClick={() => saveDatosFiliatorios(props.consejeria.usuariaDto)}>  Submit2 </Button>
+                                    <Button onClick={() => saveUsuaria(props.consejeria.usuariaDto)}>  Guardar </Button>
                                 </Row>
                                 
                             </Panel>
@@ -330,6 +331,11 @@ function renderConsejeria(props) {
                                         />
                                     </Col>
                                 </Row>
+
+                                <Row>
+                                    <Button onClick={() => saveAntecedente(props.consejeria.antecedenteDto)}>  Guardar </Button>
+                                </Row>
+
                             </Panel>
                         </Tab>
                         <Tab eventKey={3} title="Gesta Actual">
@@ -448,6 +454,9 @@ function renderConsejeria(props) {
                                             <Checkbox id="factorRiesgoCorticoterapia" checked={props.consejeria.gestaActualDto.factorRiesgoCorticoterapia || ''} onChange={handleChangeGestaActual}>Corticoterapia prolongada</Checkbox>
                                         </FormGroup>
                                     </Col>
+                                </Row>
+                                <Row>
+                                    <Button onClick={() => saveGestaActual(props.consejeria.gestaActualDto)}>  Guardar </Button>
                                 </Row>
                             </Panel>
                         </Tab>
@@ -597,7 +606,9 @@ function renderConsejeria(props) {
                                         </FormGroup>
                                     </Col>
                                 </Row>
-
+                                <Row>
+                                    <Button onClick={() => saveEstudioComplementario(props.consejeria.estudioComplementarioDto)}>  Guardar </Button>
+                                </Row>
                             </Panel>
                         </Tab>
                         <Tab eventKey={5} title="Entrevista Post Aborto">
@@ -750,6 +761,9 @@ function renderConsejeria(props) {
                                             <Checkbox id="consejeriaMACImplanteHormonal" checked={props.consejeria.entrevistaPostAbortoDto.consejeriaMACImplanteHormonal || ''} onChange={handleChangeEntrevista}>Implante hormonal</Checkbox>
                                         </FormGroup>
                                     </Col>
+                                </Row>
+                                <Row>
+                                    <Button onClick={() => saveEntrevista(props.consejeria.entrevistaPostAbortoDto)}>  Guardar </Button>
                                 </Row>
                             </Panel>
                         </Tab>

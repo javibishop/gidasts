@@ -28,15 +28,15 @@ namespace reactredux
             services.AddCors();
             services.AddSingleton<SessionFactory>();
 
-            services.AddSingleton<ISessionFactory>((provider) => {
+            services.AddSingleton<SessionFactory>((provider) => {
                 var cfg = provider.GetService<SessionFactory>();
-                return cfg.BuildSessionFactory();
+                return cfg;
             });
 
-            services.AddScoped<ISession>((provider) => {
-                var factory = provider.GetService<ISessionFactory>();
-                return factory.OpenSession();
-            });
+            //services.AddScoped<ISession>((provider) => {
+            //    var factory = provider.GetService<ISessionFactory>();
+            //    return factory.OpenSession();
+            //});
 
 
             // In production, the React files will be served from this directory
@@ -81,6 +81,9 @@ namespace reactredux
 
                 }
             });
+
+            //app.use(bodyParser.urlencoded({ extended: true }));
+            //app.use(bodyParser.json());
         }
     }
 }

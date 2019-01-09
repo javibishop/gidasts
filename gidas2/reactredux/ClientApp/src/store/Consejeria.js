@@ -1,17 +1,33 @@
-﻿const newConsejeria = 'NEW_CONCEJERIA';
-const initNewConsejeria = 'INIT_NEW_CONCEJERIA';
+﻿const newConsejeria = 'NEW_CONSEJERIA';
+const initNewConsejeria = 'INIT_NEW_CONSEJERIA';
 
-const getConsejeriaRequest = 'GET_CONCEJERIA_RUEQUEST';
-const getConsejeriaFailure = 'GET_CONCEJERIA_FAILURE';
-const getConsejeriaSuccess = 'GET_CONCEJERIA_SUCCESS';
+const getConsejeriaRequest = 'GET_CONSEJERIA_RUEQUEST';
+const getConsejeriaFailure = 'GET_CONSEJERIA_FAILURE';
+const getConsejeriaSuccess = 'GET_CONSEJERIA_SUCCESS';
 
-const saveConsejeriaRequest = 'SAVE_CONCEJERIA_RUEQUEST';
-const saveConsejeriaFailure = 'SAVE_CONCEJERIA_FAILURE';
-const saveConsejeriaSuccess = 'SAVE_CONCEJERIA_SUCCESS';
-const afterConsejeria = 'AFTER_SAVE_CONCEJERIA';
+const saveUsuariaRequest = 'SAVE_USUARIA_RUEQUEST';
+const saveUsuariaFailure = 'SAVE_USUARIA_FAILURE';
+const saveUsuariaSuccess = 'SAVE_USUARIA_SUCCESS';
 
-const editConsejeria = 'EDIT_CONCEJERIA';
-const receiveConsejeria = 'RECIVE_CONCEJERIAS';
+const saveAntecedenteRequest = 'SAVE_ANTECEDENTE_RUEQUEST';
+const saveAntecedenteFailure = 'SAVE_ANTECEDENTE_FAILURE';
+const saveAntecedenteSuccess = 'SAVE_ANTECEDENTE_SUCCESS';
+
+const saveGestaActualRequest = 'SAVE_GESTAACTUAL_RUEQUEST';
+const saveGestaActualFailure = 'SAVE_GESTAACTUAL_FAILURE';
+const saveGestaActualSuccess = 'SAVE_GESTAACTUAL_SUCCESS';
+
+const saveEstudioComplementarioRequest = 'SAVE_ESTUDIOCOMPLEMENTARIO_RUEQUEST';
+const saveEstudioComplementarioFailure = 'SAVE_ESTUDIOCOMPLEMENTARIO_FAILURE';
+const saveEstudioComplementarioSuccess = 'SAVE_ESTUDIOCOMPLEMENTARIO_SUCCESS';
+
+const saveEntrevistaRequest = 'SAVE_ENTREVISTA_RUEQUEST';
+const saveEntrevistaFailure = 'SAVE_ENTREVISTA_FAILURE';
+const saveEntrevistaSuccess = 'SAVE_ENTREVISTA_SUCCESS';
+
+const afterConsejeria = 'AFTER_SAVE_CONSEJERIA';
+const editConsejeria = 'EDIT_CONSEJERIA';
+const receiveConsejeria = 'RECIVE_CONSEJERIAS';
 
 const changeStateBeforeUsuaria = 'ChangeStateBeforeUsuaria';
 const changingStateUsuaria = 'ChangingStateUsuaria';
@@ -228,7 +244,7 @@ export const actionCreators = {
      * https://andrewlock.net/model-binding-json-posts-in-asp-net-core/
      */
 
-    saveDatosFiliatorios: usuariaDto => async (dispatch) => {
+    saveUsuaria: usuariaDto => async (dispatch) => {
         const url = `api/Consejerias/PostUsuaria`;
         const settings = {
             method: 'POST',
@@ -238,16 +254,101 @@ export const actionCreators = {
             body: JSON.stringify(usuariaDto)
         };
 
-        dispatch({ type: saveConsejeriaRequest });
+        dispatch({ type: saveUsuariaRequest });
 
         try {
             const response = await fetch(url, settings);
             const consejeria = await response.json();
-            dispatch({ type: saveConsejeriaSuccess, consejeria });
+            dispatch({ type: saveUsuariaSuccess, consejeria });
         } catch (error) {
-            dispatch({ type: saveConsejeriaFailure});
+            dispatch({ type: saveUsuariaFailure});
         }
     },
+
+    saveAntecedente: antecedenteDto => async (dispatch) => {
+        const url = `api/Consejerias/PostAntecedente`;
+        const settings = {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json;',
+            },
+            body: JSON.stringify(antecedenteDto)
+        };
+
+        dispatch({ type: saveAntecedenteRequest });
+
+        try {
+            const response = await fetch(url, settings);
+            const consejeria = await response.json();
+            dispatch({ type: saveAntecedenteSuccess, consejeria });
+        } catch (error) {
+            dispatch({ type: saveAntecedenteFailure });
+        }
+    },
+
+    saveGestaActual: gestaActualDto => async (dispatch) => {
+        const url = `api/Consejerias/PostGestaActual`;
+        const settings = {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json;',
+            },
+            body: JSON.stringify(gestaActualDto)
+        };
+
+        dispatch({ type: saveGestaActualRequest });
+
+        try {
+            const response = await fetch(url, settings);
+            const consejeria = await response.json();
+            dispatch({ type: saveGestaActualSuccess, consejeria });
+        } catch (error) {
+            dispatch({ type: saveGestaActualFailure });
+        }
+    },
+
+    saveEstudioComplementario: estudioComplementarioDto => async (dispatch) => {
+        const url = `api/Consejerias/PostEstudioComplementario`;
+        const settings = {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json;',
+            },
+            body: JSON.stringify(estudioComplementarioDto)
+        };
+
+        dispatch({ type: saveEstudioComplementarioRequest });
+
+        try {
+            const response = await fetch(url, settings);
+            const consejeria = await response.json();
+            dispatch({ type: saveEstudioComplementarioSuccess, consejeria });
+        } catch (error) {
+            dispatch({ type: saveEstudioComplementarioFailure });
+        }
+    },
+
+    saveEntrevista: entrevistaPostAbortoDto => async (dispatch) => {
+        const url = `api/Consejerias/PostEntrevista`;
+        const settings = {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json;',
+            },
+            body: JSON.stringify(entrevistaPostAbortoDto)
+        };
+
+        dispatch({ type: saveEntrevistaRequest });
+
+        try {
+            const response = await fetch(url, settings);
+            const consejeria = await response.json();
+            dispatch({ type: saveEntrevistaSuccess, consejeria });
+        } catch (error) {
+            dispatch({ type: saveEntrevistaFailure });
+        }
+    },
+    
       
     handleChangeUsuaria: valor => (dispatch, getState) => {
         dispatch({ type: changeStateBeforeUsuaria, valor });
@@ -447,19 +548,79 @@ export const reducer = (state, action) => {
         };
     }
 
-    if (action.type === saveConsejeriaRequest) {
+    if (action.type === saveUsuariaRequest) {
         return {
             ...state,
             isLoading: false
         };
     }
-    if (action.type === saveConsejeriaFailure) {
+    if (action.type === saveUsuariaFailure) {
         return {
             ...state,
             isLoading: false
         };
     }
-    if (action.type === saveConsejeriaSuccess) {
+    if (action.type === saveUsuariaSuccess) {
+        return {
+            ...state,
+            consejeria: action.consejeria,
+            isLoading: false
+        };
+    }
+
+    if (action.type === saveGestaActualRequest) {
+        return {
+            ...state,
+            isLoading: false
+        };
+    }
+    if (action.type === saveGestaActualFailure) {
+        return {
+            ...state,
+            isLoading: false
+        };
+    }
+    if (action.type === saveGestaActualSuccess) {
+        return {
+            ...state,
+            consejeria: action.consejeria,
+            isLoading: false
+        };
+    }
+
+    if (action.type === saveAntecedenteRequest) {
+        return {
+            ...state,
+            isLoading: false
+        };
+    }
+    if (action.type === saveAntecedenteFailure) {
+        return {
+            ...state,
+            isLoading: false
+        };
+    }
+    if (action.type === saveAntecedenteSuccess) {
+        return {
+            ...state,
+            consejeria: action.consejeria,
+            isLoading: false
+        };
+    }
+
+    if (action.type === saveEntrevistaRequest) {
+        return {
+            ...state,
+            isLoading: false
+        };
+    }
+    if (action.type === saveEntrevistaFailure) {
+        return {
+            ...state,
+            isLoading: false
+        };
+    }
+    if (action.type === saveEntrevistaSuccess) {
         return {
             ...state,
             consejeria: action.consejeria,

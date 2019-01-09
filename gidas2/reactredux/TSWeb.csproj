@@ -22,7 +22,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="NH\SessionFactory.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\TSModel\TSModel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="NH\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
