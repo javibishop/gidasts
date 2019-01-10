@@ -279,7 +279,7 @@ function renderConsejeria(props) {
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Button onClick={() => saveUsuaria(props.consejeria.usuariaDto)}>  Guardar </Button>
+                                    <Button onClick={() => { props.consejeria.usuariaDto.consejeriaId = props.consejeria.consejeriaDto.id; saveUsuaria(props.consejeria.usuariaDto) }}>  Guardar </Button>
                                 </Row>
                                 
                             </Panel>
@@ -333,7 +333,7 @@ function renderConsejeria(props) {
                                 </Row>
 
                                 <Row>
-                                    <Button onClick={() => saveAntecedente(props.consejeria.antecedenteDto)}>  Guardar </Button>
+                                    <Button onClick={() => { props.consejeria.antecedenteDto.consejeriaId = props.consejeria.consejeriaDto.id; saveAntecedente(props.consejeria.antecedenteDto) }}>  Guardar </Button>
                                 </Row>
 
                             </Panel>
@@ -456,7 +456,7 @@ function renderConsejeria(props) {
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Button onClick={() => saveGestaActual(props.consejeria.gestaActualDto)}>  Guardar </Button>
+                                    <Button onClick={() => { props.consejeria.gestaActualDto.consejeriaId = props.consejeria.consejeriaDto.id; saveGestaActual(props.consejeria.gestaActualDto); }}>  Guardar </Button>
                                 </Row>
                             </Panel>
                         </Tab>
@@ -607,7 +607,7 @@ function renderConsejeria(props) {
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Button onClick={() => saveEstudioComplementario(props.consejeria.estudioComplementarioDto)}>  Guardar </Button>
+                                    <Button onClick={() => { props.consejeria.estudioComplementarioDto.consejeriaId = props.consejeria.consejeriaDto.id; saveEstudioComplementario(props.consejeria.estudioComplementarioDto) }}>  Guardar </Button>
                                 </Row>
                             </Panel>
                         </Tab>
@@ -763,7 +763,7 @@ function renderConsejeria(props) {
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Button onClick={() => saveEntrevista(props.consejeria.entrevistaPostAbortoDto)}>  Guardar </Button>
+                                    <Button onClick={() => { props.consejeria.entrevistaPostAbortoDto.consejeriaId = props.consejeria.consejeriaDto.id;  saveEntrevista(props.consejeria.entrevistaPostAbortoDto)}}>  Guardar </Button>
                                 </Row>
                             </Panel>
                         </Tab>

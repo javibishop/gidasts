@@ -224,7 +224,10 @@ namespace tswebapi.Mapper
             {
                 antecedente = this.sessionFactory.GetEntity<Antecedente>(dto.Id);
             }
-
+            if (dto.ConsejeriaId > 0 && antecedente.Consejeria == null)
+            {
+                antecedente.Consejeria = this.sessionFactory.GetEntity<ConsejeriaEntidad>(dto.ConsejeriaId);
+            }
             antecedente.AbortoEspontaneo = dto.AbortoEspontaneo;
             antecedente.AbortoVoluntario = dto.AbortoVoluntario;
             antecedente.AHEMAC = dto.AHEMAC;
@@ -252,7 +255,10 @@ namespace tswebapi.Mapper
             {
                 gestaActual = this.sessionFactory.GetEntity<GestaActual>(dto.Id);
             }
-
+            if(dto.ConsejeriaId > 0 && gestaActual.Consejeria == null)
+            {
+                gestaActual.Consejeria = this.sessionFactory.GetEntity<ConsejeriaEntidad>(dto.ConsejeriaId);
+            }
             gestaActual.CausaSaludFisica = dto.CausaSaludFisica;
             gestaActual.CausaSaludPSI = dto.CausaSaludPSI;
             gestaActual.CausaSaludSocial = dto.CausaSaludSocial;
@@ -290,7 +296,7 @@ namespace tswebapi.Mapper
             {
                 usuaria = this.sessionFactory.GetEntity<Usuaria>(dto.Id);
             }
-
+          
             usuaria.Apellido = dto.Apellido;
             usuaria.ConocePorConocido = dto.ConocePorConocido;
             usuaria.ConocePorInsititucionSalud = dto.ConocePorInsititucionSalud;
@@ -361,7 +367,10 @@ namespace tswebapi.Mapper
             {
                 entrevistaPostAborto = this.sessionFactory.GetEntity<EntrevistaPostAborto>(dto.Id);
             }
-
+            if (dto.ConsejeriaId > 0 && entrevistaPostAborto.Consejeria == null)
+            {
+                entrevistaPostAborto.Consejeria = this.sessionFactory.GetEntity<ConsejeriaEntidad>(dto.ConsejeriaId);
+            }
             entrevistaPostAborto.AccedioPorConocido = dto.AccedioPorConocido;
             entrevistaPostAborto.AccedioPorFarmacia = dto.AccedioPorFarmacia;
             entrevistaPostAborto.AccedioPorInternet = dto.AccedioPorInternet;

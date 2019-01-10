@@ -54,7 +54,7 @@ namespace tswebapi.Controllers
             AntecedenteDto antecedenteDto = new AntecedenteDto();
             EstudioComplementarioDto estudioComplementarioDto = new EstudioComplementarioDto();
             EntrevistaPostAbortoDto entrevistaPostAbortoDto = new EntrevistaPostAbortoDto();
-            
+            //http://www.andrewwhitaker.com/blog/2014/06/19/queryover-series-part-4-transforming/
             //TODO: ver aca de mejorar esto, o meter las referencias en consejeria a los demas o ver de que forma.
 
             //var result = sessionFactory.CreateSQLQuery(@"
@@ -102,6 +102,7 @@ namespace tswebapi.Controllers
                 this.consejeriaDtoMapper.MapAntecedenteToDto(antecedenteDto, antecedente);
             }
             consejeriaDatosDto.AntecedenteDto = antecedenteDto;
+
 
             criteria = sessionFactory.CreateCriteria<EstudioComplementario>();
             criteria.Add(Restrictions.Eq("Consejeria.Id", consejeria.Id));

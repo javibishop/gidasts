@@ -1,6 +1,6 @@
 ﻿const newConsejeria = 'NEW_CONSEJERIA';
 const initNewConsejeria = 'INIT_NEW_CONSEJERIA';
-
+const getConsejeriaId = 'GET_CONSEJERIA_ID';
 const getConsejeriaRequest = 'GET_CONSEJERIA_RUEQUEST';
 const getConsejeriaFailure = 'GET_CONSEJERIA_FAILURE';
 const getConsejeriaSuccess = 'GET_CONSEJERIA_SUCCESS';
@@ -288,6 +288,8 @@ export const actionCreators = {
 
     saveGestaActual: gestaActualDto => async (dispatch) => {
         const url = `api/Consejerias/PostGestaActual`;
+
+
         const settings = {
             method: 'POST',
             headers: {
@@ -329,7 +331,7 @@ export const actionCreators = {
     },
 
     saveEntrevista: entrevistaPostAbortoDto => async (dispatch) => {
-        const url = `api/Consejerias/PostEntrevista`;
+        const url = `api/Consejerias/PostEntrevistaPostAborto`;
         const settings = {
             method: 'POST',
             headers: {
@@ -383,6 +385,12 @@ export const actionCreators = {
 
 export const reducer = (state, action) => {
   state = state || initialState;
+
+    if (action.type === getConsejeriaId) {
+        return {
+            idConsejeria: state.consejeria.consejeriaDto.id
+        };
+    }
 
     if (action.type === changeStateBeforeUsuaria) {
         return {
