@@ -33,7 +33,7 @@ namespace TSModel.NH
         {
             try
             {
-                bool create = false, update = true;
+                bool create = false, update = false;
 
                 // NHibernate.NHibernateLogger.SetLoggersFactory(new NHibernateToMicrosoftLoggerFactory(loggerFactory));
                 //https://github.com/nhibernate/nhibernate-core/blob/master/src/NHibernate.Example.Web/Infrastructure/AppSessionFactory.cs
@@ -94,6 +94,18 @@ namespace TSModel.NH
             try
             {
                 return _session.CreateSQLQuery(query);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public IQuery CreateQuery(string query)
+        {
+            try
+            {
+                return _session.CreateQuery(query);
             }
             catch (Exception ex)
             {

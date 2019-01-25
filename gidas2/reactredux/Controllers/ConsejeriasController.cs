@@ -28,10 +28,35 @@ namespace tswebapi.Controllers
         public List<ConsejeriaDto> Get()
         {
             List<ConsejeriaDto> resutl = new List<ConsejeriaDto>();
-            var consejeria = sessionFactory.CreateCriteria<ConsejeriaEntidad>().List<ConsejeriaEntidad>();
-            var consejerias = consejeria.ToList();
+            var criteria = sessionFactory.CreateCriteria<ConsejeriaEntidad>().List<ConsejeriaEntidad>();
+            var consejerias = criteria.ToList();
             consejerias.ForEach(c => resutl.Add(this.consejeriaDtoMapper.MapConsejeriaToDto(new ConsejeriaDto(), c)));
             return resutl;
+        }
+
+        // GET api/pacientes
+        [HttpGet("[action]")]
+        public List<ConsejeriaDto> SearchConsejeria(string searchText)
+        {
+            List<ConsejeriaDto> resutl = new List<ConsejeriaDto>();
+            string hql = "select c from ConsejeriaEntidad as c inner join c.Usuarie1 as u1 inner join c.Usuarie2 as u2 inner join c.Usuaria as ua where u1.Nombre like :texto or u2.Nombre like :texto or ua.Nombre like :texto or c.Observacion like :texto ";
+            var query = sessionFactory.CreateQuery(hql);
+            query.SetParameter("texto", "%" + searchText + "%");
+            var consejerias = query.List<ConsejeriaEntidad>().ToList();
+            consejerias.ForEach(c => resutl.Add(this.consejeriaDtoMapper.MapConsejeriaToDto(new ConsejeriaDto(), c)));
+            return resutl;
+
+
+            
+            //var criteria = sessionFactory.CreateCriteria<ConsejeriaEntidad>();
+            //criteria.CreateAlias("TSModel.Dominio.Usuarie", "Usuarie1", NHibernate.SqlCommand.JoinType.InnerJoin);
+            //criteria.SetFetchMode("Usuaria", FetchMode.Join);
+            //criteria.Add(Restrictions.Like("Usuarie1.UserName", searchText));
+            //criteria.Add(Restrictions.Like("Usuaria.Nombre", searchText));
+            //criteria.Add(Restrictions.Like("Observacion", searchText));
+            //var consejerias = criteria.List<ConsejeriaEntidad>().ToList();
+            //consejerias.ForEach(c => resutl.Add(this.consejeriaDtoMapper.MapConsejeriaToDto(new ConsejeriaDto(), c)));
+            //return resutl;
         }
 
         // GET api/pacientes/5

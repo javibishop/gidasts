@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { render } from 'react-dom'; 
-import { Panel, Tabs, Tab, FormControl, FormGroup, ControlLabel, Button, Grid, Row, Col, Label, MenuItem, Checkbox, Dropdown, Glyphicon, InputGroup } from 'react-bootstrap'; 
+import { Panel, Tabs, Tab, FormControl, FormGroup, ControlLabel, Button, Grid, Row, Col, Label, PageHeader, Checkbox, DropdownButton, MenuItem } from 'react-bootstrap'; 
 
 
 import { actionCreators } from '../store/Consejeria';
@@ -14,11 +12,6 @@ class ConsejeriaEdit extends Component {
         super(props);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-
-        //const BUTTONS = ['Default', 'Primary', 'Success', 'Info', 'Warning', 'Danger'];
-        //const buttonsInstance = (
-        //    <ButtonToolbar>{BUTTONS.map(renderDropdownButton)}</ButtonToolbar>
-        //);
     }
 
 
@@ -28,6 +21,7 @@ class ConsejeriaEdit extends Component {
         // This method runs when the component is first added to the page
         const id = parseInt(this.props.match.params.id) || 0;
         this.props.newConsejeria();
+        this.props.loadUsuaries();
 
         if (this.props.match.params.id > 0) {
             this.props.editConsejeria(id);
@@ -82,40 +76,74 @@ class ConsejeriaEdit extends Component {
         const { saveUsuaria } = this.props;
     return (
         <div>
-            <h1>Weather consejeria</h1>
-            <p>This component demonstrates fetching data from the server and working with URL parameters.</p>
-
+            <PageHeader>
+                Alta/Edicion de Consejeria {this.props.consejeria.usuariaDto.nombre || ''}
+            </PageHeader>
             <Row className="show-grid">
                 <Col xs={12} md={12}>
-
                     {renderConsejeria(this.props)} 
                 </Col>
             </Row>
-            
-                
-
-                <Row className="show-grid">
-                    <Col xs={6} md={6}>
-
-                    
-                    </Col>
-                </Row>
-           
+            <Row className="show-grid">
+                <Col xs={6} md={6}></Col>
+             </Row>
       </div>
     );
   }
 }
 
 function renderConsejeria(props) {
-    const { handleChangeUsuaria, handleChangeAntecedente, handleChangeGestaActual, handleChangeEstudioComplementario, handleChangeEntrevista,
+    const { handleChangeConsjeria, handleChangeUsuaria, handleChangeAntecedente, handleChangeGestaActual, handleChangeEstudioComplementario, handleChangeEntrevista,
         saveUsuaria, saveAntecedente, saveGestaActual, saveEstudioComplementario, saveEntrevista } = props;
     return (
-        <Grid className='form'>
+        <Grid fluid={true} bsClass="container" className='form'>
             <Row>
                 <Col xs={12} md={12}>
-                    <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
+                    <Tabs defaultActiveKey={0} id="uncontrolled-tab-example">
+                        <Tab eventKey={0} title="Profesionales">
+                            <Panel header={'Profesionales a Cargo'}>
+                                <Row className="show-grid">
+                                    <Col xs={6} md={6}>
+                                        <Label>Profesional 1</Label>
+                                        <FormControl
+                                            value={props.consejeria.consejeriaDto.usuarie1Id || ''}
+                                            id="usuarie1Id"
+                                            onChange={handleChangeConsjeria}
+                                            componentClass="select" placeholder="select">
+                                            {props.usuaries.map((option, index) =>
+                                                <option value={option.value} key={index}> {option.label} </option>)}
+                                        </FormControl>
+                                    </Col>
+                                    <Col xs={6} md={6}>
+                                        <Label>Profesional 2</Label>
+                                        <FormControl
+                                            value={props.consejeria.consejeriaDto.usuarie2Id || ''}
+                                            id="usuarie2Id"
+                                            onChange={handleChangeConsjeria}
+                                            componentClass="select" placeholder="select">
+                                            {props.usuaries.map((option, index) =>
+                                                <option value={option.value} key={index}> {option.label} </option>)}
+                                        </FormControl>
+                                    </Col>
+                                </Row>
+                                <Row className="show-grid">
+                                    <Col xs={12} md={12}>
+                                        <Label>Observaciones</Label>
+                                        <FormControl
+                                            componentClass="textarea"
+                                            id="observaciones"
+                                            type="text"
+                                            label=""
+                                            placeholder="Observaciones"
+                                            value={props.consejeria.consejeriaDto.observaciones || ''}
+                                            onChange={handleChangeConsjeria}
+                                        />
+                                    </Col>
+                                </Row>
+                            </Panel>
+                        </Tab>
                         <Tab eventKey={1} title="Datos Filiatorios">
-                            <Panel header={'Datos correspondiente a la Usuaria'}>
+                            <Panel header={'Datos correspondiente a la Usuaria '}>
                                 <Row className="show-grid">
                                     <Col xs={6} md={6}>
                                         <Label>Nombre</Label>
@@ -278,18 +306,20 @@ function renderConsejeria(props) {
                                         </FormControl>
                                     </Col>
                                 </Row>
-                                <Row>
-                                    <Button onClick={() => { props.consejeria.usuariaDto.consejeriaId = props.consejeria.consejeriaDto.id; saveUsuaria(props.consejeria.usuariaDto) }}>  Guardar </Button>
+
+                                <Row className='pull-right'>
+                                    <Button className='btn-sm btn-success pull-rigth' onClick={() => { props.consejeria.usuariaDto.consejeriaId = props.consejeria.consejeriaDto.id; saveUsuaria(props.consejeria.usuariaDto) }}>  Guardar </Button>
                                 </Row>
                                 
                             </Panel>
                         </Tab>
                         <Tab eventKey={2} title="Antecedentes">
-                            <Panel header={'Antecedentes Personales y Ginecologicos'}>
+                            <Panel header={'Antecedentes Personales y Ginecobstetricos'}>
                                 <Row className="show-grid">
                                     <Col xs={4} md={4}>
                                         <ControlLabel></ControlLabel>
                                         <FormGroup>
+                                            van numeros
                                             <Checkbox id="gestas" checked={props.consejeria.antecedenteDto.gestas || ''} onChange={handleChangeAntecedente}>Gestas</Checkbox> 
                                             <Checkbox id="partosVaginal" checked={props.consejeria.antecedenteDto.partosVaginal || ''} onChange={handleChangeAntecedente}>Parto Vaginal</Checkbox>
                                             <Checkbox id="cesareas" checked={props.consejeria.antecedenteDto.cesareas || ''} onChange={handleChangeAntecedente}>Cesareas</Checkbox>
@@ -298,7 +328,7 @@ function renderConsejeria(props) {
                                         </FormGroup>
                                     </Col>
                                     <Col xs={4} md={4}>
-                                        <ControlLabel>Mac Habitual</ControlLabel>
+                                        <ControlLabel>MAC Habitual</ControlLabel>
                                         <FormGroup>
                                             <Checkbox id="mACNoUsa" checked={props.consejeria.antecedenteDto.mACNoUsa || ''} onChange={handleChangeAntecedente}>No Usa</Checkbox>
                                             <Checkbox id="mACACO" checked={props.consejeria.antecedenteDto.mACACO || ''} onChange={handleChangeAntecedente}>ACO</Checkbox>
@@ -332,8 +362,8 @@ function renderConsejeria(props) {
                                     </Col>
                                 </Row>
 
-                                <Row>
-                                    <Button onClick={() => { props.consejeria.antecedenteDto.consejeriaId = props.consejeria.consejeriaDto.id; saveAntecedente(props.consejeria.antecedenteDto) }}>  Guardar </Button>
+                                <Row className='pull-right'>
+                                    <Button className='btn-sm btn-success pull-rigth' onClick={() => { props.consejeria.antecedenteDto.consejeriaId = props.consejeria.consejeriaDto.id; saveAntecedente(props.consejeria.antecedenteDto) }}>  Guardar </Button>
                                 </Row>
 
                             </Panel>
@@ -344,10 +374,19 @@ function renderConsejeria(props) {
                                     <Col xs={4} md={4}>
                                         <ControlLabel>Como se entero</ControlLabel>
                                         <FormGroup>
+                                            <Label>Fecha en la que se entero</Label>
+                                            <FormControl
+                                                id="enteroFecha"
+                                                type="date"
+                                                label="Fecha"
+                                                placeholder="Fecha"
+                                                value={props.consejeria.gestaActualDto.enteroFecha || ''}
+                                                onChange={handleChangeGestaActual}
+                                            />
                                             <Checkbox id="enteroPorTestOrina" checked={props.consejeria.gestaActualDto.enteroPorTestOrina || ''} onChange={handleChangeGestaActual}>Test de orina</Checkbox>
                                             <Checkbox id="enteroPorTestSangre" checked={props.consejeria.gestaActualDto.enteroPorTestSangre || ''} onChange={handleChangeGestaActual}>Test de sangre</Checkbox>
                                             <Checkbox id="enteroPorEcografia" checked={props.consejeria.gestaActualDto.enteroPorEcografia || ''} onChange={handleChangeGestaActual}>Ecografia</Checkbox>
-                                            <Label>FUM</Label>
+                                            <Label>FUM (es fecha)</Label>
                                             <FormControl
                                                 id="fUM"
                                                 type="text"
@@ -365,19 +404,11 @@ function renderConsejeria(props) {
                                                 value={props.consejeria.gestaActualDto.eGFUM || ''}
                                                 onChange={handleChangeGestaActual}
                                             />
-                                            <Label>Fecha en la que se entero</Label>
-                                            <FormControl
-                                                id="enteroFecha"
-                                                type="date"
-                                                label="Fecha"
-                                                placeholder="Fecha"
-                                                value={props.consejeria.gestaActualDto.enteroFecha || ''}
-                                                onChange={handleChangeGestaActual}
-                                            />
+                                            
                                         </FormGroup>
                                     </Col>
                                     <Col xs={4} md={4}>
-                                        <ControlLabel>Intento suprimir embarazo?</ControlLabel>
+                                        <ControlLabel>Intento interrumpir embarazo?</ControlLabel>
                                         <FormGroup>
                                             <Checkbox id="intentoSuprimir" checked={props.consejeria.gestaActualDto.intentoSuprimir || ''} onChange={handleChangeGestaActual}>Si/No</Checkbox>
                                             <Label>Como lo intento?</Label>
@@ -386,7 +417,7 @@ function renderConsejeria(props) {
                                                 id="intentoSuprimirObservaciones"
                                                 type="text"
                                                 label=""
-                                                placeholder="Como lo intento?"
+                                                placeholder="Como?"
                                                 value={props.consejeria.gestaActualDto.intentoSuprimirObservaciones || ''}
                                                 onChange={handleChangeGestaActual}
                                             />
@@ -397,7 +428,7 @@ function renderConsejeria(props) {
                                         <ControlLabel>Pudo contarle a alguien?</ControlLabel>
                                         <FormGroup>
                                             <Checkbox id="loComento" checked={props.consejeria.gestaActualDto.loComento || ''} onChange={handleChangeGestaActual}>Si/No</Checkbox>
-                                            <Label>A quien se lo comento?</Label>
+                                            <Label>A quien?</Label>
                                             <FormControl
                                                 componentClass="textarea"
                                                 id="loComentoAQuien"
@@ -412,9 +443,13 @@ function renderConsejeria(props) {
                                 </Row>
                                 <Row className="show-grid">
                                     <Col xs={4} md={4}>
-                                        <ControlLabel>Causal????</ControlLabel>
+                                        <Checkbox id="iLE" checked={props.consejeria.gestaActualDto.iLE || ''} onChange={handleChangeGestaActual}>Interrupcion Legal del Embarazo</Checkbox>
+                                    </Col>
+                                </Row>
+                                <Row className="show-grid">
+                                    <Col xs={4} md={4}>
+                                        <ControlLabel>Causal Violacion</ControlLabel>
                                         <FormGroup>
-                                            <Checkbox id="iLE" checked={props.consejeria.gestaActualDto.iLE || ''} onChange={handleChangeGestaActual}>ILE?</Checkbox>
                                             <Checkbox id="causaViolacion" checked={props.consejeria.gestaActualDto.causaViolacion || ''} onChange={handleChangeGestaActual}>Violacion</Checkbox>
                                         </FormGroup>
                                     </Col>
@@ -455,8 +490,8 @@ function renderConsejeria(props) {
                                         </FormGroup>
                                     </Col>
                                 </Row>
-                                <Row>
-                                    <Button onClick={() => { props.consejeria.gestaActualDto.consejeriaId = props.consejeria.consejeriaDto.id; saveGestaActual(props.consejeria.gestaActualDto); }}>  Guardar </Button>
+                                <Row className='pull-right'>
+                                    <Button className='btn-sm btn-success pull-rigth' onClick={() => { props.consejeria.gestaActualDto.consejeriaId = props.consejeria.consejeriaDto.id; saveGestaActual(props.consejeria.gestaActualDto); }}>  Guardar </Button>
                                 </Row>
                             </Panel>
                         </Tab>
@@ -606,8 +641,8 @@ function renderConsejeria(props) {
                                         </FormGroup>
                                     </Col>
                                 </Row>
-                                <Row>
-                                    <Button onClick={() => { props.consejeria.estudioComplementarioDto.consejeriaId = props.consejeria.consejeriaDto.id; saveEstudioComplementario(props.consejeria.estudioComplementarioDto) }}>  Guardar </Button>
+                                <Row className='pull-right'>
+                                    <Button className='btn-sm btn-success pull-rigth' onClick={() => { props.consejeria.estudioComplementarioDto.consejeriaId = props.consejeria.consejeriaDto.id; saveEstudioComplementario(props.consejeria.estudioComplementarioDto) }}>  Guardar </Button>
                                 </Row>
                             </Panel>
                         </Tab>
@@ -762,8 +797,8 @@ function renderConsejeria(props) {
                                         </FormGroup>
                                     </Col>
                                 </Row>
-                                <Row>
-                                    <Button onClick={() => { props.consejeria.entrevistaPostAbortoDto.consejeriaId = props.consejeria.consejeriaDto.id;  saveEntrevista(props.consejeria.entrevistaPostAbortoDto)}}>  Guardar </Button>
+                                <Row className='pull-right'>
+                                    <Button className='btn-sm btn-success pull-rigth' onClick={() => { props.consejeria.entrevistaPostAbortoDto.consejeriaId = props.consejeria.consejeriaDto.id;  saveEntrevista(props.consejeria.entrevistaPostAbortoDto)}}>  Guardar </Button>
                                 </Row>
                             </Panel>
                         </Tab>

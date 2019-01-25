@@ -24,3 +24,12 @@ F:\Development\gidasts\gidas2\TSModel\obj\Debug\netcoreapp2.0\TSModel.AssemblyIn
 F:\Development\gidasts\gidas2\TSModel\obj\Debug\netcoreapp2.0\TSModel.AssemblyInfo.cs
 F:\Development\gidasts\gidas2\TSModel\obj\Debug\netcoreapp2.0\TSModel.dll
 F:\Development\gidasts\gidas2\TSModel\obj\Debug\netcoreapp2.0\TSModel.pdb
+E:\Development\Gidasts\gidas2\TSModel\bin\Debug\netcoreapp2.0\TSModel.deps.json
+E:\Development\Gidasts\gidas2\TSModel\bin\Debug\netcoreapp2.0\TSModel.dll
+E:\Development\Gidasts\gidas2\TSModel\bin\Debug\netcoreapp2.0\TSModel.pdb
+E:\Development\Gidasts\gidas2\TSModel\obj\Debug\netcoreapp2.0\TSModel.csprojAssemblyReference.cache
+E:\Development\Gidasts\gidas2\TSModel\obj\Debug\netcoreapp2.0\TSModel.csproj.CoreCompileInputs.cache
+E:\Development\Gidasts\gidas2\TSModel\obj\Debug\netcoreapp2.0\TSModel.AssemblyInfoInputs.cache
+E:\Development\Gidasts\gidas2\TSModel\obj\Debug\netcoreapp2.0\TSModel.AssemblyInfo.cs
+E:\Development\Gidasts\gidas2\TSModel\obj\Debug\netcoreapp2.0\TSModel.dll
+E:\Development\Gidasts\gidas2\TSModel\obj\Debug\netcoreapp2.0\TSModel.pdb

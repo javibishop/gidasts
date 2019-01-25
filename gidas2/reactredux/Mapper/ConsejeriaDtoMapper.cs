@@ -23,7 +23,9 @@ namespace tswebapi.Mapper
             dto.Usuario2 = consejeria.Usuarie2.Nombre;
             dto.Usuarie1Id = consejeria.Usuarie1.Id;
             dto.Usuarie2Id = consejeria.Usuarie2.Id;
-
+            dto.UsuariaId = consejeria.Usuaria.Id;
+            dto.Usuaria = consejeria.Usuaria.Nombre;
+            dto.FechaIngreso = consejeria.FechaIngreso;
             return dto;
         }
         public AntecedenteDto MapAntecedenteToDto(AntecedenteDto dto, Antecedente antecedente)

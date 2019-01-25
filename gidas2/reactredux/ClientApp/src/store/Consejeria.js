@@ -5,6 +5,9 @@ const getConsejeriaRequest = 'GET_CONSEJERIA_RUEQUEST';
 const getConsejeriaFailure = 'GET_CONSEJERIA_FAILURE';
 const getConsejeriaSuccess = 'GET_CONSEJERIA_SUCCESS';
 
+const getUsuariesRequest = 'GET_USUARIES_RUEQUEST';
+const getUsuariesSuccess = 'GET_USUARIES_SUCCESS';
+
 const saveUsuariaRequest = 'SAVE_USUARIA_RUEQUEST';
 const saveUsuariaFailure = 'SAVE_USUARIA_FAILURE';
 const saveUsuariaSuccess = 'SAVE_USUARIA_SUCCESS';
@@ -32,6 +35,10 @@ const receiveConsejeria = 'RECIVE_CONSEJERIAS';
 const changeStateBeforeUsuaria = 'ChangeStateBeforeUsuaria';
 const changingStateUsuaria = 'ChangingStateUsuaria';
 const changeStateAfterUsuaria = 'ChangeStateAfterUsuaria';
+
+const changeStateBeforeConsejeria = 'ChangeStateBeforeConsejeria';
+const changingStateConsejeria = 'ChangingStateConsejeria';
+const changeStateAfterConsejeria = 'ChangeStateAfterConsejeria';
 
 const changeStateBeforeAntecedente = 'ChangeStateBeforeAntecedente';
 const changingStateAntecedente = 'ChangingStateAntecedente';
@@ -210,10 +217,21 @@ const initState = {
     
 };
 const initialState = {
-    consejeria: initState, isLoading: false, isChanging: false
+    consejeria: initState, usuaries : [], isLoading: false, isChanging: false
 };
 
 export const actionCreators = {
+    loadUsuaries : () => async (dispatch, getState) => {
+
+        dispatch({ type: getUsuariesRequest });
+
+        const url = `api/Usuaries/GetForCombo`;
+        const response = await fetch(url);
+        const usuaries = await response.json();
+
+        dispatch({ type: getUsuariesSuccess, usuaries });
+    },
+
     newConsejeria: id => async (dispatch, getState) => {
         if (id <= 0) {
             // no hay id
@@ -225,7 +243,7 @@ export const actionCreators = {
 
     editConsejeria: id => async (dispatch, getState) => {
         if (id <= 0) {
-            // no hay id
+            dispatch({ type: initNewConsejeria, getState });
             return;
         }
 
@@ -350,8 +368,13 @@ export const actionCreators = {
             dispatch({ type: saveEntrevistaFailure });
         }
     },
-    
       
+    handleChangeConsjeria: valor => (dispatch, getState) => {
+        dispatch({ type: changeStateBeforeConsejeria, valor });
+        dispatch({ type: changingStateConsejeria, valor });
+        dispatch({ type: changeStateAfterConsejeria, valor });
+    },
+
     handleChangeUsuaria: valor => (dispatch, getState) => {
         dispatch({ type: changeStateBeforeUsuaria, valor });
         dispatch({ type: changingStateUsuaria, valor });
@@ -389,6 +412,33 @@ export const reducer = (state, action) => {
     if (action.type === getConsejeriaId) {
         return {
             idConsejeria: state.consejeria.consejeriaDto.id
+        };
+    }
+
+    if (action.type === changeStateBeforeConsejeria) {
+        return {
+            ...state,
+            isChanging: true
+        };
+    }
+    if (action.type === changingStateConsejeria) {
+        if (action.valor.target.type === "checkbox") {
+            state.consejeria.consejeriaDto[action.valor.target.id] = action.valor.target.checked;
+        } else {
+            state.consejeria.consejeriaDto[action.valor.target.id] = action.valor.target.value;
+        }
+
+        return {
+            ...state,
+            isChanging: true,
+            consejeria: state.consejeria
+        }
+    }
+    if (action.type === changeStateAfterConsejeria) {
+        return {
+            ...state,
+            consejeria: state.consejeria,
+            isChanging: false
         };
     }
 
@@ -524,6 +574,20 @@ export const reducer = (state, action) => {
             ...state,
             consejeria: state.consejeria,
             isChanging: false
+        };
+    }
+
+    if (action.type === getUsuariesRequest) {
+        return {
+            ...state,
+            isLoading: true
+        };
+    }
+    if (action.type === getUsuariesSuccess) {
+        return {
+            ...state,
+            usuaries: action.usuaries,
+            isLoading: false
         };
     }
 

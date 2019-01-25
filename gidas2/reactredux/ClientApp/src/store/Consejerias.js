@@ -1,6 +1,8 @@
-﻿const requestConsejeriasType = 'REQUEST_CONCEJERIAS';
-const receiveConsejeriasType = 'RECEIVE_CONCEJERIAS';
-const initialState = { consejerias: [], isLoading: false };
+﻿const requestConsejerias = 'REQUEST_CONCEJERIAS';
+const receiveConsejerias = 'RECEIVE_CONCEJERIAS';
+const getSearchText = 'GET_SEARCHTEXT';
+const changeSearchText = 'CHANGE_SEARCH';
+const initialState = { consejerias: [], searchText: '', isLoading: false };
 
 export const actionCreators = {
   requestConsejerias: startDateIndex => async (dispatch, getState) => {    
@@ -8,35 +10,45 @@ export const actionCreators = {
       // Don't issue a duplicate request (we already have or are loading the requested data)
       return;
     }
-
-      dispatch({ type: requestConsejeriasType, startDateIndex });
+      
+      dispatch({ type: requestConsejerias, startDateIndex });
 
       const url = `api/Consejerias/Get`;
     const response = await fetch(url);
     const consejerias = await response.json();
 
-      dispatch({ type: receiveConsejeriasType, startDateIndex, consejerias });
+      dispatch({ type: receiveConsejerias, startDateIndex, consejerias });
     },
-    viewPaciente: startDateIndex => async (dispatch, getState) => {
-        if (startDateIndex === getState().consejerias.startDateIndex) {
-            // Don't issue a duplicate request (we already have or are loading the requested data)
-            return;
-        }
+    
+    handleSearch: searchText => async (dispatch, getState) => {
+        const startDateIndex = 0;
+        let url = `api/Consejerias/Get`;
+        if (getState().consejerias.searchText !== '')
+            url = `api/Consejerias/SearchConsejeria/?searchText=` + getState().consejerias.searchText;
 
-        dispatch({ type: requestConsejeriasType, startDateIndex });
+        dispatch({ type: requestConsejerias, startDateIndex });
 
-        const url = `api/Consejerias/Get`;
         const response = await fetch(url);
         const consejerias = await response.json();
 
-        dispatch({ type: receiveConsejeriasType, startDateIndex, consejerias });
+        dispatch({ type: receiveConsejerias, startDateIndex, consejerias });
+    },
+    handleChangeSearch: valor => (dispatch, getState) => {
+        dispatch({ type: changeSearchText, valor });
     }
+    
 };
 
 export const reducer = (state, action) => {
   state = state || initialState;
+    if (action.type === changeSearchText) {
+        return {
+            ...state,
+            searchText: action.valor.target.value
+        }
+    }
 
-    if (action.type === requestConsejeriasType) {
+    if (action.type === requestConsejerias) {
     return {
       ...state,
       startDateIndex: action.startDateIndex,
@@ -44,13 +56,22 @@ export const reducer = (state, action) => {
     };
   }
 
-    if (action.type === receiveConsejeriasType) {
+    if (action.type === receiveConsejerias) {
     return {
       ...state,
       startDateIndex: action.startDateIndex,
       consejerias: action.consejerias,
       isLoading: false
-    };
+        };
+
+    if (action.type === getSearchText) {
+        return {
+            ...state,
+            searchText: action.searchText,
+            isLoading: true
+        };
+    }
+        
   }
 
   return state;
