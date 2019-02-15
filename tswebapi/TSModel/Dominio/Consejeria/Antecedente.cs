@@ -1,13 +1,16 @@
-﻿namespace TSModel.Dominio.Consejeria
+﻿using System;
+
+namespace TSModel.Dominio.Consejeria
 {
     public class Antecedente : EntidadBase
     {
         public virtual  Consejeria Consejeria { get; set; }
-        public virtual  bool Gestas { get; set; }
-        public virtual  bool PartosVaginal { get; set; }
-        public virtual  bool Cesareas { get; set; }
-        public virtual  bool AbortoEspontaneo { get; set; }
-        public virtual  bool AbortoVoluntario { get; set; }
+        public virtual DateTime Fecha { get; set; }
+        public virtual short Gestas { get; set; }
+        public virtual short PartosVaginal { get; set; }
+        public virtual short Cesareas { get; set; }
+        public virtual short AbortoEspontaneo { get; set; }
+        public virtual short AbortoVoluntario { get; set; }
         //MAC = Metodos anticonceptivos.
         public virtual  bool MACNoUsa { get; set; }
         /// <summary>

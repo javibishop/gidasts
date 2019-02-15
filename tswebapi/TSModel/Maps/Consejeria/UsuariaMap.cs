@@ -13,8 +13,10 @@ namespace TSModel.Maps.Consejeria
             Map(x => x.ParejaConViviente);
             Map(x => x.ParejaNoConViviente);
             Map(x => x.SinPareja);
+            Map(x => x.TelefonoAlternativo);
             Map(x => x.ConocePorConocido);
             Map(x => x.ConocePorUS);
+            Map(x => x.ConocePorReferente);
             Map(x => x.ConocePorOrganizacion);
             Map(x => x.ConocePorMedios);
             Map(x => x.ConocePorUsuarioConcejeria);

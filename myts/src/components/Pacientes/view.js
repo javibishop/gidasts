@@ -15,7 +15,7 @@
 //           }
 //       }
 
-      
+
 
 //     render(){
 //         return(
@@ -24,7 +24,7 @@
 //                     {this.state.paciente && this.state.paciente.nombre}
 //                     {this.state.paciente && this.state.paciente.apellido}
 //                 </h1>
-                
+
 //             </div>
 //         );
 //     }
@@ -45,12 +45,12 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import green from '@material-ui/core/colors/green';
+import grey from '@material-ui/core/colors/grey';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormLabel from '@material-ui/core/FormLabel';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
+//import { empleado } from './data2';  
 
 function TabContainer({ children, dir }) {
   return (
@@ -59,11 +59,6 @@ function TabContainer({ children, dir }) {
     </Typography>
   );
 }
-
-TabContainer.propTypes = {
-  children: PropTypes.node.isRequired,
-  dir: PropTypes.string.isRequired,
-};
 
 const ranges = [
   {
@@ -80,6 +75,59 @@ const ranges = [
   },
 ];
 
+const cogestante = [
+  {
+    value: '0',
+    label: 'Conviviente',
+  },
+  {
+    value: '1',
+    label: 'No Conviviente',
+  },
+  {
+    value: '2',
+    label: 'Sin Pareja',
+  },
+];
+
+const nivelEstudio = [
+  {
+    value: '0',
+    label: 'Sin Estudios',
+  },
+  {
+    value: '1',
+    label: 'Primario',
+  },
+  {
+    value: '2',
+    label: 'Secundario',
+  },
+  {
+    value: '3',
+    label: 'Terciario',
+  },
+  {
+    value: '4',
+    label: 'Universitario'
+  },
+];
+
+const nivelEstudioAlcanzado = [
+  {
+    value: '0',
+    label: 'Completo',
+  },
+  {
+    value: '1',
+    label: 'En Curso',
+  },
+  {
+    value: '2',
+    label: 'Incompleto',
+  }
+];
+
 const styles = theme => ({
   root: {
     backgroundColor: theme.palette.background.paper,
@@ -90,20 +138,32 @@ const styles = theme => ({
     marginRight: theme.spacing.unit,
     width: '90%'
   },
+  textFieldFecha: {
+    marginLeft: theme.spacing.unit * 10,
+    marginRight: theme.spacing.unit,
+    width: '80%'
+  },
+  
   group: {
     color: green[600],
     marginLeft: theme.spacing.unit * 5,
     '&$checked': {
       color: green[600]
-  }},
+    }
+  },
   row: {
     flexGrow: 1,
     color: green[600]
   },
-
+  divider:{
+    marginLeft: theme.spacing.unit * 10,
+    color:grey[900],
+    backgroundColor:grey[900],
+    width: '95%'
+  },
   check: {
     color: green[600],
-      marginLeft: theme.spacing.unit * 10,
+    marginLeft: theme.spacing.unit * 10,
     '&$checked': {
       color: green[500],
       marginLeft: theme.spacing.unit * 10,
@@ -115,10 +175,19 @@ const styles = theme => ({
   }
 });
 
-class FullWidthTabs extends React.Component {
+
+
+
+class PacientesView extends React.Component {
   state = {
-    value: 0,
+    value: 0
+    //,paciente : empleado
   };
+
+  constructor(props){
+        super(props);
+        //this.state = {paciente : new empleado};
+      }
 
   handleChange = (event, value) => {
     this.setState({ value });
@@ -132,6 +201,15 @@ class FullWidthTabs extends React.Component {
     this.setState({ [name]: event.target.checked });
   };
 
+  componentDidMount(){
+          const {match : {params}} = this.props;
+          if(params.id > 0){
+            fetch('http://localhost:58764/api/pacientes/'+ params.id)
+            .then(response => response.json())
+            .then(paciente => this.setState({paciente}))
+          }
+      }
+    
   render() {
     const { classes, theme } = this.props;
 
@@ -143,8 +221,7 @@ class FullWidthTabs extends React.Component {
             onChange={this.handleChange}
             indicatorColor="primary"
             textColor="primary"
-            fullWidth
-          >
+            fullWidth>
             <Tab label="Datos Filiatorios" />
             <Tab label="Antecedentes Personales y Ginecologicos" />
             <Tab label="Gesta Actual" />
@@ -155,170 +232,343 @@ class FullWidthTabs extends React.Component {
         <SwipeableViews
           axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
           index={this.state.value}
-          onChangeIndex={this.handleChangeIndex}
-        >
+          onChangeIndex={this.handleChangeIndex}>
           <TabContainer dir={theme.direction}>
-          <form className={classes.container} noValidate autoComplete="off">
-          <TabContainer dir={theme.direction}>
-          <Grid container spacing={24}>
-            <Grid item xs={6}>
-              <TextField
-                  required
-                  id="nombre"
-                  label="Nombre"
-                  className={classes.textField}
-                  value={this.state.paciente && this.state.paciente.nombre}
-                //   onChange={this.handleChange('nombre')}
-                  margin="normal"
-                />
-            </Grid>
-            <Grid item xs={6}>
-                <TextField
-                        required
-                        id="apellido"
-                        label="Apellido"
-                        value={this.state.paciente && this.state.paciente.apellido}
-                        className={classes.textField}
-                        margin="normal"
+            <form className={classes.container} noValidate autoComplete="off">
+              <TabContainer dir={theme.direction}>
+                <Grid container spacing={24}>
+                  <Grid item xs={6}>
+                    <TextField
+                      required
+                      id="nombre"
+                      label="Nombre"
+                      className={classes.textField}
+                      value={this.state.paciente && this.state.paciente.nombre}
+                      //   onChange={this.handleChange('nombre')}
                     />
-            </Grid>
-            <Grid item xs={4}>
-        <TextField
-              required
-              id="edad"
-              label="Edad"
-              className={classes.textField}
-              value={this.state.paciente && this.state.paciente.edad}
-            />
-        </Grid>
-        <Grid item xs={4} >
-            <TextField className={classes.container}
-                id="fechaNacimiento"
-                label="fechaNacimiento"
-                type="date"
-                defaultValue="2017-05-24"
-                value={this.state.paciente && this.state.paciente.fechaNacimiento}
-                className={classes.textField}
-                InputLabelProps={{
-                shrink: true,
-                }}
-            />
-        </Grid>
-        <Grid item xs={4}>
-            <TextField
-            select
-            label="Nacionalidad"
-            className={classes.textField}
-            value={this.state.weightRange}
-            // onChange={this.handleChange('weightRange')}
-            // InputProps={{
-            //     startAdornment: <InputAdornment position="start">Kg</InputAdornment>,
-            // }}
-            >
-            {ranges.map(option => (
-                <MenuItem key={option.value} value={option.value}>
-                {option.label}
-                </MenuItem>
-            ))}
-            </TextField>
-        </Grid>
-        <Grid item xs={4}>
-            <TextField
-                id="direccion"
-                label="Direccion"
-                className={classes.textField}
-                value={this.state.paciente && this.state.paciente.direccion}
-                />
-        </Grid>
-        <Grid item xs={4}>
-            <TextField
-                id="telefono"
-                label="Telefono"
-                className={classes.textField}
-                value={this.state.paciente && this.state.paciente.telefono}
-            />
-        </Grid>
-        <Grid item xs={4}>   
-            <FormControlLabel control={
-                    <Checkbox
-                    checked={this.state.checkedG}
-                    // onChange={this.handleChange('checkedG')}
-                    value={this.state.paciente && this.state.paciente.usuarioCentroSalud}
-                    classes={{
-                        root: classes.check,
-                        checked: classes.checked
-                    }}/>
-                }
-                label="Usuaria del Centro de Salud?"
-                />
-        </Grid>
-        <Grid item xs={3}>   
-          <FormLabel component="legend" className={classes.textField}>Situacion de Pareja</FormLabel>
-          <RadioGroup
-            aria-label="Gender"
-            name="gender1"
-            className={classes.group}
-            value={this.state.value}
-            onChange={this.handleChange}>
-            <FormControlLabel value="female" control={<Radio classes={{root: classes.group, checked: classes.checked}} />} label="Conviviente" />
-            <FormControlLabel value="male" control={<Radio classes={{root: classes.group, checked: classes.checked}} />} label="No Conviviente" />
-            <FormControlLabel value="other" control={<Radio classes={{root: classes.group, checked: classes.checked}} />} label="Sin" />
-          </RadioGroup>
-          </Grid>
-          <Grid item xs={3}>   
-            <FormLabel component="legend" className={classes.textField}>Mayor Nivel de Instruccion</FormLabel>
-            <Grid container>
-              <Grid item xs={6}>   
-                <RadioGroup
-                  aria-label="Gender"
-                  name="gender1"
-                  className={classes.group}
-                  value={this.state.value}
-                  onChange={this.handleChange}>
-                  <FormControlLabel value="female" control={<Radio classes={{root: classes.group, checked: classes.checked}} />} label="Primario" />
-                  <FormControlLabel value="male" control={<Radio classes={{root: classes.group, checked: classes.checked}} />} label="Secundario" />
-                  <FormControlLabel value="other" control={<Radio classes={{root: classes.group, checked: classes.checked}} />} label="Terciario" />
-                  <FormControlLabel value="female" control={<Radio classes={{root: classes.group, checked: classes.checked}} />} label="Universitario" />
-                </RadioGroup>
-              </Grid>
-              <Grid item xs={6}>   
-                <RadioGroup
-                  aria-label="Gender"
-                  name="gender1"
-                  className={classes.group}
-                  value={this.state.value}
-                  onChange={this.handleChange}>
-                  <FormControlLabel value="female" control={<Radio classes={{root: classes.group, checked: classes.checked}} />} label="Completo" />
-                  <FormControlLabel value="male" control={<Radio classes={{root: classes.group, checked: classes.checked}} />} label="Incompleto" />
-                  <FormControlLabel value="other" control={<Radio classes={{root: classes.group, checked: classes.checked}} />} label="En Curso" />
-                </RadioGroup>
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid item xs={3}>   
-              <FormControlLabel
-                  control={
-                      <Checkbox
-                      checked={this.state.checkedG}
-                      onChange={this.handleChangeCheck('checkedG')}
-                      value={this.state.paciente && this.state.paciente.SinPareja}
-                      classes={{
-                          root: classes.check,
-                          checked: classes.checked,
+                  </Grid>
+                  <Grid item xs={6}>
+                    <TextField
+                      required
+                      id="apellido"
+                      label="Apellido"
+                      value={this.state.paciente && this.state.paciente.apellido}
+                      className={classes.textField}
+                    />
+                  </Grid>
+                  <Grid item xs={3}>
+                    <TextField
+                      required
+                      id="edad"
+                      label="Edad"
+                      className={classes.textField}
+                      value={this.state.paciente && this.state.paciente.edad}
+                    />
+                  </Grid>
+                  <Grid item xs={3} >
+                    <TextField 
+                      id="fechaNacimiento"
+                      label="Fecha de Nacimiento"
+                      type="date"
+                      // defaultValue="2017-05-24"
+                      value={this.state.paciente && this.state.paciente.fechaNacimiento}
+                      className={classes.textFieldFecha}
+                      InputLabelProps={{
+                        shrink: true,
                       }}
-                      />
-                  }
-                  label="SinPareja?"
-                  />
-          </Grid>
-            </Grid>
-        </TabContainer>
-          </form>
+                    />
+                  </Grid>
+                  <Grid item xs={3}>
+                    <TextField
+                      select
+                      label="Nacionalidad"
+                      className={classes.textField}
+                      value={this.state.paciente && this.state.paciente.nacionalidad}
+                    // onChange={this.handleChange('weightRange')}
+                    // InputProps={{
+                    //     startAdornment: <InputAdornment position="start">Kg</InputAdornment>,
+                    // }}
+                    >
+                      {ranges.map(option => (
+                        <MenuItem key={option.value} value={option.value}>
+                          {option.label}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                  </Grid>
+                  <Grid item xs={3}>
+                    <TextField
+                      id="documento"
+                      label="Documento"
+                      className={classes.textFieldFecha}
+                      value={this.state.paciente && this.state.paciente.documento}
+                    />
+                  </Grid>
+                  <Grid item xs={5}>
+                    <TextField
+                      id="direccion"
+                      label="Direccion"
+                      className={classes.textField}
+                      value={this.state.paciente && this.state.paciente.direccion}
+                    />
+                  </Grid>
+                  <Grid item xs={5}>
+                    <TextField
+                      id="telefono"
+                      label="Telefono"
+                      className={classes.textField}
+                      value={this.state.paciente && this.state.paciente.telefono}
+                    />
+                  </Grid>
+                  <Grid item xs={2}>
+                    <FormControlLabel control={
+                      <Checkbox
+                        checked={this.state.checkedG}
+                        // onChange={this.handleChange('checkedG')}
+                        value={this.state.paciente && this.state.paciente.usuarioCentroSalud}
+                        classes={{
+                          root: classes.check,
+                          checked: classes.checked
+                        }} />
+                    }
+                      label="Usuaria del Centro de Salud?"
+                    />
+                  </Grid>
+                  
+                  {/* <Grid item xs={12}>
+                  <Divider className={classes.divider} style={{ padding: '0.05em' }} />
+                </Grid> */}
+                </Grid>
+                <Grid container spacing={24}>
+                  <Grid item lg={12}>
+                    <FormLabel component="legend" className={classes.textField}> Como conoce la concejeria?</FormLabel>
+                  </Grid>
+                  <Grid item xs={2}>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={this.state.checkedG}
+                          onChange={this.handleChangeCheck('checkedG')}
+                          value={this.state.paciente && this.state.paciente.conocePorConocido}
+                          classes={{
+                            root: classes.check,
+                            checked: classes.checked,
+                          }}
+                        />
+                      } label="Pareja/Familiar/Amigo?"
+                    />
+                  </Grid>
+                  <Grid item xs={2}>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={this.state.checkedG}
+                          onChange={this.handleChangeCheck('checkedG')}
+                          value={this.state.paciente && this.state.paciente.conocePorUS}
+                          classes={{
+                            root: classes.check,
+                            checked: classes.checked,
+                          }}
+                        />
+                      } label="Personal de la US?"
+                    />
+                  </Grid>
+                  <Grid item xs={2}>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={this.state.checkedG}
+                          onChange={this.handleChangeCheck('checkedG')}
+                          value={this.state.paciente && this.state.paciente.conocePorOrganizacion}
+                          classes={{
+                            root: classes.check,
+                            checked: classes.checked,
+                          }}
+                        />
+                      } label="Organizacion Social?"
+                    />
+                  </Grid>
+                  <Grid item xs={2}>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={this.state.checkedG}
+                          onChange={this.handleChangeCheck('checkedG')}
+                          value={this.state.paciente && this.state.paciente.conocePorReferente}
+                          classes={{
+                            root: classes.check,
+                            checked: classes.checked,
+                          }}
+                        />
+                      } label="Referente Comunitario?"
+                    />
+                  </Grid>
+                  <Grid item xs={2}>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={this.state.checkedG}
+                          onChange={this.handleChangeCheck('checkedG')}
+                          value={this.state.paciente && this.state.paciente.conocePorMedios}
+                          classes={{
+                            root: classes.check,
+                            checked: classes.checked,
+                          }}
+                        />
+                      } label="Medios de Comunicacion?"
+                    />
+                  </Grid>
+                  <Grid item xs={2}>
+                    <FormControlLabel variant="caption"
+                      control={
+                        <Checkbox
+                          checked={this.state.checkedG}
+                          onChange={this.handleChangeCheck('checkedG')}
+                          value={this.state.paciente && this.state.paciente.conocePorUsuarioConcejeria}
+                          classes={{
+                            root: classes.check,
+                            checked: classes.checked,
+                          }}
+                        />
+                      } label="Otra usuaria de la Consejeria?"
+                    />
+                  </Grid>
+                  <Grid item xs={2}>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={this.state.checkedG}
+                          onChange={this.handleChangeCheck('checkedG')}
+                          value={this.state.paciente && this.state.paciente.conocePorInsititucionSalud}
+                          classes={{
+                            root: classes.check,
+                            checked: classes.checked,
+                          }}
+                        />
+                      } label="Otra Institucion?"
+                    />
+                  </Grid>
+                  <Grid item xs={4}>
+                    <TextField
+                      id="direccion"
+                      label="Cual Institucion?"
+                      className={classes.textField}
+                      value={this.state.paciente && this.state.paciente.conocePorInsititucionSaludObs}
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <TextField
+                      id="direccion"
+                      label="Otro Comentario?"
+                      className={classes.textField}
+                      value={this.state.paciente && this.state.paciente.conocePorOtro}
+                    />
+                  </Grid>
+                </Grid>
+                <Grid container spacing={24}>
+                {/* <Grid item xs={12}>
+                  <Divider className={classes.divider} style={{ padding: '0.05em' }} />
+                </Grid> */}
+                <Grid item xs={12}>
+                </Grid>
+                  <Grid item xs={4}>
+                    <TextField
+                      select
+                      label="Cogestante"
+                      className={classes.textField}
+                      value={this.state.paciente && this.state.paciente.cogestante}
+                    // onChange={this.handleChange('weightRange')}
+                    // InputProps={{
+                    //     startAdornment: <InputAdornment position="start">Kg</InputAdornment>,
+                    // }}
+                    >
+                      {cogestante.map(option => (
+                        <MenuItem key={option.value} value={option.value}>
+                          {option.label}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+
+                    {/* <RadioGroup
+                      aria-label="Gender"
+                      name="gender1"
+                      className={classes.group}
+                      value={this.state.value}
+                      onChange={this.handleChange}>
+                      <FormControlLabel value={this.state.paciente && this.state.paciente.parejaConViviente} control={<Radio classes={{ root: classes.group, checked: classes.checked }} />} label="Conviviente" />
+                      <FormControlLabel value={this.state.paciente && this.state.paciente.parejaNoConViviente} control={<Radio classes={{ root: classes.group, checked: classes.checked }} />} label="No Conviviente" />
+                      <FormControlLabel value={this.state.paciente && this.state.paciente.sinPareja} control={<Radio classes={{ root: classes.group, checked: classes.checked }} />} label="Sin Pareja" />
+                    </RadioGroup> */}
+                  </Grid>
+                  
+                  <Grid item xs={4}>
+                    {/* <FormLabel component="legend" className={classes.textField}>Mayor Nivel de Instruccion</FormLabel>
+                    <Grid container>
+                      <Grid item xs={6}>
+                        <RadioGroup
+                          aria-label="Gender"
+                          name="gender1"
+                          className={classes.group}
+                          value={this.state.value}
+                          onChange={this.handleChange}>
+                          <FormControlLabel value={this.state.paciente && this.state.paciente.sinPareja} control={<Radio classes={{ root: classes.group, checked: classes.checked }} />} label="Primario" />
+                          <FormControlLabel value={this.state.paciente && this.state.paciente.sinPareja} control={<Radio classes={{ root: classes.group, checked: classes.checked }} />} label="Secundario" />
+                          <FormControlLabel value={this.state.paciente && this.state.paciente.sinPareja} control={<Radio classes={{ root: classes.group, checked: classes.checked }} />} label="Terciario" />
+                          <FormControlLabel value={this.state.paciente && this.state.paciente.sinPareja} control={<Radio classes={{ root: classes.group, checked: classes.checked }} />} label="Universitario" />
+                        </RadioGroup> */}
+                           <TextField
+                            select
+                            label="Nivel de Estudios"
+                            className={classes.textField}
+                            value={this.state.paciente && this.state.paciente.nivelInstruccion}
+                          // onChange={this.handleChange('weightRange')}
+                          // InputProps={{
+                          //     startAdornment: <InputAdornment position="start">Kg</InputAdornment>,
+                          // }}
+                          >
+                            {nivelEstudio.map(option => (
+                              <MenuItem key={option.value} value={option.value}>
+                                {option.label}
+                              </MenuItem>
+                            ))}
+                          </TextField>
+                      </Grid>
+                      <Grid item xs={4}>
+                      <TextField
+                            select
+                            label="Estudios en estado?"
+                            className={classes.textField}
+                            value={this.state.paciente && this.state.paciente.nivelInstruccionEstado}
+                          // onChange={this.handleChange('weightRange')}
+                          // InputProps={{
+                          //     startAdornment: <InputAdornment position="start">Kg</InputAdornment>,
+                          // }}
+                          >
+                            {nivelEstudio.map(option => (
+                              <MenuItem key={option.value} value={option.value}>
+                                {option.label}
+                              </MenuItem>
+                            ))}
+                          </TextField>
+                        {/* <RadioGroup
+                          aria-label="Gender"
+                          name="gender1"
+                          className={classes.group}
+                          value={this.state.value}
+                          onChange={this.handleChange}>
+                          <FormControlLabel value="female" control={<Radio classes={{ root: classes.group, checked: classes.checked }} />} label="Completo" />
+                          <FormControlLabel value="male" control={<Radio classes={{ root: classes.group, checked: classes.checked }} />} label="Incompleto" />
+                          <FormControlLabel value="other" control={<Radio classes={{ root: classes.group, checked: classes.checked }} />} label="En Curso" />
+                        </RadioGroup> */}
+                      </Grid>
+                    </Grid>
+              </TabContainer>
+            </form>
           </TabContainer>
           <TabContainer dir={theme.direction}>
-          <Grid container spacing={24}>
-            
-          </Grid>
+            <Grid container spacing={24}>
+
+            </Grid>
           </TabContainer>
           <TabContainer dir={theme.direction}>3</TabContainer>
           <TabContainer dir={theme.direction}>4</TabContainer>
@@ -329,9 +579,9 @@ class FullWidthTabs extends React.Component {
   }
 }
 
-FullWidthTabs.propTypes = {
+PacientesView.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(FullWidthTabs);
+export default withStyles(styles, { withTheme: true })(PacientesView);

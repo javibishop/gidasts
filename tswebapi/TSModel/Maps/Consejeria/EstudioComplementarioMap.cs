@@ -11,6 +11,7 @@ namespace TSModel.Maps.Consejeria
             Id(x => x.Id);
             References(x => x.Consejeria).Not.Nullable();
             Map(x => x.Eco1Observacion);
+            Map(x => x.Fecha);
             Map(x => x.Eco1Fecha);
             Map(x => x.Eco1EG);
             Map(x => x.Eco1LFC);

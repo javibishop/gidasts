@@ -14,6 +14,7 @@ namespace TSModel.Maps.Consejeria
             Map(x => x.EnteroPorTestSangre);
             Map(x => x.EnteroPorEcografia);
             Map(x => x.EnteroFecha);
+            Map(x => x.Fecha);
             Map(x => x.FUM);
             Map(x => x.EGFUM);
             Map(x => x.IntentoSuprimir);

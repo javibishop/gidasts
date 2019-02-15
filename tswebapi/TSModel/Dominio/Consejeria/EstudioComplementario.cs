@@ -5,7 +5,7 @@ namespace TSModel.Dominio.Consejeria
     public class EstudioComplementario : EntidadBase
     {
         public virtual  Consejeria Consejeria { get; set; }
-
+        public virtual DateTime Fecha { get; set; }
         public virtual  string Eco1Observacion { get; set; }
         public virtual  DateTime Eco1Fecha { get; set; }
         public virtual  string Eco1EG { get; set; }
