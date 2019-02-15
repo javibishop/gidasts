@@ -6,6 +6,7 @@ import Counter from './components/Counter';
 import FetchData from './components/FetchData';
 import ConsejeriasList from './components/ConsejeriasList';
 import ConsejeriaEdit from './components/ConsejeriaEdit';
+import ConsejeriaNew from './components/ConsejeriaNew';
 import PacientesList from './components/PacientesList';
 
 export default () => (
@@ -16,5 +17,6 @@ export default () => (
         <Route path='/pacientes' component={PacientesList} />
         <Route path='/fetchdata/:startDateIndex?' component={FetchData} />
         <Route path='/consejeria/:id?' component={ConsejeriaEdit} />
+        <Route path='/consejerianueva' component={ConsejeriaNew} />
   </Layout>
 );

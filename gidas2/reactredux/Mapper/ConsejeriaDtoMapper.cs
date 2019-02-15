@@ -34,10 +34,12 @@ namespace tswebapi.Mapper
             dto.ConsejeriaId = antecedente.Consejeria.Id;
             dto.AbortoEspontaneo = antecedente.AbortoEspontaneo;
             dto.AbortoVoluntario = antecedente.AbortoVoluntario;
-            dto.AHEMAC = antecedente.AHEMAC;
             dto.Cesareas = antecedente.Cesareas;
-            dto.FalloMAC = antecedente.FalloMAC;
             dto.Gestas = antecedente.Gestas;
+            dto.PartosVaginal = antecedente.PartosVaginal;
+
+            dto.AHEMAC = antecedente.AHEMAC;
+            dto.FalloMAC = antecedente.FalloMAC;
             dto.MACACI = antecedente.MACACI;
             dto.MACACO = antecedente.MACACO;
             dto.MACDIU = antecedente.MACDIU;
@@ -46,7 +48,6 @@ namespace tswebapi.Mapper
             dto.MACPreservativo = antecedente.MACPreservativo;
             dto.NoUsoMAC = antecedente.NoUsoMAC;
             dto.Observaciones = antecedente.Observaciones;
-            dto.PartosVaginal = antecedente.PartosVaginal;
 
             return dto;
         }
@@ -206,11 +207,11 @@ namespace tswebapi.Mapper
             consejeriaEntidad.FechaIngreso = dto.FechaIngreso;
             consejeriaEntidad.Numero = dto.Numero;
             consejeriaEntidad.Observacion = dto.Observacion;
-            if(dto.Usuarie1Id != consejeriaEntidad.Usuarie1.Id)
+            if(dto.Id == 0 || dto.Usuarie1Id != consejeriaEntidad.Usuarie1.Id)
             {
                 consejeriaEntidad.Usuarie1 = this.sessionFactory.GetEntity<Usuarie>(dto.Usuarie1Id);
             }
-            if (dto.Usuarie2Id != consejeriaEntidad.Usuarie2.Id)
+            if (dto.Id == 0 || dto.Usuarie2Id != consejeriaEntidad.Usuarie2.Id)
             {
                 consejeriaEntidad.Usuarie2 = this.sessionFactory.GetEntity<Usuarie>(dto.Usuarie2Id);
             }

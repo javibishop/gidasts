@@ -6,11 +6,11 @@ namespace tswebapi.Dtos
     {
         public int Id { get; set; }
         public int ConsejeriaId { get; set; }
-        public  bool Gestas { get; set; }
-        public  bool PartosVaginal { get; set; }
-        public  bool Cesareas { get; set; }
-        public  bool AbortoEspontaneo { get; set; }
-        public  bool AbortoVoluntario { get; set; }
+        public  int Gestas { get; set; }
+        public  int PartosVaginal { get; set; }
+        public  int Cesareas { get; set; }
+        public  int AbortoEspontaneo { get; set; }
+        public  int AbortoVoluntario { get; set; }
         public  bool MACNoUsa { get; set; }
         public  bool MACACO { get; set; }
         public  bool MACACI { get; set; }

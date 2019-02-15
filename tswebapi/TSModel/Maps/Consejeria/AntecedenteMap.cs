@@ -13,6 +13,7 @@ namespace TSModel.Maps.Consejeria
             Map(x => x.Gestas);
             Map(x => x.PartosVaginal);
             Map(x => x.Cesareas);
+            Map(x => x.Fecha);
             Map(x => x.AbortoEspontaneo);
             Map(x => x.AbortoVoluntario);
             Map(x => x.MACNoUsa);

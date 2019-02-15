@@ -8,6 +8,7 @@ using tswebapi.Dtos;
 using tswebapi.Mapper;
 using reactredux.Dtos;
 using TSModel.NH;
+using System;
 
 namespace tswebapi.Controllers
 {
@@ -167,13 +168,42 @@ namespace tswebapi.Controllers
         }
 
         //[FromBody] works for properly formatted content – ie. JSON, XML and whatever other media formatters that are configured in the Conneg pipeline. It requires that the data is formatted in JSON or XML. [FromBody] also works with a single POST form variable in urlencoded form data, but because it only works with a single parameter it’s kind of limited for that.
+        
+        [HttpPost("[action]")]
+        public ConsejeriaDatosDto PostConsejeria([FromBody]  ConsejeriaDto consejeriaDto)
+        {
+            var consejeria = this.consejeriaDtoMapper.MapDtoToConsejeria(consejeriaDto);
+            this.sessionFactory.SaveOrUpdateEntity(consejeria);
+            return this.GetCompleta(consejeria.Id);
+        }
 
         [HttpPost("[action]")]
-        public ConsejeriaDatosDto PostUsuaria([FromBody] UsuariaDto usuariaDto)
+        public int PostConsejeriaNew([FromBody] ConsejeriaNewDatos consejeriaNewDatos)
         {
-            var usuaria = this.consejeriaDtoMapper.MapDtoToUsuaria(usuariaDto);
+            var usuaria = this.consejeriaDtoMapper.MapDtoToUsuaria(new UsuariaDto {
+                Apellido = consejeriaNewDatos.Apellido,
+                Direccion = consejeriaNewDatos.Direccion,
+                Edad = consejeriaNewDatos.Edad,
+                Nombre = consejeriaNewDatos.Nombre,
+                NacionalidadId = consejeriaNewDatos.NacionalidadId,
+                FechaNacimiento = consejeriaNewDatos.FechaNacimiento,
+                Telefono = consejeriaNewDatos.Telefono
+            });
             this.sessionFactory.SaveOrUpdateEntity(usuaria);
-            return this.GetCompleta(usuariaDto.ConsejeriaId);
+
+            var criteria = this.sessionFactory.CreateCriteria<ConsejeriaEntidad>();
+            criteria.SetProjection(Projections.Max("Numero"));
+            var numero = (int)criteria.UniqueResult();
+            var consejeria = this.consejeriaDtoMapper.MapDtoToConsejeria(new ConsejeriaDto {
+                FechaIngreso = DateTime.Now,
+                Numero = numero + 1,
+                Observacion = consejeriaNewDatos.Observacion,
+                Usuarie1Id = consejeriaNewDatos.Usuarie1Id,
+                Usuarie2Id = consejeriaNewDatos.Usuarie2Id,
+            });
+            consejeria.Usuaria = usuaria;
+            this.sessionFactory.SaveOrUpdateEntity(consejeria);
+            return consejeria.Id;
         }
 
         [HttpPost("[action]")]
@@ -219,5 +249,22 @@ namespace tswebapi.Controllers
         public void Delete(int id)
         {
         }
+    }
+
+    public class ConsejeriaNewDatos
+    {
+        public DateTime FechaIngreso { get; set; }
+        public string Usuaria { get; set; }
+        public int Usuarie1Id { get; set; }
+        public int Usuarie2Id { get; set; }
+        public int UsuariaId { get; set; }
+        public string Observacion { get; set; }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public int Edad { get; set; }
+        public DateTime FechaNacimiento { get; set; }
+        public int NacionalidadId { get; set; }
+        public string Telefono { get; set; }
+        public string Direccion { get; set; }
     }
 }

@@ -128,6 +128,7 @@ namespace TSModel.NH
                 }
                 catch (Exception ex)
                 {
+                    transaction.Rollback();
                     throw ex;
                 }
 
@@ -147,6 +148,7 @@ namespace TSModel.NH
                 }
                 catch (Exception ex)
                 {
+                    transaction.Rollback();
                     throw ex;
                 }
 
@@ -165,6 +167,7 @@ namespace TSModel.NH
                 }
                 catch (Exception ex)
                 {
+                    transaction.Rollback();
                     throw ex;
                 }
 
@@ -186,6 +189,7 @@ namespace TSModel.NH
                     }
                     catch (Exception ex)
                     {
+                        transaction.Rollback();
                         throw ex;
                     }
                 }

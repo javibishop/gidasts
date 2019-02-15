@@ -55,7 +55,7 @@ const changeStateAfterEstudioComplementario = 'ChangeStateAfterEstudioComplement
 const changeStateBeforeEntrevista = 'ChangeStateBeforeEntrevista';
 const changingStateEntrevista = 'ChangingStateEntrevista';
 const changeStateAfterEntrevista = 'ChangeStateAfterEntrevista';
-
+const redirectEdit = 'RedirectEdit';
 
 const initState = {
     "consejeriaDto": {
@@ -96,11 +96,11 @@ const initState = {
     "antecedenteDto": {
         "id": 0,
         "consejariaId": 0,
-        "gestas": false,
-        "partosVaginal": false,
-        "cesareas": false,
-        "abortoEspontaneo": false,
-        "abortoVoluntario": false,
+        "gestas": 0,
+        "partosVaginal": 0,
+        "cesareas": 0,
+        "abortoEspontaneo": 0,
+        "abortoVoluntario": 0,
         "mACNoUsa": false,
         "mACACO": false,
         "mACACI": false,
@@ -217,7 +217,7 @@ const initState = {
     
 };
 const initialState = {
-    consejeria: initState, usuaries : [], isLoading: false, isChanging: false
+    consejeria: initState, usuaries : [], isLoading: false, isChanging: false, redirectEdit:false
 };
 
 export const actionCreators = {
@@ -230,6 +230,10 @@ export const actionCreators = {
         const usuaries = await response.json();
 
         dispatch({ type: getUsuariesSuccess, usuaries });
+    },
+
+    setRedirecting: value => (dispatch, getState) => {
+        dispatch({ type: 'SetRedirect', value});
     },
 
     newConsejeria: id => async (dispatch, getState) => {
@@ -246,7 +250,6 @@ export const actionCreators = {
             dispatch({ type: initNewConsejeria, getState });
             return;
         }
-
         dispatch({ type: getConsejeriaRequest, id });
 
         const url = `api/Consejerias/GetCompleta?id=` + id;
@@ -262,14 +265,16 @@ export const actionCreators = {
      * https://andrewlock.net/model-binding-json-posts-in-asp-net-core/
      */
 
-    saveUsuaria: usuariaDto => async (dispatch) => {
+    saveUsuaria: (usuariaDto, consejeriaDto, props) => async (dispatch, browserHistory) => {
         const url = `api/Consejerias/PostUsuaria`;
+        let datos = { ConsejeriaDto: consejeriaDto, UsuariaDto: usuariaDto };
         const settings = {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json;',
             },
-            body: JSON.stringify(usuariaDto)
+
+            body: JSON.stringify(datos)
         };
 
         dispatch({ type: saveUsuariaRequest });
@@ -278,6 +283,10 @@ export const actionCreators = {
             const response = await fetch(url, settings);
             const consejeria = await response.json();
             dispatch({ type: saveUsuariaSuccess, consejeria });
+			//si id == 0 hacer redirect a edicion.
+            if (consejeriaDto.id == 0)
+                props.history.push(`/consejeria/${consejeria.consejeriaDto.id}`);
+                dispatch({ type: 'RedirectEdit', consejeria });
         } catch (error) {
             dispatch({ type: saveUsuariaFailure});
         }
@@ -299,6 +308,7 @@ export const actionCreators = {
             const response = await fetch(url, settings);
             const consejeria = await response.json();
             dispatch({ type: saveAntecedenteSuccess, consejeria });
+			
         } catch (error) {
             dispatch({ type: saveAntecedenteFailure });
         }
@@ -601,9 +611,20 @@ export const reducer = (state, action) => {
         return {
             ...state,
             consejeria: action.consejeria,
-            isLoading: false
+            isLoading: false,
+            redirectEdit: false
         };
     }
+
+    if (action.type === 'SetRedirect') {
+        return {
+            ...state,
+            consejeria: action.consejeria,
+            redirectEdit: action.value
+        };
+    }
+
+    
 
     if (action.type === newConsejeria) {
         return {
@@ -637,6 +658,14 @@ export const reducer = (state, action) => {
             ...state,
             consejeria: action.consejeria,
             isLoading: false
+        };
+    }
+
+    if (action.type === redirectEdit) {
+        return {
+            ...state,
+            consejeria: action.consejeria,
+            redirectEdit : true
         };
     }
 

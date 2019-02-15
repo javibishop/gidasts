@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { Panel, Tabs, Tab, FormControl, FormGroup, ControlLabel, Button, Grid, Row, Col, Label, PageHeader, Checkbox, DropdownButton, MenuItem } from 'react-bootstrap'; 
 
 
@@ -62,8 +62,17 @@ class ConsejeriaEdit extends Component {
     // This method runs when incoming props (e.g., route params) change
       //const id = parseInt(nextProps.match.params.id) || 0;
       //this.props.editConsejeria(id);
-      if (nextProps.consejeria)
-        renderConsejeria(this.props);
+      if (nextProps.redirectEdit) {
+          //this.props.setRedirecting(false);
+          //this.props.editConsejeria(nextProps.consejeria.consejeriaDto.id);
+          //this.props.history.push(`/consejeria/${nextProps.consejeria.consejeriaDto.id}`);
+          //return <Redirect to='/consejeria/${nextProps.consejeria.consejeriaDto.id}' />;
+      }
+      else {
+          if (nextProps.consejeria)
+              renderConsejeria(this.props);
+      }
+      
     }
 
     onPickColor(e) {
@@ -308,7 +317,7 @@ function renderConsejeria(props) {
                                 </Row>
 
                                 <Row className='pull-right'>
-                                    <Button className='btn-sm btn-success pull-rigth' onClick={() => { props.consejeria.usuariaDto.consejeriaId = props.consejeria.consejeriaDto.id; saveUsuaria(props.consejeria.usuariaDto) }}>  Guardar </Button>
+                                    <Button className='btn-sm btn-success pull-rigth' onClick={() => { props.consejeria.usuariaDto.consejeriaId = props.consejeria.consejeriaDto.id; saveUsuaria(props.consejeria.usuariaDto, props.consejeria.consejeriaDto, props) }}>  Guardar </Button>
                                 </Row>
                                 
                             </Panel>
@@ -319,12 +328,52 @@ function renderConsejeria(props) {
                                     <Col xs={4} md={4}>
                                         <ControlLabel></ControlLabel>
                                         <FormGroup>
-                                            van numeros
-                                            <Checkbox id="gestas" checked={props.consejeria.antecedenteDto.gestas || ''} onChange={handleChangeAntecedente}>Gestas</Checkbox> 
-                                            <Checkbox id="partosVaginal" checked={props.consejeria.antecedenteDto.partosVaginal || ''} onChange={handleChangeAntecedente}>Parto Vaginal</Checkbox>
-                                            <Checkbox id="cesareas" checked={props.consejeria.antecedenteDto.cesareas || ''} onChange={handleChangeAntecedente}>Cesareas</Checkbox>
-                                            <Checkbox id="abortoEspontaneo" checked={props.consejeria.antecedenteDto.abortoEspontaneo || ''} onChange={handleChangeAntecedente}>Aborto Espontaneo</Checkbox>
-                                            <Checkbox id="abortoVoluntario" checked={props.consejeria.antecedenteDto.abortoVoluntario || ''} onChange={handleChangeAntecedente}>Aborto Voluntario</Checkbox>
+                                            <Label>Gestas</Label>
+                                            <FormControl
+                                                id="gestas"
+                                                type="number"
+                                                label="Gestas"
+                                                placeholder="Gestas"
+                                                value={props.consejeria.antecedenteDto.gestas || ''}
+                                                onChange={handleChangeAntecedente}
+                                            />
+                                            <Label>Partos Vaginales</Label>
+                                            <FormControl
+                                                id="partosVaginal"
+                                                type="number"
+                                                label="Partos Vaginales"
+                                                placeholder="Partos Vaginales"
+                                                value={props.consejeria.antecedenteDto.partosVaginal || ''}
+                                                onChange={handleChangeAntecedente}
+                                            />
+                                            <Label>Cesareas</Label>
+                                            <FormControl
+                                                id="cesareas"
+                                                type="number"
+                                                label="Cesareas"
+                                                placeholder="Cesareas"
+                                                value={props.consejeria.antecedenteDto.cesareas || ''}
+                                                onChange={handleChangeAntecedente}
+                                            />
+                                            <Label>Abortos Espontaneos</Label>
+                                            <FormControl
+                                                id="abortoEspontaneo"
+                                                type="number"
+                                                label="Abortos Espontaneos"
+                                                placeholder="Abortos Espontaneos"
+                                                value={props.consejeria.antecedenteDto.abortoEspontaneo || ''}
+                                                onChange={handleChangeAntecedente}
+                                            />
+
+                                            <Label>Abortos Voluntarios</Label>
+                                            <FormControl
+                                                id="abortoVoluntario"
+                                                type="number"
+                                                label="Abortos Voluntarios"
+                                                placeholder="Abortos Voluntarios"
+                                                value={props.consejeria.antecedenteDto.abortoVoluntario || ''}
+                                                onChange={handleChangeAntecedente}
+                                            />
                                         </FormGroup>
                                     </Col>
                                     <Col xs={4} md={4}>
@@ -448,17 +497,17 @@ function renderConsejeria(props) {
                                 </Row>
                                 <Row className="show-grid">
                                     <Col xs={4} md={4}>
-                                        <ControlLabel>Causal Violacion</ControlLabel>
-                                        <FormGroup>
-                                            <Checkbox id="causaViolacion" checked={props.consejeria.gestaActualDto.causaViolacion || ''} onChange={handleChangeGestaActual}>Violacion</Checkbox>
-                                        </FormGroup>
-                                    </Col>
-                                    <Col xs={4} md={4}>
                                         <ControlLabel>Causal Salud</ControlLabel>
                                         <FormGroup>
                                             <Checkbox id="causaSaludFisica" checked={props.consejeria.gestaActualDto.causaSaludFisica || ''} onChange={handleChangeGestaActual}>Salud Fisica</Checkbox>
                                             <Checkbox id="causaSaludPSI" checked={props.consejeria.gestaActualDto.causaSaludPSI || ''} onChange={handleChangeGestaActual}>Salud PSI</Checkbox>
                                             <Checkbox id="causaSaludSocial" checked={props.consejeria.gestaActualDto.causaSaludSocial || ''} onChange={handleChangeGestaActual}>Salud Social</Checkbox>
+                                        </FormGroup>
+                                    </Col>
+                                    <Col xs={4} md={4}>
+                                        <ControlLabel>Causal Violacion</ControlLabel>
+                                        <FormGroup>
+                                            <Checkbox id="causaViolacion" checked={props.consejeria.gestaActualDto.causaViolacion || ''} onChange={handleChangeGestaActual}>Violacion</Checkbox>
                                         </FormGroup>
                                     </Col>
                                     <Col xs={4} md={4}>
@@ -650,7 +699,8 @@ function renderConsejeria(props) {
                             <Panel header={'Datos relacionados al post aborto'}> 
                                 <Row className="show-grid">
                                     <Col xs={4} md={4}>
-                                        <ControlLabel>A-Realizo el procedimiento?</ControlLabel>
+                                        <ControlLabel>A-Procedimiento</ControlLabel>
+                                        <Checkbox id="procedimientoHecho" checked={props.consejeria.entrevistaPostAbortoDto.procedimientoHecho || ''} onChange={handleChangeEntrevista}>Realizo el procedimiento?</Checkbox>
                                         <Label>Fecha</Label>
                                         <FormGroup>
                                             <FormControl
@@ -661,8 +711,8 @@ function renderConsejeria(props) {
                                                 value={props.consejeria.entrevistaPostAbortoDto.fecha || ''}
                                                 onChange={handleChangeEntrevista}
                                             />
-                                            <Checkbox id="procedimientoHecho" checked={props.consejeria.entrevistaPostAbortoDto.procedimientoHecho || ''} onChange={handleChangeEntrevista}>Realizo?</Checkbox>
-                                            <ControlLabel>Sino continua</ControlLabel>
+                                            
+                                            <ControlLabel>NO</ControlLabel>
                                             <Checkbox id="procedimientoNoContinua" checked={props.consejeria.entrevistaPostAbortoDto.procedimientoNoContinua || ''} onChange={handleChangeEntrevista}>Continua la gesta</Checkbox>
                                             <Checkbox id="procedimientoNoAbortoEspontaneo" checked={props.consejeria.entrevistaPostAbortoDto.procedimientoNoAbortoEspontaneo || ''} onChange={handleChangeEntrevista}>Aborto espontaneo</Checkbox>
                                             <Label>Otro procedimiento</Label>
@@ -678,7 +728,7 @@ function renderConsejeria(props) {
                                     </Col>
                                     <Col xs={4} md={4}>
                                         <FormGroup>
-                                            <ControlLabel>Si continua</ControlLabel>
+                                            <ControlLabel>SI</ControlLabel>
                                             <Checkbox id="procedimientoSiInformado" checked={props.consejeria.entrevistaPostAbortoDto.procedimientoSiInformado || ''} onChange={handleChangeEntrevista}>S/ informado</Checkbox>
                                             <Checkbox id="procedimientoSiOtra" checked={props.consejeria.entrevistaPostAbortoDto.procedimientoSiOtra || ''} onChange={handleChangeEntrevista}>Otra</Checkbox>
                                             <Checkbox id="procedimientoSiViaV" checked={props.consejeria.entrevistaPostAbortoDto.procedimientoSiViaV || ''} onChange={handleChangeEntrevista}>Via V</Checkbox>
@@ -703,14 +753,15 @@ function renderConsejeria(props) {
                                             <Checkbox id="accedioPorConocido" checked={props.consejeria.entrevistaPostAbortoDto.accedioPorConocido || ''} onChange={handleChangeEntrevista}>Conocido</Checkbox>
                                             <Checkbox id="accedioPorInternet" checked={props.consejeria.entrevistaPostAbortoDto.accedioPorInternet || ''} onChange={handleChangeEntrevista}>Internet</Checkbox>
                                             <Checkbox id="accedioPorOrgSocial" checked={props.consejeria.entrevistaPostAbortoDto.accedioPorOrgSocial || ''} onChange={handleChangeEntrevista}>Org.Social</Checkbox>
+                                            <Checkbox id="accedioPorOrgSocial" checked={props.consejeria.entrevistaPostAbortoDto.accedioPorOrgSocial || ''} onChange={handleChangeEntrevista}>Efector de salud</Checkbox>
                                         </FormGroup>
                                     </Col>
                                     <Col xs={4} md={4}>
                                         <ControlLabel>C-Presentacion</ControlLabel>
                                         <FormGroup>
-                                            <Checkbox id="presentacionSuelto" checked={props.consejeria.entrevistaPostAbortoDto.presentacionSuelto || ''} onChange={handleChangeEntrevista}>Suelto</Checkbox>
-                                            <Checkbox id="presentacionCaja20" checked={props.consejeria.entrevistaPostAbortoDto.presentacionCaja20 || ''} onChange={handleChangeEntrevista}>Caja x 20</Checkbox>
                                             <Checkbox id="presentacionCaja16" checked={props.consejeria.entrevistaPostAbortoDto.presentacionCaja16 || ''} onChange={handleChangeEntrevista}>Caja x 16</Checkbox>
+                                            <Checkbox id="presentacionCaja20" checked={props.consejeria.entrevistaPostAbortoDto.presentacionCaja20 || ''} onChange={handleChangeEntrevista}>Caja x 20</Checkbox>
+                                            <Checkbox id="presentacionSuelto" checked={props.consejeria.entrevistaPostAbortoDto.presentacionSuelto || ''} onChange={handleChangeEntrevista}>Suelto</Checkbox>
                                         </FormGroup>
                                     </Col>
                                     <Col xs={4} md={4}>
@@ -718,8 +769,9 @@ function renderConsejeria(props) {
                                         <FormGroup>
                                             <Checkbox id="efectoAdversoNo" checked={props.consejeria.entrevistaPostAbortoDto.efectoAdversoNo || ''} onChange={handleChangeEntrevista}>Si/No</Checkbox>
                                             <Checkbox id="efectoAdversoGastro" checked={props.consejeria.entrevistaPostAbortoDto.efectoAdversoGastro || ''} onChange={handleChangeEntrevista}>Gastrointestinal</Checkbox>
-                                            <Checkbox id="efectoAdversoTemperatura" checked={props.consejeria.entrevistaPostAbortoDto.efectoAdversoTemperatura || ''} onChange={handleChangeEntrevista}>Temperatura 38ºC</Checkbox>
+                                            <Checkbox id="efectoAdversoTemperatura" checked={props.consejeria.entrevistaPostAbortoDto.efectoAdversoTemperatura || ''} onChange={handleChangeEntrevista}>Temperatura 38 C</Checkbox>
                                             <Checkbox id="efectoAdversoCafalea" checked={props.consejeria.entrevistaPostAbortoDto.efectoAdversoCafalea || ''} onChange={handleChangeEntrevista}>Cafalea</Checkbox>
+                                           <Checkbox id="efectoAdversoCafalea" >Escalofrios</Checkbox>
                                             <Label>Otro efecto adverso</Label>
                                             <FormControl
                                                 id="efectoAdversoOtro"
@@ -786,6 +838,7 @@ function renderConsejeria(props) {
                                         </FormGroup>
                                     </Col>
                                     <Col xs={4} md={4}>
+                                        //https://codepen.io/alansouzati/pen/WGJgAx
                                         <ControlLabel>I-Consejeria MAC</ControlLabel>
                                         <FormGroup>
                                             <Checkbox id="consejeriaMACNo" checked={props.consejeria.entrevistaPostAbortoDto.consejeriaMACNo || ''} onChange={handleChangeEntrevista}>Si/No</Checkbox>

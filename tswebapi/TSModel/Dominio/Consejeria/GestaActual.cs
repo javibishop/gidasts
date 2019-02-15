@@ -8,6 +8,7 @@ namespace TSModel.Dominio.Consejeria
         public virtual bool EnteroPorTestOrina { get; set; }
         public virtual bool EnteroPorTestSangre { get; set; }
         public virtual bool EnteroPorEcografia{ get; set; }
+        public virtual DateTime Fecha { get; set; }
         public virtual DateTime EnteroFecha { get; set; }
         public virtual string FUM { get; set; }
         public virtual string EGFUM { get; set; }
