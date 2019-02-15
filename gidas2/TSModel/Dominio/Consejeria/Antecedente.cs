@@ -3,11 +3,11 @@
     public class Antecedente : EntidadBase
     {
         public virtual  ConsejeriaEntidad Consejeria { get; set; }
-        public virtual  bool Gestas { get; set; }
-        public virtual  bool PartosVaginal { get; set; }
-        public virtual  bool Cesareas { get; set; }
-        public virtual  bool AbortoEspontaneo { get; set; }
-        public virtual  bool AbortoVoluntario { get; set; }
+        public virtual  int Gestas { get; set; }
+        public virtual int PartosVaginal { get; set; }
+        public virtual int Cesareas { get; set; }
+        public virtual int AbortoEspontaneo { get; set; }
+        public virtual int AbortoVoluntario { get; set; }
         //MAC = Metodos anticonceptivos.
         public virtual  bool MACNoUsa { get; set; }
         /// <summary>

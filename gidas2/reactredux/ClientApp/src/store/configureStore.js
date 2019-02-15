@@ -5,6 +5,7 @@ import * as Counter from './Counter';
 import * as WeatherForecasts from './WeatherForecasts';
 import * as Consejerias from './Consejerias';
 import * as Consejeria from './Consejeria';
+import * as ConsejeriaNew from './ConsejeriaNew';
 import * as Pacientes from './Pacientes';
 
 export default function configureStore(history, initialState) {
@@ -14,6 +15,7 @@ export default function configureStore(history, initialState) {
       consejerias: Consejerias.reducer,
       pacientes: Pacientes.reducer,
       consejeria: Consejeria.reducer,
+      consejeriaNew: ConsejeriaNew.reducer,
   };
 
   const middleware = [

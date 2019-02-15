@@ -50,7 +50,7 @@ class ConsejeriasList extends Component {
                     </Col>
                     <Col lg={6}>
                         <ButtonGroup className='pull-right'>
-                            <Link className='btn-xs btn-success pull-left' role='button' to='/consejeria/new' >Nueva Consejeria</Link>
+                            <Link className='btn-xs btn-success pull-left' role='button' to='/consejerianueva' >Nueva Consejeria</Link>
                         </ButtonGroup>
                     </Col>
                 </Row>
