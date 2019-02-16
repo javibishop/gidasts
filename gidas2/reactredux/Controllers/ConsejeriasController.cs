@@ -207,6 +207,13 @@ namespace tswebapi.Controllers
         }
 
         [HttpPost("[action]")]
+        public ConsejeriaDatosDto PostUsuaria([FromBody] UsuariaDto usuariaDto)
+        {
+            var usuaria = this.consejeriaDtoMapper.MapDtoToUsuaria(usuariaDto);
+            this.sessionFactory.SaveOrUpdateEntity(usuaria);
+            return this.GetCompleta(usuariaDto.ConsejeriaId);
+        }
+        [HttpPost("[action]")]
         public ConsejeriaDatosDto PostAntecedente([FromBody] AntecedenteDto antecedenteDto)
         {
             var antecedente = this.consejeriaDtoMapper.MapDtoToAntecedente(antecedenteDto);

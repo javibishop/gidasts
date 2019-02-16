@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { FormControl, Button, Grid, Row, Col, Label, PageHeader } from 'react-bootstrap'; 
 import { actionCreators } from '../store/ConsejeriaNew';
-
+import moment from 'moment';
 class ConsejeriaNew extends Component {
     constructor(props) {
         super(props);
@@ -112,6 +112,7 @@ function renderNuevaConsejeria(props) {
                                 id="fechaNacimiento"
                                 type="date"
                                 label="Fecha Nacimiento"
+                                date="yyyy-MM-dd"
                                 placeholder="Ingrese su Fecha Nacimiento"
                                 value={props.consejeriaNew.fechaNacimiento || ''}
                                 onChange={handleChangeConsejeriaNew}

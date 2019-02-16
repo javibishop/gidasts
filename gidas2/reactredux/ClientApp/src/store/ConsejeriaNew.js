@@ -11,6 +11,9 @@ const changeStateBeforeConsejeriaNew = 'ChangeStateBeforeConsejeriaNew';
 const changingStateConsejeriaNew = 'ChangingStateConsejeriaNew';
 const changeStateAfterConsejeriaNew = 'ChangeStateAfterConsejeriaNew';
 
+const changingStateDateConsejeriaNew = 'ChangingStateDateConsejeriaNew';
+
+
 const redirectEdit = 'RedirectEdit';
 
 const initState = {
@@ -87,6 +90,11 @@ export const actionCreators = {
         dispatch({ type: changingStateConsejeriaNew, valor });
         dispatch({ type: changeStateAfterConsejeriaNew, valor });
     },
+
+    handleChangeDateConsejeriaNew: valor => (dispatch, getState) => {
+        dispatch({ type: changingStateDateConsejeriaNew, valor });
+    },
+    
 };
 
 export const reducer = (state, action) => {
@@ -144,6 +152,16 @@ export const reducer = (state, action) => {
         } else {
             state.consejeriaNew[action.valor.target.id] = action.valor.target.value;
         }
+
+        return {
+            ...state,
+            isChanging: true,
+            consejeriaNew: state.consejeriaNew
+        }
+    }
+
+    if (action.type === changingStateDateConsejeriaNew) {
+        state.consejeriaNew[action.valor.target.name] = action.valor.target.value;
         
         return {
             ...state,

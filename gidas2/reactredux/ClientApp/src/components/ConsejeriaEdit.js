@@ -3,9 +3,11 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { Panel, Tabs, Tab, FormControl, FormGroup, ControlLabel, Button, Grid, Row, Col, Label, PageHeader, Checkbox, DropdownButton, MenuItem } from 'react-bootstrap'; 
-
-
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { actionCreators } from '../store/Consejeria';
+
+//https://github.com/Hacker0x01/react-datepicker/search?utf8=%E2%9C%93&q=format&type=
 
 class ConsejeriaEdit extends Component {
     constructor(props) {
@@ -103,7 +105,7 @@ class ConsejeriaEdit extends Component {
 
 function renderConsejeria(props) {
     const { handleChangeConsjeria, handleChangeUsuaria, handleChangeAntecedente, handleChangeGestaActual, handleChangeEstudioComplementario, handleChangeEntrevista,
-        saveUsuaria, saveAntecedente, saveGestaActual, saveEstudioComplementario, saveEntrevista } = props;
+        saveUsuaria, saveAntecedente, saveGestaActual, saveEstudioComplementario, saveEntrevista, handleChangeConsjeriaFecha } = props;
     return (
         <Grid fluid={true} bsClass="container" className='form'>
             <Row>
@@ -191,13 +193,12 @@ function renderConsejeria(props) {
                                     </Col>
                                     <Col xs={4} md={4}>
                                         <Label>Fecha Nacimiento</Label>
-                                        <FormControl
+                                        <DatePicker
+                                            selected={props.consejeria.usuariaDto.fechaNacimiento || ''}
+                                            onChange={handleChangeConsjeriaFecha}
+                                            name="fechaNacimiento"
+                                            dateFormat="dd/MM/yyyy"
                                             id="fechaNacimiento"
-                                            type="date"
-                                            label="Fecha Nacimiento"
-                                            placeholder="Ingrese su Fecha Nacimiento"
-                                            value={props.consejeria.usuariaDto.fechaNacimiento || ''}
-                                            onChange={handleChangeUsuaria}
                                         />
                                     </Col>
                                     <Col xs={4} md={4}>
@@ -317,7 +318,7 @@ function renderConsejeria(props) {
                                 </Row>
 
                                 <Row className='pull-right'>
-                                    <Button className='btn-sm btn-success pull-rigth' onClick={() => { props.consejeria.usuariaDto.consejeriaId = props.consejeria.consejeriaDto.id; saveUsuaria(props.consejeria.usuariaDto, props.consejeria.consejeriaDto, props) }}>  Guardar </Button>
+                                    <Button className='btn-sm btn-success pull-rigth' onClick={() => { props.consejeria.usuariaDto.consejeriaId = props.consejeria.consejeriaDto.id; saveUsuaria(props.consejeria.usuariaDto) }}>  Guardar </Button>
                                 </Row>
                                 
                             </Panel>

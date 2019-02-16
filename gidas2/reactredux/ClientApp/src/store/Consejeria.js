@@ -265,16 +265,15 @@ export const actionCreators = {
      * https://andrewlock.net/model-binding-json-posts-in-asp-net-core/
      */
 
-    saveUsuaria: (usuariaDto, consejeriaDto, props) => async (dispatch, browserHistory) => {
+    saveUsuaria: usuariaDto => async (dispatch) => {
         const url = `api/Consejerias/PostUsuaria`;
-        let datos = { ConsejeriaDto: consejeriaDto, UsuariaDto: usuariaDto };
         const settings = {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json;',
             },
 
-            body: JSON.stringify(datos)
+            body: JSON.stringify(usuariaDto)
         };
 
         dispatch({ type: saveUsuariaRequest });
@@ -283,10 +282,7 @@ export const actionCreators = {
             const response = await fetch(url, settings);
             const consejeria = await response.json();
             dispatch({ type: saveUsuariaSuccess, consejeria });
-			//si id == 0 hacer redirect a edicion.
-            if (consejeriaDto.id == 0)
-                props.history.push(`/consejeria/${consejeria.consejeriaDto.id}`);
-                dispatch({ type: 'RedirectEdit', consejeria });
+           
         } catch (error) {
             dispatch({ type: saveUsuariaFailure});
         }
@@ -414,6 +410,10 @@ export const actionCreators = {
         dispatch({ type: changingStateEntrevista, valor });
         dispatch({ type: changeStateAfterEntrevista, valor });
     },
+
+    handleChangeConsjeriaFecha: (valor, name) => (dispatch, getState) => {
+        dispatch({ type: 'handleChangeConsjeriaFecha', valor, name });
+    },
 };
 
 export const reducer = (state, action) => {
@@ -431,6 +431,19 @@ export const reducer = (state, action) => {
             isChanging: true
         };
     }
+
+    
+    if (action.type === 'handleChangeConsjeriaFecha') {
+
+        state.consejeria.usuariaDto[action.name.target.firstChild.ownerDocument.activeElement.id] = action.valor;
+
+        return {
+            ...state,
+            isChanging: true,
+            consejeria: state.consejeria
+        }
+    }
+
     if (action.type === changingStateConsejeria) {
         if (action.valor.target.type === "checkbox") {
             state.consejeria.consejeriaDto[action.valor.target.id] = action.valor.target.checked;
