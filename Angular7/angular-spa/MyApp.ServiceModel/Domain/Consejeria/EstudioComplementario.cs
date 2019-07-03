@@ -18,6 +18,8 @@ namespace TSModel.Dominio.Consejeria
         public bool Eco1Normoincerto { get; set; }
         public bool Eco1Ectopico { get; set; }
 
+        public bool Eco1HMR { get; set; }
+
         public string Eco2Observacion { get; set; }
         public DateTime Eco2Fecha { get; set; }
         public string Eco2EG { get; set; }
@@ -27,7 +29,7 @@ namespace TSModel.Dominio.Consejeria
         public string Eco2Ubicacion { get; set; }
         public bool Eco2Normoincerto { get; set; }
         public bool Eco2Ectopico { get; set; }
-
+        public bool Eco2HMR { get; set; }
         public DateTime LabFecha { get; set; }
         public string LabGB { get; set; }
         public string LabGR { get; set; }

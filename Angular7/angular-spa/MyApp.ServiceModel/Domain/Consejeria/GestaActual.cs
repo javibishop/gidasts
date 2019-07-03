@@ -35,5 +35,8 @@ namespace TSModel.Dominio.Consejeria
         public bool FactorRiesgoCorticoterapia { get; set; }
 
         public string FactorRiesgoOtros { get; set; }
+
+        public bool CalendarioVacunacionCompleto { get; set; }
+        public string CalendarioVacunacionObservaciones { get; set; }
     }
 }

@@ -53,12 +53,14 @@ namespace TSModel.Dominio.Consejeria
         public bool EcografiaPostNuevaConsejeria { get; set; }
         public bool EcografiaPostDerivacion2Nivel { get; set; }
         public bool EcografiaPostConductaExpectante { get; set; }
-
+        public bool EcografiaPostAbortoHMyR { get; set; }
+        
         public bool ConsejeriaMACNo { get; set; }
         public bool ConsejeriaMACACO { get; set; }
         public bool ConsejeriaMACACI { get; set; }
         public bool ConsejeriaMACDIU { get; set; }
         public bool ConsejeriaMACPreservativo { get; set; }
         public bool ConsejeriaMACImplanteHormonal { get; set; }
+        public bool ConsejeriaMACACOLactancia { get; set; }
     }
 }
