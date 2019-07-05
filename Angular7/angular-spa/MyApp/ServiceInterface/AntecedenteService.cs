@@ -1,5 +1,4 @@
 using MyApp.ServiceModel;
-using MyApp.ServiceModel.Domain;
 using ServiceStack;
 using ServiceStack.OrmLite;
 using System;

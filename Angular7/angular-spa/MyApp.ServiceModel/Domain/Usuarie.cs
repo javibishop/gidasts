@@ -11,7 +11,6 @@ namespace TSModel.Dominio
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public int Edad { get; set; }
-        public DateTime FechaNacimiento { get; set; }
         public int NacionalidadId { get; set; }
         [References(typeof(Especialidad))]
         public int EspecialidadId { get; set; }

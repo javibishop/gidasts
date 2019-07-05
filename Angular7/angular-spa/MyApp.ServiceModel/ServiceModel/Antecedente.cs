@@ -1,5 +1,4 @@
-﻿using MyApp.ServiceModel.Domain;
-using ServiceStack;
+﻿using ServiceStack;
 using TSModel.Dominio.Consejeria;
 
 namespace MyApp.ServiceModel
