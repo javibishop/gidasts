@@ -12,7 +12,7 @@ namespace TSModel.Dominio.Consejeria
         public DateTime Eco1Fecha { get; set; }
         public string Eco1EG { get; set; }
         public bool Eco1LFC { get; set; }
-        public bool Eco1Embrion { get; set; }
+        public int Eco1Embrion { get; set; }
         public bool Eco1Saco { get; set; }
         public string Eco1Ubicacion { get; set; }
         public bool Eco1Normoincerto { get; set; }
@@ -24,7 +24,7 @@ namespace TSModel.Dominio.Consejeria
         public DateTime Eco2Fecha { get; set; }
         public string Eco2EG { get; set; }
         public bool Eco2LFC { get; set; }
-        public bool Eco2Embrion { get; set; }
+        public int Eco2Embrion { get; set; }
         public bool Eco2Saco { get; set; }
         public string Eco2Ubicacion { get; set; }
         public bool Eco2Normoincerto { get; set; }
@@ -37,5 +37,7 @@ namespace TSModel.Dominio.Consejeria
         public string LabHto { get; set; }
         public string LabGrupo { get; set; }
         public string LabRh { get; set; }
+
+        public string LabFactor { get; set; }
     }
 }
