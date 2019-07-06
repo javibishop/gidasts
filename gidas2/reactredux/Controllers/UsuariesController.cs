@@ -39,6 +39,7 @@ namespace tswebapi.Controllers
         {
             var criteria = sessionFactory.CreateCriteria<Usuarie>().List<Usuarie>();
             var consejerias = criteria.ToList();
+            
             var result = consejerias.Select(c => new { label = c.Nombre + " "+ c.Apellido, value = c.Id });
             return new JsonResult(result);
         }

@@ -2,8 +2,10 @@
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
 using NHibernate.Cfg;
+using NHibernate.Criterion;
 using NHibernate.Tool.hbm2ddl;
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using TSModel.Dominio;
 
@@ -88,6 +90,18 @@ namespace TSModel.NH
                 throw ex;
             }
         }
+
+        public IList<T> GetResultCriteria<T>(List<ICriterion> expressions) where T : EntidadBase
+        {
+            var criteria = _session.CreateCriteria<T>();
+            foreach (var criterio in expressions)
+            {
+                criteria.Add(criterio);
+            }
+
+            return criteria.List<T>();
+        }
+        
 
         public ISQLQuery CreateSQLQuery(string query)
         {

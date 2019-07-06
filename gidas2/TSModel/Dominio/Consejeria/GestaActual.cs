@@ -9,8 +9,8 @@ namespace TSModel.Dominio.Consejeria
         public virtual bool EnteroPorTestSangre { get; set; }
         public virtual bool EnteroPorEcografia{ get; set; }
         public virtual DateTime EnteroFecha { get; set; }
-        public virtual string FUM { get; set; }
-        public virtual string EGFUM { get; set; }
+        public virtual DateTime FUM { get; set; }
+        public virtual DateTime EGFUM { get; set; }
         public virtual bool IntentoSuprimir { get; set; }
         public virtual string IntentoSuprimirObservaciones { get; set; }
         public virtual bool Lactancia { get; set; }

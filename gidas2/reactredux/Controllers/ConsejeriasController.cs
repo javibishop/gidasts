@@ -80,21 +80,88 @@ namespace tswebapi.Controllers
             AntecedenteDto antecedenteDto = new AntecedenteDto();
             EstudioComplementarioDto estudioComplementarioDto = new EstudioComplementarioDto();
             EntrevistaPostAbortoDto entrevistaPostAbortoDto = new EntrevistaPostAbortoDto();
-            //http://www.andrewwhitaker.com/blog/2014/06/19/queryover-series-part-4-transforming/
-            //TODO: ver aca de mejorar esto, o meter las referencias en consejeria a los demas o ver de que forma.
+            #region comentado
+            // //http://www.andrewwhitaker.com/blog/2014/06/19/queryover-series-part-4-transforming/
+            // //TODO: ver aca de mejorar esto, o meter las referencias en consejeria a los demas o ver de que forma.
 
-            //var result = sessionFactory.CreateSQLQuery(@"
-            //    select ConsejeriaDto.*, gestaActualDto.*
-            //    from Consejerias ConsejeriaDto 
-            //    Left join GestasActuales gestaActualDto on ConsejeriaDto.Id = gestaActualDto.Consejeria_id 
-            //    Left join Antecedentes antecedente on ConsejeriaDto.Id = antecedente.Consejeria_id 
-            //    Left join EstudiosComplementarios estudioComplementario on ConsejeriaDto.Id = estudioComplementario.Consejeria_id 
-            //    Left join EntrevistasPostAbortos entrevistaPostAborto on ConsejeriaDto.Id = entrevistaPostAborto.Consejeria_id")
-            //    //.SetResultTransformer(NHibernate.Transform.Transformers)
-            //    .UniqueResult();
+            // //var result = sessionFactory.CreateSQLQuery(@"
+            // //    select ConsejeriaDto.*, gestaActualDto.*
+            // //    from Consejerias ConsejeriaDto 
+            // //    Left join GestasActuales gestaActualDto on ConsejeriaDto.Id = gestaActualDto.Consejeria_id 
+            // //    Left join Antecedentes antecedente on ConsejeriaDto.Id = antecedente.Consejeria_id 
+            // //    Left join EstudiosComplementarios estudioComplementario on ConsejeriaDto.Id = estudioComplementario.Consejeria_id 
+            // //    Left join EntrevistasPostAbortos entrevistaPostAborto on ConsejeriaDto.Id = entrevistaPostAborto.Consejeria_id")
+            // //    //.SetResultTransformer(NHibernate.Transform.Transformers)
+            // //    .UniqueResult();
 
 
 
+            // var consejeria = sessionFactory.GetEntity<ConsejeriaEntidad>(id);
+            // //var consejeria = criteria.UniqueResult<ConsejeriaEntidad>();
+            // this.consejeriaDtoMapper.MapConsejeriaToDto(consejeriaDto, consejeria);
+            // consejeriaDatosDto.ConsejeriaDto = consejeriaDto;
+
+            // //List<ICriterion> expressions = new List<ICriterion>();
+            // //expressions.Add(Restrictions.Eq("Consejeria.Id", consejeria.Id));
+
+            // //var result = sessionFactory.GetResultCriteria<GestaActual>(expressions);
+
+            // //var criteria = sessionFactory.CreateCriteria<GestaActual>();
+            // //criteria.Add(Restrictions.Eq("Consejeria.Id", consejeria.Id));
+            // //var gestaActual = criteria.UniqueResult<GestaActual>();
+
+            // if (consejeria.GestaActual != null)
+            // {
+            //     this.consejeriaDtoMapper.MapGestaActualToDto(gestaActualDto, consejeria.GestaActual);
+            // }
+            // consejeriaDatosDto.GestaActualDto = gestaActualDto;
+
+            // if (consejeria.Usuaria != null)
+            // {
+            //     this.consejeriaDtoMapper.MapUsuariaToDto(usuariaDto, consejeria.Usuaria);
+            //     usuariaDto.ConsejeriaId = consejeria.Id;
+            // }
+            // consejeriaDatosDto.UsuariaDto = usuariaDto;
+
+            // //expressions.Clear();
+
+            // //criteria = sessionFactory.CreateCriteria<Antecedente>();
+            // //criteria.Add(Restrictions.Eq("Consejeria.Id", consejeria.Id));
+
+            // //expressions.Add(Restrictions.Eq("Consejeria.Id", consejeria.Id));
+            // //var result2 = sessionFactory.GetResultCriteria<Antecedente>(expressions);
+
+            ////var antecedente = result2.FirstOrDefault();//criteria.UniqueResult<Antecedente>();
+
+            // if (consejeria.Antecedente != null)
+            // {
+            //     this.consejeriaDtoMapper.MapAntecedenteToDto(antecedenteDto, consejeria.Antecedente);
+            // }
+            // consejeriaDatosDto.AntecedenteDto = antecedenteDto;
+
+
+            // //var result3 = sessionFactory.GetResultCriteria<EstudioComplementario>(expressions);
+            // //criteria.Add(Restrictions.Eq("Consejeria.Id", consejeria.Id));
+            // //var estudioComplementario = result3.FirstOrDefault(); //criteria.UniqueResult<EstudioComplementario>();
+            // if (consejeria.EstudioComplementario != null)
+            // {
+            //     this.consejeriaDtoMapper.MapEstudioComplementarioDto(estudioComplementarioDto, consejeria.EstudioComplementario);
+            // }
+            // consejeriaDatosDto.EstudioComplementarioDto = estudioComplementarioDto;
+
+            // //criteria = sessionFactory.CreateCriteria<EntrevistaPostAborto>();
+            // //criteria.Add(Restrictions.Eq("Consejeria.Id", consejeria.Id));
+            // //var result4 = sessionFactory.GetResultCriteria<EntrevistaPostAborto>(expressions);
+            // //var entrevistaPostAborto = result4.FirstOrDefault();//criteria.UniqueResult<EntrevistaPostAborto>();
+
+            // if (consejeria.EntrevistaPostAborto != null)
+            // {
+            //     this.consejeriaDtoMapper.MapEntrevistaPostAbortoDto(entrevistaPostAbortoDto, consejeria.EntrevistaPostAborto);
+            // }
+            // consejeriaDatosDto.EntrevistaPostAbortoDto = entrevistaPostAbortoDto;
+
+            // return consejeriaDatosDto;
+            #endregion
             var criteria = sessionFactory.CreateCriteria<ConsejeriaEntidad>();
             criteria.Add(Restrictions.Eq("Id", id));
             var consejeria = criteria.UniqueResult<ConsejeriaEntidad>();

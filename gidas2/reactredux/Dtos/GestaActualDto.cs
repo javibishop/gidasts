@@ -9,7 +9,7 @@ namespace tswebapi.Dtos
         public bool EnteroPorTestOrina { get; set; }
         public bool EnteroPorTestSangre { get; set; }
         public bool EnteroPorEcografia{ get; set; }
-        public DateTime EnteroFecha { get; set; }
+        public string EnteroFecha { get; set; }
         public string FUM { get; set; }
         public string EGFUM { get; set; }
         public bool IntentoSuprimir { get; set; }

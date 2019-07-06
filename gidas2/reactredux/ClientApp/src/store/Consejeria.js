@@ -119,8 +119,8 @@ const initState = {
         "enteroPorTestSangre": false,
         "enteroPorEcografia": false,
         "enteroFecha": new Date(),
-        "fUM": "",
-        "eGFUM": "",
+        "fUM": new Date(),
+        "eGFUM": new Date(),
         "intentoSuprimir": false,
         "intentoSuprimirObservaciones": "",
         "lactancia": false,
@@ -414,6 +414,17 @@ export const actionCreators = {
     handleChangeConsjeriaFecha: (valor, name) => (dispatch, getState) => {
         dispatch({ type: 'handleChangeConsjeriaFecha', valor, name });
     },
+    handleChangeGestaActualFecha: (valor, name) => (dispatch, getState) => {
+        dispatch({ type: 'handleChangeGestaActualFecha', valor, name });
+    },
+
+    handleChangeEstudioComplementarioFecha: (valor, name) => (dispatch, getState) => {
+        dispatch({ type: 'handleChangeEstudioComplementarioFecha', valor, name });
+    },
+
+    handleChangeEntrevistaPostFecha: (valor, name) => (dispatch, getState) => {
+        dispatch({ type: 'handleChangeEntrevistaPostFecha', valor, name });
+    }
 };
 
 export const reducer = (state, action) => {
@@ -443,7 +454,39 @@ export const reducer = (state, action) => {
             consejeria: state.consejeria
         }
     }
+    if (action.type === 'handleChangeGestaActualFecha') {
 
+        state.consejeria.gestaActualDto[action.name.target.firstChild.ownerDocument.activeElement.id] = action.valor;
+
+        return {
+            ...state,
+            isChanging: true,
+            consejeria: state.consejeria
+        }
+    }
+
+    if (action.type === 'handleChangeEstudioComplementarioFecha') {
+
+        state.consejeria.estudioComplementarioDto[action.name.target.firstChild.ownerDocument.activeElement.id] = action.valor;
+
+        return {
+            ...state,
+            isChanging: true,
+            consejeria: state.consejeria
+        }
+    }
+
+    if (action.type === 'handleChangeEntrevistaPostFecha') {
+
+        state.consejeria.entrevistaPostAbortoDto[action.name.target.firstChild.ownerDocument.activeElement.id] = action.valor;
+
+        return {
+            ...state,
+            isChanging: true,
+            consejeria: state.consejeria
+        }
+    }
+    
     if (action.type === changingStateConsejeria) {
         if (action.valor.target.type === "checkbox") {
             state.consejeria.consejeriaDto[action.valor.target.id] = action.valor.target.checked;

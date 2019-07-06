@@ -1,4 +1,0 @@
-https://material.angular.io/components/grid-list/examples
-https://www.dotnettricks.com/learn/angularmaterial/gridlayout
-
-https://docs.microsoft.com/en-us/learn/modules/create-a-mobile-app-with-xamarin-forms/1-introduction

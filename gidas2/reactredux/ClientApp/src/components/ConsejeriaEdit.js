@@ -105,7 +105,7 @@ class ConsejeriaEdit extends Component {
 
 function renderConsejeria(props) {
     const { handleChangeConsjeria, handleChangeUsuaria, handleChangeAntecedente, handleChangeGestaActual, handleChangeEstudioComplementario, handleChangeEntrevista,
-        saveUsuaria, saveAntecedente, saveGestaActual, saveEstudioComplementario, saveEntrevista, handleChangeConsjeriaFecha } = props;
+        saveUsuaria, saveAntecedente, saveGestaActual, saveEstudioComplementario, saveEntrevista, handleChangeConsjeriaFecha, handleChangeGestaActualFecha, handleChangeEstudioComplementarioFecha, handleChangeEntrevistaPostFecha } = props;
     return (
         <Grid fluid={true} bsClass="container" className='form'>
             <Row>
@@ -194,7 +194,7 @@ function renderConsejeria(props) {
                                     <Col xs={4} md={4}>
                                         <Label>Fecha Nacimiento</Label>
                                         <DatePicker
-                                            selected={props.consejeria.usuariaDto.fechaNacimiento || ''}
+                                            selected={new Date(props.consejeria.usuariaDto.fechaNacimiento) || ''}
                                             onChange={handleChangeConsjeriaFecha}
                                             name="fechaNacimiento"
                                             dateFormat="dd/MM/yyyy"
@@ -425,35 +425,35 @@ function renderConsejeria(props) {
                                         <ControlLabel>Como se entero</ControlLabel>
                                         <FormGroup>
                                             <Label>Fecha en la que se entero</Label>
-                                            <FormControl
+
+                                            <DatePicker
+                                                selected={props.consejeria.gestaActualDto.enteroFecha || ''}
+                                                onChange={handleChangeGestaActualFecha}
+                                                name="enteroFecha"
+                                                dateFormat="dd/MM/yyyy"
                                                 id="enteroFecha"
-                                                type="date"
-                                                label="Fecha"
-                                                placeholder="Fecha"
-                                                value={props.consejeria.gestaActualDto.enteroFecha || ''}
-                                                onChange={handleChangeGestaActual}
                                             />
                                             <Checkbox id="enteroPorTestOrina" checked={props.consejeria.gestaActualDto.enteroPorTestOrina || ''} onChange={handleChangeGestaActual}>Test de orina</Checkbox>
                                             <Checkbox id="enteroPorTestSangre" checked={props.consejeria.gestaActualDto.enteroPorTestSangre || ''} onChange={handleChangeGestaActual}>Test de sangre</Checkbox>
                                             <Checkbox id="enteroPorEcografia" checked={props.consejeria.gestaActualDto.enteroPorEcografia || ''} onChange={handleChangeGestaActual}>Ecografia</Checkbox>
-                                            <Label>FUM (es fecha)</Label>
-                                            <FormControl
+                                            <Label>FUM</Label>
+                                            <DatePicker
+                                                selected={props.consejeria.gestaActualDto.fUM || ''}
+                                                onChange={handleChangeGestaActualFecha}
+                                                name="fUM"
+                                                dateFormat="dd/MM/yyyy"
                                                 id="fUM"
-                                                type="text"
-                                                label="FUM"
-                                                placeholder="FUM"
-                                                value={props.consejeria.gestaActualDto.fUM || ''}
-                                                onChange={handleChangeGestaActual}
                                             />
+
                                             <Label>GFUM</Label>
-                                            <FormControl
+                                            <DatePicker
+                                                selected={props.consejeria.gestaActualDto.eGFUM || ''}
+                                                onChange={handleChangeGestaActualFecha}
+                                                name="eGFUM"
+                                                dateFormat="dd/MM/yyyy"
                                                 id="eGFUM"
-                                                type="text"
-                                                label="GFUM"
-                                                placeholder="GFUM"
-                                                value={props.consejeria.gestaActualDto.eGFUM || ''}
-                                                onChange={handleChangeGestaActual}
                                             />
+                                            
                                             
                                         </FormGroup>
                                     </Col>

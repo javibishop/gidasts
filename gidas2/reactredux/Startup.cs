@@ -1,3 +1,4 @@
+using FluentNHibernate.Cfg;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -6,6 +7,8 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NHibernate;
+using System.Linq;
+using System.Reflection;
 using TSModel.NH;
 
 namespace reactredux
@@ -26,21 +29,47 @@ namespace reactredux
 
 
             services.AddCors();
-            services.AddSingleton<SessionFactory>();
 
-            services.AddSingleton<SessionFactory>((provider) => {
-                var cfg = provider.GetService<SessionFactory>();
-                return cfg;
-            });
+            //services.AddSingleton<NHibernate.ISessionFactory>(factory =>
+            //{
+            //    //    return Fluently
+                //                .Configure()
+                //                .Database(() =>
+                //                {
 
-            //services.AddScoped<ISession>((provider) => {
-            //    var factory = provider.GetService<ISessionFactory>();
-            //    return factory.OpenSession();
-            //});
+                //                    return FluentNHibernate.Cfg.Db.MySQLConfiguration
+                //                            .Standard
+                //                            .ShowSql()
+                //                            .ConnectionString("server=localhost;port=3306;database=ts;userid=root;password=mysql;SslMode=none;");
+                //                })
+                //                .Mappings(m => m.FluentMappings.AddFromAssembly(Assembly.Load("TSModel")))
+                //                .BuildSessionFactory();
+                //});
+
+                //services.AddScoped<NHibernate.ISession>(factory =>
+                //   factory
+                //        .GetServices<NHibernate.ISessionFactory>()
+                //        .First()
+                //        .OpenSession()
+                //);
+
+                //services.AddSingleton<SessionFactory>();
+
+                services.AddSingleton<SessionFactory>((provider) =>
+                {
+                    var cfg = provider.GetService<SessionFactory>();
+                    return cfg;
+                });
+
+                services.AddScoped<ISession>((provider) =>
+                {
+                    var factory = provider.GetService<ISessionFactory>();
+                    return factory.OpenSession();
+                });
 
 
-            // In production, the React files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
+                // In production, the React files will be served from this directory
+                services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/build";
             });
