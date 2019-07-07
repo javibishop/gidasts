@@ -9,9 +9,9 @@ export class UsuarieApi {
         public activo: boolean,
         public userName: string,
         public password: string,
-        public especialidadId: number
-    ){
-    }
+        public especialidadId: number,
+        public token: string
+    ){}
 }
 
 // si aca solo pongo @Injectable me da un error de que nadie lo provee, y se debe poner el en providers del module.ts Entonces se pone el root como abajo
@@ -25,12 +25,12 @@ export class UsuariesAdapter {
 
     adapt(usuariesApi: UsuarieApi) :Usuarie {
         return new Usuarie(usuariesApi.id, usuariesApi.nombre, usuariesApi.apellido,  usuariesApi.activo, 
-            usuariesApi.userName, usuariesApi.password, usuariesApi.especialidadId );
+            usuariesApi.userName, usuariesApi.password, usuariesApi.especialidadId, usuariesApi.token );
     }
 
     adaptToApi(usuarie: Usuarie) :UsuarieApi {
         return new UsuarieApi(usuarie.id, usuarie.nombre, usuarie.apellido, usuarie.activo, usuarie.userName,
-             usuarie.password, usuarie.especialidadId );
+             usuarie.password, usuarie.especialidadId, usuarie.token );
     }
 
     parseJsonDate(jsonDateString): Date {

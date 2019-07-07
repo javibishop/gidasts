@@ -1,12 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMenuComponent } from './app-menu/app-menu.component';
 import { LayoutModule } from '@angular/cdk/layout';
+
+import { ErrorInterceptor } from '../app/helpers/error.interceptor';
+import { JwtInterceptor } from '../app/helpers/jwt.interceptor';
+import { AuthGuard } from '../app/helpers/auth.guard';
+
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule,
          MatListModule, MatFormFieldModule, MatCardModule, MatInputModule,
          MatRadioModule, MatSelectModule, MatCheckboxModule, MatTableModule, MatMenuModule,
@@ -19,7 +24,7 @@ import { FilterBoxComponent } from './filter-box/filter-box.component';
 import { ProfesionalEditComponent } from './profesional/profesional-edit/profesional-edit.component';
 import { EspecialidadManagerComponent } from './especialidad/especialidad-manager.component';
 import { AsistenciasManagerComponent } from './asistencias-manager/asistencias-manager.component';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { ConsejeriaManagerComponent } from './consejeria/consejeria-manager/consejeria-manager.component';
 import { ConsejeriaEditComponent } from './consejeria/consejeria-edit/consejeria-edit.component';
 import { ConsejeriaListComponent } from './consejeria/consejeria-list/consejeria-list.component';
@@ -31,6 +36,8 @@ import { EstudioComplementarioComponent } from './consejeria/estudio-complementa
 import { EntrevistaPostComponent } from './consejeria/entrevista-post/entrevista-post.component';
 import { EspecialidadListComponent } from './especialidad/especialidad-list/especialidad-list.component';
 import { EspecialidadEditComponent } from './especialidad/especialidad-edit/especialidad-edit.component';
+import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,12 +58,15 @@ import { EspecialidadEditComponent } from './especialidad/especialidad-edit/espe
     EstudioComplementarioComponent,
     EntrevistaPostComponent,
     EspecialidadListComponent,
-    EspecialidadEditComponent
+    EspecialidadEditComponent,
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
@@ -77,19 +87,24 @@ import { EspecialidadEditComponent } from './especialidad/especialidad-edit/espe
     MatNativeDateModule,
     MatGridListModule, 
     RouterModule.forRoot([
-      { path: 'profesionales/:id', component: ProfesionalEditComponent},
-      { path: 'profesionales' , component: ProfesionalManagerComponent},
-      { path: 'consejerias/:id', component: ConsejeriaEditComponent},
-      { path: 'consejerias' , component: ConsejeriaManagerComponent},
-      { path: 'especialidades' , component: EspecialidadManagerComponent},
-      { path: 'especialidades/:id', component: EspecialidadEditComponent},
-      { path: 'asistencias' , component: AsistenciasManagerComponent},
-      { path: '',  redirectTo: '/profesionales', pathMatch: 'full' },
-      { path: '**',  redirectTo: '/profesionales', pathMatch: 'full' },
+      { path: 'profesionales/:id', component: ProfesionalEditComponent, canActivate: [AuthGuard] },
+      { path: 'profesionales' , component: ProfesionalManagerComponent, canActivate: [AuthGuard] },
+      { path: 'consejerias/:id', component: ConsejeriaEditComponent, canActivate: [AuthGuard] },
+      { path: 'consejerias' , component: ConsejeriaManagerComponent, canActivate: [AuthGuard]},
+      { path: 'especialidades' , component: EspecialidadManagerComponent, canActivate: [AuthGuard] },
+      { path: 'especialidades/:id', component: EspecialidadEditComponent, canActivate: [AuthGuard] },
+      { path: 'asistencias' , component: AsistenciasManagerComponent, canActivate: [AuthGuard] },
+      { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+      { path: 'login', component: LoginComponent },
       
     ])
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }

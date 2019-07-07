@@ -32,7 +32,7 @@ export class ProfesionalEditComponent implements OnInit {
     if(id > 0)
       this.usuarieService.getById(id).subscribe(usuarie => this.usuarie = usuarie); 
     else{
-      this.usuarie = new Usuarie(0,'','',true,'','',0);
+      this.usuarie = new Usuarie(0,'','',true,'','',0,'');
     }
     /*aca puede que sea nul cuando se muestra la pantalla y da un error , entonces en el html se pone el *ngIf="profesional" para que se muestre cuando el valor esta
     asignado al alumnno */

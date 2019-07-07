@@ -9,7 +9,6 @@ import { environment } from '../../environments/environment.prod';
 import { EspecialidadesAdapter, EspecialidadApi } from './especialidades.adapter';
 import { map, tap } from 'rxjs/operators';
 import { StateService } from './state.service';
-import { GenericList,ListItem } from '../models/list-item.model';
 
 
 @Injectable({

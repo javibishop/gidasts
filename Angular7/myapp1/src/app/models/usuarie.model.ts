@@ -8,8 +8,8 @@ export class Usuarie {
         public activo: boolean,
         public userName: string,
         public password: string,
-        public especialidadId: number
-        
+        public especialidadId: number,
+        public token: string
         )
         {}
 }

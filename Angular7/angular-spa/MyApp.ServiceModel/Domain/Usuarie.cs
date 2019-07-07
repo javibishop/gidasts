@@ -16,5 +16,8 @@ namespace TSModel.Dominio
         public int EspecialidadId { get; set; }
         public string Telefono { get; set; }
         public string Direccion { get; set; }
+
+        public byte[] PasswordHash { get; set; }
+        public byte[] PasswordSalt { get; set; }
     }
 }

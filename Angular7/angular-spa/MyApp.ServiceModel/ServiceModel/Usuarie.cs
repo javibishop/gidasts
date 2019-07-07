@@ -14,6 +14,13 @@ namespace MyApp.ServiceModel
         public int Id { get; set; }
     }
 
+    [Route("/consejerias/usuaries/authenticate", "POST")]
+    public class PostAuthenticate : IReturn<Usuarie>
+    {
+        public string UserName { get; set; }
+        public string PassWord { get; set; }
+    }
+
     [Route("/consejerias/usuaries", "POST")]
     [Route("/consejerias/usuaries/{Id}", "PUT")]
     public class PostUsuarie : Usuarie
