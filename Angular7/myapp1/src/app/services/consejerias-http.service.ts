@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { Consejeria, EntrevistaPostAborto, EstudioComplementario, GestaActual, Antecedente } from '../models/consejeria.model';
 import { Usuaria } from '../models/usuaria.model';
 import { environment } from '../../environments/environment.prod';
-import { ConsejeriasAdapter, ConsejeriaApi } from './conejerias.adapter';
+import { ConsejeriasAdapter, ConsejeriaApi, ConsejeriaList } from './conejerias.adapter';
 import { EntrevistaAdapter, EntrevistaApi } from './entrevista.adapter';
 import { GestaActualAdapter, GestaActualApi } from './gestaactual.adapter';
 import { EstudioComplementarioAdapter, EstudioApi } from './estudio.adapter';
@@ -41,9 +41,9 @@ export class ConsejeriasHttpService {
    }
 
   getAll() {
-    return this.HttpClient.get<ConsejeriaApi[]>(this.urlConsejeria)
+    return this.HttpClient.get<ConsejeriaList[]>(this.urlConsejeria)
     .pipe(
-      map(consejeriasApi => consejeriasApi.map(consejeriaApi => this.consejeriasAdapter.adapt(consejeriaApi)))
+      map(consejeriasList => consejeriasList.map(consejeriaList => this.consejeriasAdapter.adaptToList(consejeriaList)))
     )
     .subscribe(consejerias => this.stateService.setConsejeria(consejerias));
   }
@@ -111,7 +111,7 @@ export class ConsejeriasHttpService {
     return new Date(parseInt(jsonDateString.replace('/Date(', '')));
 }
   
-  filterByNombreApellido(nombre: string) : Observable<Consejeria[]>{
+  filterByNombreApellido(nombre: string) : Observable<ConsejeriaList[]>{
       /*esto devuelve un nuevo array, por eso el input del list component se repinta. Si fuera la misma istancia, no se refresca */
       //return this.consejerias.filter(a =>(a.nombre + ' ' + a.apellido).toLowerCase().includes(nombre.toLowerCase()) )
       // return this.getAll()
@@ -119,9 +119,9 @@ export class ConsejeriasHttpService {
       //   map(consejerias => consejerias.filter(a =>(a.nombre + ' ' + a.apellido).toLowerCase().includes(nombre.toLowerCase())))
       // )
       //cambio luego del state service.
-      return this.HttpClient.get<ConsejeriaApi[]>(this.urlConsejeria)
+      return this.HttpClient.get<ConsejeriaList[]>(this.urlConsejeria)
       .pipe(
-        map(consejeriasApi => consejeriasApi.map(consejeriaApi => this.consejeriasAdapter.adapt(consejeriaApi))),
+        //map(consejeriasApi => consejeriasApi.map(consejeriaApi => this.consejeriasAdapter.adapt(consejeriaApi))),
         map(consejerias => consejerias.filter(a =>(a.numero + ' ' + a.id).toLowerCase().includes(nombre.toLowerCase())))
       )
 

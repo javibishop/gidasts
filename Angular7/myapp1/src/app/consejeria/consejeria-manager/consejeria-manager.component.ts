@@ -3,6 +3,7 @@ import { Consejeria } from '../../models/consejeria.model';
 import { Router } from '@angular/router';
 import { ConsejeriasHttpService } from '../../services/consejerias-http.service';
 import { StateService } from '../../services/state.service';
+import { ConsejeriaList } from 'src/app/services/conejerias.adapter';
 
 @Component({
   selector: 'app-consejeria-manager',
@@ -12,7 +13,7 @@ import { StateService } from '../../services/state.service';
 export class ConsejeriaManagerComponent implements OnInit {
 
   //consejerias: Consejeria[];
-  consejerias: Consejeria[];
+  consejerias: ConsejeriaList[];
   consejeriaSeleccionado: Consejeria;
 
   constructor(
@@ -22,6 +23,7 @@ export class ConsejeriaManagerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    
     this.stateService.consejerias$.subscribe(consejerias => this.consejerias = consejerias);
     this.stateService.setAppTitulo('Administracion de consejerias');
   }

@@ -6,6 +6,7 @@ namespace MyApp.ServiceModel
 {
     [Route("/consejerias/consejerias")]
     public class GetConsejerias : QueryDb<ConsejeriaEntidad, ConsejeriaResult>
+       
     {
     }
 
@@ -28,10 +29,17 @@ namespace MyApp.ServiceModel
     }
 
 
-    public class ConsejeriaResult : ConsejeriaEntidad
+    public class ConsejeriaResult 
     {
+        public int Id { get; set; }
+        public int Numero { get; set; }
+        public DateTime FechaIngreso { get; set; }
+        public string Observacion { get; set; }
         public string Usuarie1Nombre { get; set; }
         public string Usuarie2Nombre { get; set; }
         public string UsuariaNombre { get; set; }
+        public string Usuarie1Apellido { get; set; }
+        public string Usuarie2Apellido { get; set; }
+        public string UsuariaApellido { get; set; }
     }
 }

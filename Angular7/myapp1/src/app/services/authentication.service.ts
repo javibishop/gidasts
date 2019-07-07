@@ -23,6 +23,10 @@ export class AuthenticationService {
         return this.currentUsuarieSubject.value;
     }
 
+    public get currentUserName(): String {
+        return this.currentUsuarieSubject.value.nombre;
+    }
+
     login(username, password) {
         return this.http.post<any>(`${this.url}/authenticate`, { username, password })
             .pipe(map(Usuarie => {

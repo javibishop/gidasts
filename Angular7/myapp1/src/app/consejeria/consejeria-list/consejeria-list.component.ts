@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Consejeria } from '../../models/consejeria.model';
+import { ConsejeriaList } from 'src/app/services/conejerias.adapter';
 
 @Component({
   selector: 'app-consejeria-list',
@@ -8,10 +9,10 @@ import { Consejeria } from '../../models/consejeria.model';
 })
 export class ConsejeriaListComponent implements OnInit {
   //consejerias a mostrar. Recibe el array de consejerias ya que es el input.
-  @Input() consejerias: Consejeria[];
+  @Input() consejerias: ConsejeriaList[];
   consejeriaSeleccionado: Consejeria = null;
   @Output() seleccionar = new EventEmitter<Consejeria> ();
-  columnas: string [] = ['Nro', 'Fecha','Usuaria', 'Acciones'];
+  columnas: string [] = ['Nro', 'Fecha','Usuaria','Prof1', 'Prof2', 'Acciones'];
   
   constructor() { }
 

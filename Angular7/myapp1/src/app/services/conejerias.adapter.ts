@@ -10,6 +10,10 @@ export class ConsejeriaApi {
         public usuariaId :number,
         public usuarie1Id :number,
         public usuarie2Id :number
+        // ,
+        // public usuariaNombre :String,
+        // public usuarie1Nombre :String,
+        // public usuarie2Nombre :String
     ){
        
     }
@@ -23,7 +27,10 @@ export class ConsejeriaList {
         public observacion :string,
         public usuariaNombre :string,
         public usuarie1Nombre :string,
-        public usuarie2Nombre :string
+        public usuarie2Nombre :string,
+        public usuariaApellido :string,
+        public usuarie1Apellido :string,
+        public usuarie2Apellido :string
     ){
        
     }
@@ -42,10 +49,10 @@ export class ConsejeriasAdapter {
             consejeriasApi.usuarie1Id, consejeriasApi.usuarie2Id);
     }
 
-    // adaptToList(consejeriasApi: ConsejeriaApi) :ConsejeriaList {
-    //     return new ConsejeriaList(consejeriasApi.id, consejeriasApi.numero, this.parseJsonDate(consejeriasApi.fechaIngreso), consejeriasApi.observacion, consejeriasApi.usuaria, 
-    //         consejeriasApi.usuarie1Id, consejeriasApi.usuarie2Id);
-    // }
+    adaptToList(consejeriasApi: ConsejeriaList) :ConsejeriaList {
+        return new ConsejeriaList(consejeriasApi.id, consejeriasApi.numero, this.parseJsonDate(consejeriasApi.fechaIngreso), consejeriasApi.observacion, consejeriasApi.usuariaNombre, 
+            consejeriasApi.usuarie1Nombre, consejeriasApi.usuarie2Nombre,consejeriasApi.usuariaApellido, consejeriasApi.usuarie1Apellido, consejeriasApi.usuarie2Apellido );
+    }
 
     adaptToApi(consejeria: Consejeria) :ConsejeriaApi {
         return new ConsejeriaApi(consejeria.id, consejeria.numero, consejeria.fechaIngreso, consejeria.observacion, consejeria.usuariaId, 

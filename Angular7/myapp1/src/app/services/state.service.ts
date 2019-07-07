@@ -7,6 +7,7 @@ import { Pais } from '../models/pais.model';
 import { Provincia } from '../models/provincia.model';
 import { Localidad } from '../models/localidad.model';
 import { Partido } from '../models/partido.model';
+import { ConsejeriaList } from './conejerias.adapter';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class StateService {
 
   public appTitulo$ = new BehaviorSubject<string>('');
   public usuaries$ = new BehaviorSubject<Usuarie[]>([]);
-  public consejerias$ = new BehaviorSubject<Consejeria[]>([]);
+  public consejerias$ = new BehaviorSubject<ConsejeriaList[]>([]);
   public especialidades$ = new BehaviorSubject<Especialidad[]>([]);
   public paises$ = new BehaviorSubject<Pais[]>([]);
   public provincias$ = new BehaviorSubject<Provincia[]>([]);
@@ -33,7 +34,7 @@ export class StateService {
     this.usuaries$.next(usuaries);
   }
 
-  setConsejeria(consejerias: Consejeria[]){
+  setConsejeria(consejerias: ConsejeriaList[]){
     //para informar a los suscriptores.
     this.consejerias$.next(consejerias);
   }
