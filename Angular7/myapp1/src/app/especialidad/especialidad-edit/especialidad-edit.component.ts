@@ -1,11 +1,11 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Especialidad } from '../../models/especialidad.model';
 import { EspecialidadHttpService } from '../../services/especialidad-http.service';
 import { StateService } from '../../services/state.service';
-
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-especialidad-edit',
@@ -37,7 +37,20 @@ export class EspecialidadEditComponent implements OnInit {
     this.stateService.setAppTitulo('Edicion de especialidad');
   }
 
+  // openDialog(): void {
+  //   const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+  //     width: '250px',
+  //     data: {name: this.name, animal: this.animal}
+  //   });
+
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log('The dialog was closed');
+  //     this.animal = result;
+  //   });
+  // }
+
   guardar(form: any) {
+    
       if(this.especialidad.id > 0){
         this.especialidadsData.update(this.especialidad).subscribe(
           (_) => this.router.navigate(['especialidades'])
@@ -58,3 +71,17 @@ export class EspecialidadEditComponent implements OnInit {
   }
 
 }
+
+// @Component({
+//   selector: 'dialog-overview-example-dialog',
+//   templateUrl: 'dialog-overview-example-dialog.html',
+// })
+// export class DialogOverviewExampleDialog {
+
+//   constructor(
+//     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+//     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+//   onNoClick(): void {
+//     this.dialogRef.close();
+//   }

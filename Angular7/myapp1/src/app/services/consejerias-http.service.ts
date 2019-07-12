@@ -48,6 +48,26 @@ export class ConsejeriasHttpService {
     .subscribe(consejerias => this.stateService.setConsejeria(consejerias));
   }
   
+  filterByNombreApellido(nombre: string) : Observable<ConsejeriaList[]>{
+    /*esto devuelve un nuevo array, por eso el input del list component se repinta. Si fuera la misma istancia, no se refresca */
+    //return this.consejerias.filter(a =>(a.nombre + ' ' + a.apellido).toLowerCase().includes(nombre.toLowerCase()) )
+    // return this.getAll()
+    // .pipe(
+    //   map(consejerias => consejerias.filter(a =>(a.nombre + ' ' + a.apellido).toLowerCase().includes(nombre.toLowerCase())))
+    // )
+    //cambio luego del state service.
+    return this.HttpClient.get<ConsejeriaList[]>(this.urlConsejeria)
+    .pipe(
+      //map(consejeriasApi => consejeriasApi.map(consejeriaApi => this.consejeriasAdapter.adapt(consejeriaApi))),
+      map(consejerias => consejerias.filter(a => 
+        (a.numero + ' ' + a.observacion + ' ' + a.usuariaNombre+ ' ' + a.usuarie1Nombre+ ' ' + a.usuarie2Nombre+ ' ' + a.usuariaApellido+ ' ' + a.usuarie1Apellido
+        + ' ' + a.usuarie2Apellido)
+        .toLowerCase().includes(nombre.toLowerCase())).map(consejeriaList => this.consejeriasAdapter.adaptToList(consejeriaList)))
+    )
+    //el primer map tiene como salida un array de objetos consejerias. se los pasa al otro map.
+    
+}
+
   getById(id: number) : Observable<Consejeria> {
     const url = `${this.urlConsejeria}/${id}`; /*interpolacion */
     return this.HttpClient.get<ConsejeriaApi>(url)
@@ -111,23 +131,7 @@ export class ConsejeriasHttpService {
     return new Date(parseInt(jsonDateString.replace('/Date(', '')));
 }
   
-  filterByNombreApellido(nombre: string) : Observable<ConsejeriaList[]>{
-      /*esto devuelve un nuevo array, por eso el input del list component se repinta. Si fuera la misma istancia, no se refresca */
-      //return this.consejerias.filter(a =>(a.nombre + ' ' + a.apellido).toLowerCase().includes(nombre.toLowerCase()) )
-      // return this.getAll()
-      // .pipe(
-      //   map(consejerias => consejerias.filter(a =>(a.nombre + ' ' + a.apellido).toLowerCase().includes(nombre.toLowerCase())))
-      // )
-      //cambio luego del state service.
-      return this.HttpClient.get<ConsejeriaList[]>(this.urlConsejeria)
-      .pipe(
-        //map(consejeriasApi => consejeriasApi.map(consejeriaApi => this.consejeriasAdapter.adapt(consejeriaApi))),
-        map(consejerias => consejerias.filter(a =>(a.numero + ' ' + a.id).toLowerCase().includes(nombre.toLowerCase())))
-      )
-
-      //el primer map tiene como salida un array de objetos consejerias. se los pasa al otro map.
-      
-  }
+  
   
     updateAntecedente(antecedente: Antecedente): Observable<void>{
         const url = `${this.urlAntecedente}/${antecedente.id}`; /*interpolacion */

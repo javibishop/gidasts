@@ -16,8 +16,10 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule,
          MatListModule, MatFormFieldModule, MatCardModule, MatInputModule,
          MatRadioModule, MatSelectModule, MatCheckboxModule, MatTableModule, MatMenuModule,
          MatTabsModule, MatDatepickerModule, MatNativeDateModule,
-         MatGridListModule
+         MatGridListModule, MatProgressSpinnerModule
        } from '@angular/material';
+import {MatDialog, MatDialogRef}  from '@angular/material/dialog';     
+
 import { ProfesionalManagerComponent } from './profesional/profesional-manager/profesional-manager.component';
 import { ProfesionalListComponent } from './profesional/profesional-list/profesional-list.component';
 import { FilterBoxComponent } from './filter-box/filter-box.component';
@@ -38,6 +40,9 @@ import { EspecialidadListComponent } from './especialidad/especialidad-list/espe
 import { EspecialidadEditComponent } from './especialidad/especialidad-edit/especialidad-edit.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
+import { LoaderComponent } from './loader/loader.component';
+import { LoaderService } from './services/loader.service';
+import { LoaderInterceptor } from './interceptors/loader.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,7 +65,8 @@ import { HomeComponent } from './home/home.component';
     EspecialidadListComponent,
     EspecialidadEditComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -86,6 +92,9 @@ import { HomeComponent } from './home/home.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatGridListModule, 
+    MatProgressSpinnerModule,
+    // MatDialog, 
+    // MatDialogRef,
     RouterModule.forRoot([
       { path: 'profesionales/:id', component: ProfesionalEditComponent, canActivate: [AuthGuard] },
       { path: 'profesionales' , component: ProfesionalManagerComponent, canActivate: [AuthGuard] },
@@ -101,7 +110,9 @@ import { HomeComponent } from './home/home.component';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    LoaderService,
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
   ],
   bootstrap: [
     AppComponent
