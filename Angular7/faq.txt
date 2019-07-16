@@ -1,0 +1,16 @@
+https://material.angular.io/components/grid-list/examples
+https://www.dotnettricks.com/learn/angularmaterial/gridlayout
+
+https://docs.microsoft.com/en-us/learn/modules/create-a-mobile-app-with-xamarin-forms/1-introduction
+
+Si da el error de los datepicker revisar que "picker2" este en los 3 tags.
+<mat-form-field>
+  <input matInput [matDatepicker]="picker2" placeholder="Fecha" name="labFecha" [(ngModel)]="estudioComplementario.labFecha">
+  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+  <mat-datepicker #picker2 startView="month" [startAt]="startDate"></mat-datepicker>
+</mat-form-field>
+
+
+https://jasonwatmore.com/post/2019/06/10/angular-8-user-registration-and-login-example-tutorial
+login
+https://stackblitz.com/edit/angular-material-login-form?file=src%2Fapp%2Flogin-form.component.ts
