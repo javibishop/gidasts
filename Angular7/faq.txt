@@ -14,3 +14,11 @@ Si da el error de los datepicker revisar que "picker2" este en los 3 tags.
 https://jasonwatmore.com/post/2019/06/10/angular-8-user-registration-and-login-example-tutorial
 login
 https://stackblitz.com/edit/angular-material-login-form?file=src%2Fapp%2Flogin-form.component.ts
+
+
+https://www.djamware.com/post/5b56a6cc80aca707dd4f65a9/nodejs-expressjs-sequelizejs-and-postgresql-restful-api
+
+node js
+	npm install -g sequelize-cli
+	npm install --save sequelize
+	

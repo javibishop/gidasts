@@ -11,11 +11,6 @@ export class Consejeria {
         )
         {}
 }
-
-
-
-
-
 export class EntrevistaPostAborto {
     constructor(
 

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 export class EspecialidadApi {
     constructor(
-        public id: number,
+        public _id: string,
         public nombre: string
     ){
     }
@@ -19,7 +19,7 @@ export class EspecialidadesAdapter {
     ){}
 
     adapt(usuariesApi: EspecialidadApi) :Especialidad {
-        return new Especialidad(usuariesApi.id, usuariesApi.nombre);
+        return new Especialidad(usuariesApi._id, usuariesApi.nombre);
     }
 
     adaptToApi(usuarie: Especialidad) :EspecialidadApi {

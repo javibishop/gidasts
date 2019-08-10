@@ -15,7 +15,7 @@ import { StateService } from './state.service';
   providedIn: 'root'
 })
 export class EspecialidadHttpService {
-  private url = environment.baseUrl + 'consejerias/especialidades';
+  private url = environment.baseUrl + 'especialidad';
   constructor(private HttpClient: HttpClient,private especialidadesAdapter: EspecialidadesAdapter,private stateService: StateService) 
   {
     this.getAll();
@@ -29,7 +29,7 @@ export class EspecialidadHttpService {
     .subscribe(especialidades => this.stateService.setEspecialidades(especialidades));
   }
   
-  getById(id: number) : Observable<Especialidad> {
+  getById(id: string) : Observable<Especialidad> {
           //const url = this.url + '/' + id.toString();
           const url = `${this.url}/${id}`; /*interpolacion */
           return this.HttpClient.get<EspecialidadApi>(url)

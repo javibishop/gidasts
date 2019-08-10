@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment.prod';
 export class AuthenticationService {
     private currentUsuarieSubject: BehaviorSubject<Usuarie>;
     public currentUsuarie: Observable<Usuarie>;
-    private url = environment.baseUrl + 'consejerias/usuaries';
+    private url = environment.baseUrl + 'login';
     constructor(private http: HttpClient) {
         this.currentUsuarieSubject = new BehaviorSubject<Usuarie>(JSON.parse(localStorage.getItem('currentUsuarie')));
         this.currentUsuarie = this.currentUsuarieSubject.asObservable();
@@ -28,12 +28,12 @@ export class AuthenticationService {
     }
 
     login(username, password) {
-        return this.http.post<any>(`${this.url}/authenticate`, { username, password })
-            .pipe(map(Usuarie => {
+        return this.http.post<any>(`${this.url}`, { username, password })
+            .pipe(map(dataUsuarieDB => {
                 // store Usuarie details and jwt token in local storage to keep Usuarie logged in between page refreshes
-                localStorage.setItem('currentUsuarie', JSON.stringify(Usuarie));
-                this.currentUsuarieSubject.next(Usuarie);
-                return Usuarie;
+                localStorage.setItem('currentUsuarie', JSON.stringify(dataUsuarieDB));
+                this.currentUsuarieSubject.next(dataUsuarieDB);
+                return dataUsuarieDB;
             }));
     }
 

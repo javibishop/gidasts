@@ -25,7 +25,6 @@ import { ProfesionalListComponent } from './profesional/profesional-list/profesi
 import { FilterBoxComponent } from './filter-box/filter-box.component';
 import { ProfesionalEditComponent } from './profesional/profesional-edit/profesional-edit.component';
 import { EspecialidadManagerComponent } from './especialidad/especialidad-manager.component';
-import { AsistenciasManagerComponent } from './asistencias-manager/asistencias-manager.component';
 import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { ConsejeriaManagerComponent } from './consejeria/consejeria-manager/consejeria-manager.component';
 import { ConsejeriaEditComponent } from './consejeria/consejeria-edit/consejeria-edit.component';
@@ -52,7 +51,6 @@ import { LoaderInterceptor } from './interceptors/loader.interceptor';
     FilterBoxComponent,
     ProfesionalEditComponent,
     EspecialidadManagerComponent,
-    AsistenciasManagerComponent,
     ConsejeriaManagerComponent,
     ConsejeriaEditComponent,
     ConsejeriaListComponent,
@@ -102,7 +100,6 @@ import { LoaderInterceptor } from './interceptors/loader.interceptor';
       { path: 'consejerias' , component: ConsejeriaManagerComponent, canActivate: [AuthGuard]},
       { path: 'especialidades' , component: EspecialidadManagerComponent, canActivate: [AuthGuard] },
       { path: 'especialidades/:id', component: EspecialidadEditComponent, canActivate: [AuthGuard] },
-      { path: 'asistencias' , component: AsistenciasManagerComponent, canActivate: [AuthGuard] },
       { path: '', component: HomeComponent, canActivate: [AuthGuard] },
       { path: 'login', component: LoginComponent },
       

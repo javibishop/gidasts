@@ -2,7 +2,7 @@ import { ListItem } from './list-item.model';
 
 export class Especialidad {
     constructor(
-        public id: number,
+        public id: string,
         public nombre: string,
         )
         {}

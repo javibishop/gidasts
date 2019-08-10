@@ -24,12 +24,12 @@ export class EspecialidadEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
     /*cuando me llega la data la asigno al especialidad */
-    if(id > 0)
+    if(id !== '')
       this.especialidadsData.getById(id).subscribe(especialidad => this.especialidad = especialidad); 
     else{
-      this.especialidad = new Especialidad(0, '');
+      this.especialidad = new Especialidad('', '');
     }
     /*aca puede que sea nul cuando se muestra la pantalla y da un error , entonces en el html se pone el *ngIf="especialidad" para que se muestre cuando el valor esta
     asignado al alumnno */
@@ -51,7 +51,7 @@ export class EspecialidadEditComponent implements OnInit {
 
   guardar(form: any) {
     
-      if(this.especialidad.id > 0){
+      if(this.especialidad.id !== ''){
         this.especialidadsData.update(this.especialidad).subscribe(
           (_) => this.router.navigate(['especialidades'])
         ); /*si aca no hago subscribe no se ejecuta el update. Ademas falta (JS tiene un solo hilo de ejecucion). Entonces
