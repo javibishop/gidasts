@@ -17,12 +17,12 @@ let localidadSchema = new Shcema({
     }
 });
 
-localidadSchema.methods.toJSON = function (){
-    let user = this;
-    let userObject = user.toObject();
-    delete userObject.password;
-    return userObject;
-}
+// localidadSchema.methods.toJSON = function (){
+//     let user = this;
+//     let userObject = user.toObject();
+//     delete userObject.password;
+//     return userObject;
+// }
 
 localidadSchema.plugin(uniqueValidator, {message:'{PATH} debe de ser unico'});
 

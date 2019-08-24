@@ -20,15 +20,7 @@ app.get('/pais', verificaToken, (req, res)  => {
         if(err){
             return res.status(400).json({ok: false, err});
         }else{
-            Pais.count(filtro, (err, cantidad) =>{
-                return res.json(
-                    {
-                        ok: true, 
-                        paises,
-                        cantidad
-                    });
-            })
-            
+            return res.json(paises);
         }
     });     
 })

@@ -24,17 +24,28 @@ app.get('/localidad/:partidoId', verificaToken, (req, res)  => {
         if(err){
             return res.status(400).json({ok: false, err});
         }else{
-            Localidad.count(filtro, (err, cantidad) =>{
-                return res.json(
-                    {
-                        ok: true, 
-                        localidades,
-                        cantidad
-                    });
-            })
+            return res.json(localidades);
             
         }
     });     
+})
+
+app.post('/localidad', [verificaToken],  (req, res) => {
+    let body = req.body;
+    let loc = new Localidad({
+        nombre: body.nombre,
+        partidoId: body.partidoId,
+        cp:body.cp
+    });
+    
+    loc.save((err, partDB) => {
+        if(err){
+            return res.status(400).json({ok: false, err});
+        }else{
+            return res.json({ok: true, usuarie: partDB});
+        }
+    })
+    
 })
 
 

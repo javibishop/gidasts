@@ -4,14 +4,14 @@ const Provincia = require('../models/provincia')
 const { verificaToken } =  require('../middlewares/authentication');
 
 //cada vez q hago un get, se ejecuta el middleware
-app.get('/provincia/:paisId', verificaToken, (req, res)  => {
+app.get('/provincia/:paisId?', verificaToken, (req, res)  => {
 
     //esto es loq ue viene en el payload del token luego del middle verificaToken 
     //return res.json(req.usuarie);
 
     let desde = Number(req.query.desde || 0);
     let hasta = Number(req.query.hasta || 50);
-    let filtro = {};
+    let filtro = {paisId:1};
     if(req.params.paisId){
         filtro = {paisId:req.params.paisId};
     }
@@ -24,18 +24,13 @@ app.get('/provincia/:paisId', verificaToken, (req, res)  => {
         if(err){
             return res.status(400).json({ok: false, err});
         }else{
-            Provincia.count(filtro, (err, cantidad) =>{
-                return res.json(
-                    {
-                        ok: true, 
-                        provincias,
-                        cantidad
-                    });
-            })
+            return res.json(provincias);
             
         }
     });     
 })
+
+
 
 
 module.exports = app;

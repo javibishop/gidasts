@@ -17,23 +17,23 @@ export class ConsejeriaManagerComponent implements OnInit {
   consejeriaSeleccionado: Consejeria;
 
   constructor(
-    private consejeriasData: ConsejeriasHttpService,//ConsejeriaArrayService,
+    private consejeriasService: ConsejeriasHttpService,//ConsejeriaArrayService,
     private router: Router,
     private stateService: StateService
   ) { }
 
   ngOnInit() {
-    
-    this.stateService.consejerias$.subscribe(consejerias => this.consejerias = consejerias);
+    this.consejeriasService.getAll();
+    //this.stateService.consejerias$.subscribe(consejerias => this.consejerias = consejerias);
     this.stateService.setAppTitulo('Administracion de consejerias');
   }
 
   filtrarConsejeria(filtro: string) {
-    this.consejeriasData.filterByNombreApellido(filtro).subscribe(consejerias => this.consejerias = consejerias);
+    this.consejeriasService.filterByNombreApellido(filtro).subscribe(consejerias => this.consejerias = consejerias);
   }
 
   seleccionarConsejeria(consejeria: Consejeria) {
-    this.router.navigate(['consejerias', consejeria.id.toString()]);
+    this.router.navigate(['consejerias', consejeria._id.toString()]);
   }
 
   cancelarEdicion() {
@@ -41,7 +41,7 @@ export class ConsejeriaManagerComponent implements OnInit {
   }
 
   nuevoConsejeria(){
-    this.router.navigate(['consejerias', 0]);
+    this.router.navigate(['consejerias', 'new']);
   }
   //pasa al consejerias edit.
   // actualizarConsejeria(consejeria: Consejeria) {

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 export class LocalidadApi {
     constructor(
-        public id: number,
+        public _id: number,
         public nombre: string,
         public cp: string,
         public partidoId: number,
@@ -21,7 +21,7 @@ export class LocalidadAdapter {
     ){}
 
     adapt(localidadApi: LocalidadApi) :Localidad {
-        return new Localidad(localidadApi.id, localidadApi.nombre,localidadApi.cp, localidadApi.partidoId);
+        return new Localidad(localidadApi._id, localidadApi.nombre,localidadApi.cp, localidadApi.partidoId);
     }
 
     adaptToApi(localidad: Localidad) :LocalidadApi {

@@ -15,17 +15,17 @@ import { StateService } from './state.service';
   providedIn: 'root'
 })
 export class ProvinciaHttpService {
-  private url = environment.baseUrl + 'consejerias/provincias';
+  private url = environment.baseUrl + 'provincia';
   constructor(
     private HttpClient: HttpClient,
     private provinciaAdapter: ProvinciaAdapter,
     private stateService: StateService
   ) {
-    this.getAll();
+   
    }
 
-  getAll() {
-    return this.HttpClient.get<ProvinciaApi[]>(this.url)
+  getPorPais(id:string) {
+    return this.HttpClient.get<ProvinciaApi[]>(`${this.url}/${id}`)
     .pipe(
       map(provinciasApi => provinciasApi.map(provinciaApi => this.provinciaAdapter.adapt(provinciaApi)))
     )

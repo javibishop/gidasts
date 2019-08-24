@@ -16,7 +16,7 @@ export class ProfesionalManagerComponent implements OnInit {
   usuarieSeleccionado: Usuarie;
   
   constructor(
-    private profesionalesData: UsuarieHttpService,//ProfesionalsArrayService,
+    private profesionalesService: UsuarieHttpService,//ProfesionalsArrayService,
     private router: Router,
     private stateService: StateService
   ) { }
@@ -25,18 +25,19 @@ export class ProfesionalManagerComponent implements OnInit {
     //this.profesionalesData.getAll().subscribe(profesionales => this.profesionales = profesionales);
     //esto se comenta pq en el init del httpserviceprofesional, cuando hace el getall llama al stateService y le asigna los profesionales, entonces aca los recibe ya que 
     //esta suscripto.
+    this.profesionalesService.getAll();
     this.stateService.usuaries$.subscribe(profesionales => this.usuaries = profesionales);
-    this.stateService.setAppTitulo('Administracion de profesionales');
+    //this.stateService.setAppTitulo('Administracion de profesionales');
 
     
   }
 
   filtrarProfesionals(filtro: string) {
-    this.profesionalesData.filterByNombreApellido(filtro).subscribe(profesionales => this.usuaries = profesionales);
+    this.profesionalesService.filterByNombreApellido(filtro).subscribe(profesionales => this.usuaries = profesionales);
   }
 
   seleccionarProfesional(profesional: Usuarie) {
-    this.router.navigate(['profesionales', profesional.id.toString()]);
+    this.router.navigate(['profesionales', profesional._id.toString()]);
   }
 
   cancelarEdicion() {
@@ -44,7 +45,7 @@ export class ProfesionalManagerComponent implements OnInit {
   }
 
   nuevoProfesional(){
-    this.router.navigate(['profesionales', 0]);
+    this.router.navigate(['profesionales', '']);
   }
   //pasa al profesionales edit.
   // actualizarProfesional(profesional: Profesional) {

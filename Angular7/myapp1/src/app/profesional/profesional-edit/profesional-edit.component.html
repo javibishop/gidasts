@@ -33,7 +33,7 @@
                   [(ngModel)]="usuarie.userName">
           <mat-error>Debe ingresar el Usuario</mat-error>
         </mat-form-field>
-        <mat-form-field  class="all-width">
+        <mat-form-field  class="all-width" [hidden]="!passvisible">
           <input  matInput
                   required
                   name="password"

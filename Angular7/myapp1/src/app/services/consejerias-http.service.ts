@@ -19,8 +19,8 @@ import { StateService } from './state.service';
   providedIn: 'root'
 })
 export class ConsejeriasHttpService {
-  private url = environment.baseUrl + 'consejerias/';
-  private urlConsejeria = this.url + 'consejerias';
+  private url = environment.baseUrl;
+  private urlConsejeria = this.url + 'consejeria';
   private urlEntrevista = this.url + 'entrevistaspostabortos';
   private urlEstudio = this.url + 'estudioscomplementarios';
   private urlGestas = this.url + 'gestasactuales';
@@ -37,13 +37,13 @@ export class ConsejeriasHttpService {
     private usuariasAdapter: UsuariasAdapter,
 
   ) {
-    this.getAll();
+    
    }
 
   getAll() {
-    return this.HttpClient.get<ConsejeriaList[]>(this.urlConsejeria)
+    return this.HttpClient.get<ConsejeriaApi[]>(this.urlConsejeria)
     .pipe(
-      map(consejeriasList => consejeriasList.map(consejeriaList => this.consejeriasAdapter.adaptToList(consejeriaList)))
+      map(consejeriasApi => consejeriasApi.map(consejeriaApi => this.consejeriasAdapter.adaptToList(consejeriaApi)))
     )
     .subscribe(consejerias => this.stateService.setConsejeria(consejerias));
   }
@@ -56,19 +56,19 @@ export class ConsejeriasHttpService {
     //   map(consejerias => consejerias.filter(a =>(a.nombre + ' ' + a.apellido).toLowerCase().includes(nombre.toLowerCase())))
     // )
     //cambio luego del state service.
-    return this.HttpClient.get<ConsejeriaList[]>(this.urlConsejeria)
+    return this.HttpClient.get<ConsejeriaApi[]>(this.urlConsejeria)
     .pipe(
-      //map(consejeriasApi => consejeriasApi.map(consejeriaApi => this.consejeriasAdapter.adapt(consejeriaApi))),
+      map(consejeriasApi => consejeriasApi.map(consejeriaApi => this.consejeriasAdapter.adaptToList(consejeriaApi))),
       map(consejerias => consejerias.filter(a => 
         (a.numero + ' ' + a.observacion + ' ' + a.usuariaNombre+ ' ' + a.usuarie1Nombre+ ' ' + a.usuarie2Nombre+ ' ' + a.usuariaApellido+ ' ' + a.usuarie1Apellido
         + ' ' + a.usuarie2Apellido)
-        .toLowerCase().includes(nombre.toLowerCase())).map(consejeriaList => this.consejeriasAdapter.adaptToList(consejeriaList)))
+        .toLowerCase().includes(nombre.toLowerCase())))
     )
     //el primer map tiene como salida un array de objetos consejerias. se los pasa al otro map.
     
 }
 
-  getById(id: number) : Observable<Consejeria> {
+  getById(id: string) : Observable<Consejeria> {
     const url = `${this.urlConsejeria}/${id}`; /*interpolacion */
     return this.HttpClient.get<ConsejeriaApi>(url)
     .pipe(
@@ -170,7 +170,7 @@ export class ConsejeriasHttpService {
   }
 
   insertEstudio(estudioComplementario: EstudioComplementario): Observable<void>{
-  return this.HttpClient.post<void>(this.urlEstudio, estudioComplementario);
+    return this.HttpClient.post<void>(this.urlEstudio, estudioComplementario);
   }
 
   updateUsuaria(usuaria: Usuaria): Observable<void>{
@@ -184,7 +184,7 @@ export class ConsejeriasHttpService {
   }
 
   update(consejeria: Consejeria): Observable<void>{
-    const url = `${this.urlConsejeria}/${consejeria.id}`; /*interpolacion */
+    const url = `${this.urlConsejeria}/${consejeria._id}`; /*interpolacion */
     return this.HttpClient.put<void>(url, this.consejeriasAdapter.adaptToApi(consejeria))
     .pipe(tap(() =>{return this.getAll()}));
   }

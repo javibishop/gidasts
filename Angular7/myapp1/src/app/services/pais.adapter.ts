@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 export class PaisApi {
     constructor(
-        public id: number,
+        public _id: number,
         public nombre: string
     ){
     }
@@ -19,7 +19,7 @@ export class PaisAdapter {
     ){}
 
     adapt(paisApi: PaisApi) :Pais {
-        return new Pais(paisApi.id, paisApi.nombre);
+        return new Pais(paisApi._id, paisApi.nombre);
     }
 
     adaptToApi(usuarie: Pais) :PaisApi {

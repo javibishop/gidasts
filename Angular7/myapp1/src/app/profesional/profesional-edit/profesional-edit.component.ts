@@ -17,7 +17,7 @@ export class ProfesionalEditComponent implements OnInit {
 
   usuarie: Usuarie;
   especialidades: Especialidad [];
-
+  passvisible: boolean = true;
   constructor(
     private usuarieService: UsuarieHttpService, //ProfesionalsArrayService,
     private activatedRoute: ActivatedRoute,
@@ -27,12 +27,16 @@ export class ProfesionalEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+    this.especialidadesHttpService.getAll();
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
     /*cuando me llega la data la asigno al profesional */
-    if(id > 0)
+    if(id  !== ''){
       this.usuarieService.getById(id).subscribe(usuarie => this.usuarie = usuarie); 
+      this.passvisible = false;
+    }
+      
     else{
-      this.usuarie = new Usuarie(0,'','',true,'','',0,'');
+      this.usuarie = new Usuarie('','','',true,'','',0,'');
     }
     /*aca puede que sea nul cuando se muestra la pantalla y da un error , entonces en el html se pone el *ngIf="profesional" para que se muestre cuando el valor esta
     asignado al alumnno */
@@ -42,7 +46,7 @@ export class ProfesionalEditComponent implements OnInit {
   }
 
   guardar(form: any) {
-      if(this.usuarie.id > 0){
+      if(this.usuarie._id  !== ''){
         this.usuarieService.update(this.usuarie).subscribe(
           (_) => this.router.navigate(['profesionales'])
         ); /*si aca no hago subscribe no se ejecuta el update. Ademas falta (JS tiene un solo hilo de ejecucion). Entonces
@@ -56,7 +60,7 @@ export class ProfesionalEditComponent implements OnInit {
         (_) es para indicar que tiene un parametro vacio*/
       }
       
-      //this.router.navigate(['profesionales']);
+      this.router.navigate(['profesionales']);
   }
 
   cancelarEdicion() {

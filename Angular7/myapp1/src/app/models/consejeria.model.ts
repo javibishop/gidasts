@@ -1,13 +1,13 @@
 
 export class Consejeria {
     constructor(
-        public id :number,
+        public _id :string,
         public numero :number,
         public fechaIngreso: Date,
         public observacion :string,
-        public usuariaId :number,
-        public usuarie1Id :number,
-        public usuarie2Id :number
+        public usuariaId :string,
+        public usuarie1Id :string,
+        public usuarie2Id :string
         )
         {}
 }

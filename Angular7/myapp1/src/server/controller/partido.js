@@ -24,17 +24,27 @@ app.get('/partido/:provinciaId', verificaToken, (req, res)  => {
         if(err){
             return res.status(400).json({ok: false, err});
         }else{
-            Partido.count(filtro, (err, cantidad) =>{
-                return res.json(
-                    {
-                        ok: true, 
-                        partidos,
-                        cantidad
-                    });
-            })
+            return res.json(partidos);
             
         }
     });     
+})
+
+app.post('/partido', [verificaToken],  (req, res) => {
+    
+    let body = req.body;
+    let part = new Partido({
+        nombre: body.nombre,
+        provinciaId: body.provinciaId,
+    });
+    
+    part.save((err, partDB) => {
+        if(err){
+            return res.status(400).json({ok: false, err});
+        }else{
+            return res.json({ok: true, usuarie: partDB});
+        }
+    })
 })
 
 

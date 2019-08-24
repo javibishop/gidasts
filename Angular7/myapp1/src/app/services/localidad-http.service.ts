@@ -13,7 +13,7 @@ import { StateService } from './state.service';
   providedIn: 'root'
 })
 export class LocalidadHttpService {
-  private url = environment.baseUrl + 'consejerias/localidades';
+  private url = environment.baseUrl + 'localidad';
   constructor(
     private HttpClient: HttpClient,
     private localidadAdapter: LocalidadAdapter,
@@ -22,8 +22,8 @@ export class LocalidadHttpService {
     
    }
 
-  getByPartido(partidoId: number) : Observable<LocalidadApi[]>  {
-    const url = `${this.url}/${partidoId}/porpartido`; 
+  getByPartido(partidoId: string) : Observable<LocalidadApi[]>  {
+    const url = `${this.url}/${partidoId}`; 
     return this.HttpClient.get<LocalidadApi[]>(url)
     .pipe(
       map(localidadApi => localidadApi.map(localidadApi => this.localidadAdapter.adapt(localidadApi)))

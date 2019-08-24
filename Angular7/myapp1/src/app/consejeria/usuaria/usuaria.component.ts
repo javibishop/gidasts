@@ -39,14 +39,18 @@ export class UsuariaComponent implements OnInit {
   ngOnInit() {
     this.nivelEstudios = this.estadoEstudioListService.list;
     this.estadoEstudios = this.nivelEstudioListService.list;
-    this.stateService.paises$.subscribe(paises => this.paises = paises);
-    this.stateService.provincias$.subscribe(provincias => this.provincias = provincias);
+    this.paisHttpService.getAll();
+    this.provinciaHttpService.getPorPais("1");
+    
     if(this.usuariaId > 0){
       this.consejeriaService.getUsuariaById(this.usuariaId).subscribe(usuariaRequest => this.usuaria = usuariaRequest);
     }
     else{
-      this.usuaria = new Usuaria(0,'','',0, true, new Date(),1,'',0,0,'','', false, false, false, false, false, false, false, false, false, false, false, '','',0,0,0);
+      this.usuaria = new Usuaria(0,'','',0, true, new Date(),'','','','','','', false, false, false, false, false, false, false, false, false, false, false, '','',0,0,'');
     }
+
+    this.stateService.paises$.subscribe(paises => this.paises = paises);
+    this.stateService.provincias$.subscribe(provincias => this.provincias = provincias);
   }
 
   guardarUsuaria(form: any) {
@@ -65,10 +69,10 @@ export class UsuariaComponent implements OnInit {
    //this.router.navigate(['consejerias']);
 }
 
-  selectProvincia(provinciaid: number){
+  selectProvincia(provinciaid: string){
     this.partidoHttpService.getByProvincia(provinciaid).subscribe(partidos => this.partidos = partidos);
   }
-  selectPartido(partidoid: number){
+  selectPartido(partidoid: string){
     this.localidadHttpService.getByPartido(partidoid).subscribe(localidades => this.localidades = localidades);
   }
   

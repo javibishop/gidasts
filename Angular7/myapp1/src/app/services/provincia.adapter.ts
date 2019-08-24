@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 export class ProvinciaApi {
     constructor(
-        public id: number,
+        public _id: number,
         public nombre: string,
         public paisId: number,
     ){
@@ -20,7 +20,7 @@ export class ProvinciaAdapter {
     ){}
 
     adapt(paisApi: ProvinciaApi) :Provincia {
-        return new Provincia(paisApi.id, paisApi.nombre, paisApi.paisId);
+        return new Provincia(paisApi._id, paisApi.nombre, paisApi.paisId);
     }
 
     adaptToApi(provincia: Provincia) :ProvinciaApi {

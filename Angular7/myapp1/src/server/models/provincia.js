@@ -13,13 +13,13 @@ let provinciaSchema = new Shcema({
     }
 });
 
-provinciaSchema.methods.toJSON = function (){
-    let user = this;
-    let userObject = user.toObject();
-    delete userObject.password;
-    return userObject;
-}
+// provinciaSchema.methods.toJSON = function (){
+//     let user = this;
+//     let userObject = user.toObject();
+//     delete userObject.password;
+//     return userObject;
+// }
 
 provinciaSchema.plugin(uniqueValidator, {message:'{PATH} debe de ser unico'});
 
-module.exports = mongoose.model('Provincias', provinciaSchema);
+module.exports = mongoose.model('Provincia', provinciaSchema);

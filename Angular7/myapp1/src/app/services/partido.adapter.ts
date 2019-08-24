@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 export class PartidoApi {
     constructor(
-        public id: number,
+        public _id: number,
         public nombre: string,
         public provinciaId: number,
     ){
@@ -20,7 +20,7 @@ export class PartidoAdapter {
     ){}
 
     adapt(partidoApi: PartidoApi) :Partido {
-        return new Partido(partidoApi.id, partidoApi.nombre, partidoApi.provinciaId);
+        return new Partido(partidoApi._id, partidoApi.nombre, partidoApi.provinciaId);
     }
 
     adaptToApi(partido: Partido) :PartidoApi {

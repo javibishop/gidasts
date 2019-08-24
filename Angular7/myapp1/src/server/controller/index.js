@@ -8,5 +8,6 @@ app.use(require('./localidad'));
 app.use(require('./provincia'));
 app.use(require('./partido'));
 app.use(require('./especialidad'));
+app.use(require('./consejeria'));
 
 module.exports = app;

@@ -21,9 +21,9 @@ export class EspecialidadManagerComponent implements OnInit {
    ) { }
  
    ngOnInit() {
-     //this.consejeriasData.getAll().subscribe(consejerias => this.consejerias = consejerias);
+     this.especialidadesData.getAll();
      this.stateService.especialidades$.subscribe(especialidades => this.especialidades = especialidades);
-     this.stateService.setAppTitulo('Administracion de especialidades');
+     //this.stateService.setAppTitulo('Administracion de especialidades');
    }
  
    filtrarEspecialidad(filtro: string) {
@@ -39,7 +39,7 @@ export class EspecialidadManagerComponent implements OnInit {
    }
  
    nuevaEspecialidad(){
-     this.router.navigate(['especialidades', 0]);
+     this.router.navigate(['especialidades', '']);
    }
 
 }

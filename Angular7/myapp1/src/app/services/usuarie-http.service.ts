@@ -15,13 +15,13 @@ import { StateService } from './state.service';
   providedIn: 'root'
 })
 export class UsuarieHttpService {
-  private url = environment.baseUrl + 'consejerias/usuaries';
+  private url = environment.baseUrl + 'usuarie';
   constructor(
     private HttpClient: HttpClient,
     private usuariesAdapter: UsuariesAdapter,
     private stateService: StateService
   ) {
-    this.getAll();
+    
    }
 
   getAll() {
@@ -32,7 +32,7 @@ export class UsuarieHttpService {
     .subscribe(usuaries => this.stateService.setUsuaries(usuaries));
   }
   
-  getById(id: number) : Observable<Usuarie> {
+  getById(id: string) : Observable<Usuarie> {
           //const url = this.url + '/' + id.toString();
           const url = `${this.url}/${id}`; /*interpolacion */
           return this.HttpClient.get<UsuarieApi>(url)
@@ -64,7 +64,7 @@ export class UsuarieHttpService {
   update(usuarie: Usuarie): Observable<void>{
       // var index = this.usuaries.findIndex(a => a.id === usuarie.id);
       // this.usuaries[index] = usuarie;
-      const url = `${this.url}/${usuarie.id}`; /*interpolacion */
+      const url = `${this.url}/${usuarie._id}`; /*interpolacion */
       /* */
       return this.HttpClient.put<void>(url, this.usuariesAdapter.adaptToApi(usuarie))
       .pipe(tap(() =>{return this.getAll()}));
@@ -76,6 +76,6 @@ export class UsuarieHttpService {
     // this.usuaries[index] = usuarie;
     //const url = `${this.url}/${usuarie.id}`; /*interpolacion */
     /* */
-    return this.HttpClient.post<void>(this.url, this.usuariesAdapter.adaptToApi(usuarie));
+    return this.HttpClient.post<void>(this.url, this.usuariesAdapter.adaptToApi(usuarie)).pipe(tap(() =>{return this.getAll()}));
 }
 }

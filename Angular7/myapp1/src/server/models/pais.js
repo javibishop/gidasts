@@ -9,12 +9,12 @@ let paisSchema = new Shcema({
     }
 });
 
-paisSchema.methods.toJSON = function (){
-    let user = this;
-    let userObject = user.toObject();
-    delete userObject.password;
-    return userObject;
-}
+// paisSchema.methods.toJSON = function (){
+//     let user = this;
+//     let userObject = user.toObject();
+//     delete userObject.password;
+//     return userObject;
+// }
 
 paisSchema.plugin(uniqueValidator, {message:'{PATH} debe de ser unico'});
 

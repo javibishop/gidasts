@@ -8,10 +8,10 @@ export class Usuaria {
         public edad: number,
         public activo: boolean,
         public fechaNacimiento: Date,
-        public nacionalidadId: number,
+        public nacionalidadId: string,
         public documento: string,
-        public provinciaId: number,
-        public partidoId: number,
+        public provinciaId: string,
+        public partidoId: string,
         public telefono: string,
         public direccion: string,
         public usuarioCentroSalud: boolean,
@@ -29,7 +29,7 @@ export class Usuaria {
         public conocePorOtro : string,
         public nivelInstruccion : number,
         public nivelInstruccionEstado : number,
-        public localidadId: number
+        public localidadId: string
         )
         {}
 }

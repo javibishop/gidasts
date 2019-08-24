@@ -13,7 +13,7 @@ import { StateService } from './state.service';
   providedIn: 'root'
 })
 export class PartidoHttpService {
-  private url = environment.baseUrl + 'consejerias/partidos';
+  private url = environment.baseUrl + 'partido';
   constructor(
     private HttpClient: HttpClient,
     private partidoAdapter: PartidoAdapter,
@@ -22,8 +22,8 @@ export class PartidoHttpService {
     //this.getAll();
    }
 
-  getByProvincia(provinciaId: number) : Observable<PartidoApi[]>  {
-    const url = `${this.url}/${provinciaId}/porprovincia`; 
+  getByProvincia(provinciaId: string) : Observable<PartidoApi[]>  {
+    const url = `${this.url}/${provinciaId}`; 
     return this.HttpClient.get<PartidoApi[]>(url)
     .pipe(
       map(partidosApi => partidosApi.map(partidoApi => this.partidoAdapter.adapt(partidoApi)))

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 export class UsuarieApi {
     constructor(
-        public id: number,
+        public _id: string,
         public nombre: string,
         public apellido: string,
         public activo: boolean,
@@ -24,12 +24,12 @@ export class UsuariesAdapter {
     ){}
 
     adapt(usuariesApi: UsuarieApi) :Usuarie {
-        return new Usuarie(usuariesApi.id, usuariesApi.nombre, usuariesApi.apellido,  usuariesApi.activo, 
+        return new Usuarie(usuariesApi._id, usuariesApi.nombre, usuariesApi.apellido,  usuariesApi.activo, 
             usuariesApi.userName, usuariesApi.password, usuariesApi.especialidadId, usuariesApi.token );
     }
 
     adaptToApi(usuarie: Usuarie) :UsuarieApi {
-        return new UsuarieApi(usuarie.id, usuarie.nombre, usuarie.apellido, usuarie.activo, usuarie.userName,
+        return new UsuarieApi(usuarie._id, usuarie.nombre, usuarie.apellido, usuarie.activo, usuarie.userName,
              usuarie.password, usuarie.especialidadId, usuarie.token );
     }
 

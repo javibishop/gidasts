@@ -13,12 +13,12 @@ let partidoSchema = new Shcema({
     }
 });
 
-partidoSchema.methods.toJSON = function (){
-    let user = this;
-    let userObject = user.toObject();
-    delete userObject.password;
-    return userObject;
-}
+// partidoSchema.methods.toJSON = function (){
+//     let user = this;
+//     let userObject = user.toObject();
+//     delete userObject.password;
+//     return userObject;
+// }
 
 partidoSchema.plugin(uniqueValidator, {message:'{PATH} debe de ser unico'});
 

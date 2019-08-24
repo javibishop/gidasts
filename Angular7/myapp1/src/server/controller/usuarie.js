@@ -26,16 +26,26 @@ app.get('/usuarie', verificaToken, (req, res)  => {
         }else{
             //usuarieDB.password = null;
             Usuarie.count(filtro, (err, cantidad) =>{
-                return res.json(
-                    {
-                        ok: true, 
-                        usuaries,
-                        cantidad
-                    });
+                return res.json(usuaries);
             })
             
         }
     });     
+})
+
+app.get('/usuarie/:id', verificaToken, (req, res)  => {
+    Usuarie.findById(req.params.id)
+    .exec((err, usuarie) => {
+        
+        if(err){
+            return res.status(400).json({ok: false, err});
+        }else{
+            Usuarie.count((err, cantidad) =>{
+                return res.json(usuarie);
+            })
+            
+        }
+    });   
 })
 
 //  app.post('/usuarie', [verificaToken, verificaRol],  (req, res) => {
@@ -47,7 +57,7 @@ app.post('/usuarie',  (req, res) => {
     let usuarie = new Usuarie({
         nombre: body.nombre,
         apellido: body.apellido,
-        userName: body.username,
+        userName: body.userName,
         password: bcrypt.hashSync( body.password, 10),
         especialidadId: body.especialidadId
     });

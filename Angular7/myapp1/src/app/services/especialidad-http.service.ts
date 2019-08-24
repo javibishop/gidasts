@@ -18,7 +18,7 @@ export class EspecialidadHttpService {
   private url = environment.baseUrl + 'especialidad';
   constructor(private HttpClient: HttpClient,private especialidadesAdapter: EspecialidadesAdapter,private stateService: StateService) 
   {
-    this.getAll();
+    //this.getAll();
   }
 
   getAll() {
@@ -73,6 +73,6 @@ export class EspecialidadHttpService {
     // this.Especialidads[index] = Especialidad;
     //const url = `${this.url}/${Especialidad.id}`; /*interpolacion */
     /* */
-    return this.HttpClient.post<void>(this.url, this.especialidadesAdapter.adaptToApi(Especialidad));
+    return this.HttpClient.post<void>(this.url, this.especialidadesAdapter.adaptToApi(Especialidad)).pipe(tap(() =>{return this.getAll()}));
 }
 }

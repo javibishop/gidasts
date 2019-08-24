@@ -15,13 +15,13 @@ import { StateService } from './state.service';
   providedIn: 'root'
 })
 export class PaisHttpService {
-  private url = environment.baseUrl + 'consejerias/paises';
+  private url = environment.baseUrl + 'pais';
   constructor(
     private HttpClient: HttpClient,
     private paisAdapter: PaisAdapter,
     private stateService: StateService
   ) {
-    this.getAll();
+   
    }
 
   getAll() {
