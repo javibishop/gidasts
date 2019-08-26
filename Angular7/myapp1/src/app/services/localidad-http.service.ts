@@ -22,7 +22,7 @@ export class LocalidadHttpService {
     
    }
 
-  getByPartido(partidoId: string) : Observable<LocalidadApi[]>  {
+  getByPartido(partidoId: string) : Observable<Localidad []>  {
     const url = `${this.url}/${partidoId}`; 
     return this.HttpClient.get<LocalidadApi[]>(url)
     .pipe(

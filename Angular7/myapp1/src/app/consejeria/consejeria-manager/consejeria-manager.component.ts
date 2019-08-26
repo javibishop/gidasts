@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ConsejeriasHttpService } from '../../services/consejerias-http.service';
 import { StateService } from '../../services/state.service';
 import { ConsejeriaList } from 'src/app/services/conejerias.adapter';
-
+import {UsuarieHttpService} from '../../services/usuarie-http.service';
 @Component({
   selector: 'app-consejeria-manager',
   templateUrl: './consejeria-manager.component.html',
@@ -19,12 +19,15 @@ export class ConsejeriaManagerComponent implements OnInit {
   constructor(
     private consejeriasService: ConsejeriasHttpService,//ConsejeriaArrayService,
     private router: Router,
-    private stateService: StateService
+    private stateService: StateService,
+    private usuarieHttpService : UsuarieHttpService,
   ) { }
 
   ngOnInit() {
     this.consejeriasService.getAll();
-    //this.stateService.consejerias$.subscribe(consejerias => this.consejerias = consejerias);
+    this.stateService.consejerias$.subscribe(consejerias => this.consejerias = consejerias);
+    //this.usuarieHttpService.getAll();
+
     this.stateService.setAppTitulo('Administracion de consejerias');
   }
 

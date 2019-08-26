@@ -36,7 +36,7 @@ export class ProfesionalEditComponent implements OnInit {
     }
       
     else{
-      this.usuarie = new Usuarie('','','',true,'','',0,'');
+      this.usuarie = new Usuarie('','','',true,'','',0,''); 
     }
     /*aca puede que sea nul cuando se muestra la pantalla y da un error , entonces en el html se pone el *ngIf="profesional" para que se muestre cuando el valor esta
     asignado al alumnno */
@@ -46,7 +46,7 @@ export class ProfesionalEditComponent implements OnInit {
   }
 
   guardar(form: any) {
-      if(this.usuarie._id  !== ''){
+      if(this.usuarie.id  !== ''){
         this.usuarieService.update(this.usuarie).subscribe(
           (_) => this.router.navigate(['profesionales'])
         ); /*si aca no hago subscribe no se ejecuta el update. Ademas falta (JS tiene un solo hilo de ejecucion). Entonces

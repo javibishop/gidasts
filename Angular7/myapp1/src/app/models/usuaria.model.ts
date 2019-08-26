@@ -2,7 +2,7 @@
 export class Usuaria {
 
     constructor(
-        public id: number,
+        public id: string,
         public nombre: string,
         public apellido: string,
         public edad: number,

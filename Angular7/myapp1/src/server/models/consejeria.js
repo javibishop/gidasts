@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator')
-
+const Usuaria = require('../models/usuaria');
+const Usuarie = require('../models/usuarie');
 let Shcema = mongoose.Schema;
 let consejeriaSchema = new Shcema({
     numero:{
@@ -14,30 +15,25 @@ let consejeriaSchema = new Shcema({
     observacion:{
         type:String
     },
-    usuariaId:{
-        type:String,
-        required: [true, 'Usuaria es requerido']
-    },
-    usuarie1Id:{
-        type:String,
-        required: [true, 'Usuarie 1 es requerido']
-    },
-    usuarie2Id:{
-        type:String,
-        required: [true, 'Usuarie 1 es requerido']
-    },
+    usuariaId:{type: mongoose.Schema.ObjectId, ref: Usuaria},
+    usuarie1Id:{type: mongoose.Schema.ObjectId, ref: Usuarie },
+    usuarie2Id:{type: mongoose.Schema.ObjectId, ref: Usuarie },
     estado:{
         type:Boolean,
         default:true
     }
+},
+{
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
 });
 
-consejeriaSchema.methods.toJSON = function (){
-    let user = this;
-    let userObject = user.toObject();
-    delete userObject.password;
-    return userObject;
-}
+// consejeriaSchema.methods.toJSON = function (){
+//     let user = this;
+//     let userObject = user.toObject();
+//     delete userObject.password;
+//     return userObject;
+// }
 
 consejeriaSchema.plugin(uniqueValidator, {message:'{PATH} debe de ser unico'});
 

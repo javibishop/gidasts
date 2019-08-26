@@ -37,7 +37,7 @@ export class ProfesionalManagerComponent implements OnInit {
   }
 
   seleccionarProfesional(profesional: Usuarie) {
-    this.router.navigate(['profesionales', profesional._id.toString()]);
+    this.router.navigate(['profesionales', profesional.id.toString()]);
   }
 
   cancelarEdicion() {

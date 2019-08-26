@@ -25,10 +25,11 @@ app.get('/usuarie', verificaToken, (req, res)  => {
             return res.status(400).json({ok: false, err});
         }else{
             //usuarieDB.password = null;
-            Usuarie.count(filtro, (err, cantidad) =>{
-                return res.json(usuaries);
-            })
+            // Usuarie.count(filtro, (err, cantidad) =>{
+            //     return res.json(usuaries);
+            // })
             
+            return res.json(usuaries);
         }
     });     
 })
@@ -40,16 +41,16 @@ app.get('/usuarie/:id', verificaToken, (req, res)  => {
         if(err){
             return res.status(400).json({ok: false, err});
         }else{
-            Usuarie.count((err, cantidad) =>{
-                return res.json(usuarie);
-            })
-            
+            // Usuarie.count((err, cantidad) =>{
+            //     return res.json(usuarie);
+            // })
+            return res.json(usuarie);
         }
     });   
 })
 
 //  app.post('/usuarie', [verificaToken, verificaRol],  (req, res) => {
-app.post('/usuarie',  (req, res) => {
+app.post('/usuarie', verificaToken, (req, res) => {
     //req.body es lo que parseo el body parser.
     let body = req.body;
     //console.log(body);
@@ -72,7 +73,7 @@ app.post('/usuarie',  (req, res) => {
     })
 })
 
-app.put('/usuarie/:id', [verificaToken, verificaRol],  (req, res) => {
+app.put('/usuarie/:id', verificaToken,  (req, res) => {
     //el :id aparece en params, si es otro nombre, aparece otro nombre.
     let id = req.params.id;
     //una forma de quitar el pass y el role para que no se modifiquen es:
@@ -98,7 +99,7 @@ app.put('/usuarie/:id', [verificaToken, verificaRol],  (req, res) => {
     
 })
 
-app.delete('/usuarie/fisico/:id', [verificaToken, verificaRol],  (req, res) =>{
+app.delete('/usuarie/fisico/:id', verificaToken,  (req, res) =>{
     let id = req.params.id;
     Usuarie.findByIdAndRemove(id, (err, usuarieBorrado) =>{
         if(err){
@@ -114,7 +115,7 @@ app.delete('/usuarie/fisico/:id', [verificaToken, verificaRol],  (req, res) =>{
     })
 })
 
-app.delete('/usuarie/:id', [verificaToken, verificaRol],  (req, res) => {
+app.delete('/usuarie/:id', verificaToken,  (req, res) => {
     let id = req.params.id;
     let optionsMongoose = {
         new: true, 

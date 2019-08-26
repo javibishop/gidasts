@@ -40,6 +40,10 @@ let usuarieSchema = new Shcema({
         type:Boolean,
         default:true
     }
+},
+{
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
 });
 
 usuarieSchema.methods.toJSON = function (){

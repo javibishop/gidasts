@@ -2,7 +2,7 @@
 export class Usuarie {
 
     constructor(
-        public _id: string,
+        public id: string,
         public nombre: string,
         public apellido: string,
         public activo: boolean,

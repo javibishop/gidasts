@@ -22,11 +22,11 @@ export class PartidoHttpService {
     //this.getAll();
    }
 
-  getByProvincia(provinciaId: string) : Observable<PartidoApi[]>  {
+  getByProvincia(provinciaId: string) : Observable<Partido[]>  {
     const url = `${this.url}/${provinciaId}`; 
     return this.HttpClient.get<PartidoApi[]>(url)
     .pipe(
-      map(partidosApi => partidosApi.map(partidoApi => this.partidoAdapter.adapt(partidoApi)))
+      map(partidos => partidos.map(partido => this.partidoAdapter.adapt(partido)))
     )
   }
 

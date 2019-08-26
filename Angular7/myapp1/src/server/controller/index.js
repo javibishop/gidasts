@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 
 app.use(require('./usuarie'));
+app.use(require('./usuaria'));
 app.use(require('./login'));
 app.use(require('./pais'));
 app.use(require('./localidad'));

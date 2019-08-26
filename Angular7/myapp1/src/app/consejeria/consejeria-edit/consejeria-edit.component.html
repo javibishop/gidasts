@@ -9,7 +9,7 @@
             <mat-form-field  >
                 <mat-select
                     placeholder="Profesional 1"
-                    [(ngModel)]="consejeria.usuarie1Id"
+                    [(ngModel)]="usuarie1Id"
                     name="usuarie1Id">
                     <mat-option *ngFor="let usuarie of usuaries"
                       [value]="usuarie.id">
@@ -22,7 +22,7 @@
             <mat-form-field  >
                 <mat-select
                     placeholder="Profesional 2"
-                    [(ngModel)]="consejeria.usuarie2Id"
+                    [(ngModel)]="usuarie2Id"
                     name="usuarie2Id">
                     <mat-option *ngFor="let usuarie of usuaries"
                       [value]="usuarie.id">
@@ -65,7 +65,7 @@
     <mat-grid-list cols="1" rowHeight="1:1">
         <mat-tab-group>
             <mat-tab label="Usuaria"> 
-              <app-usuaria [usuariaId] = "usuariaId" (usuariaIdInsert)="usuariaInserted($event)" > </app-usuaria>
+              <app-usuaria [usuaria] = "usuaria" (usuariaIdInsert)="usuariaInserted($event)" > </app-usuaria>
             </mat-tab>
             <mat-tab label="Antecedentes">
               <app-antecedente [consejeriaId] = "id"></app-antecedente>

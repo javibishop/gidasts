@@ -29,7 +29,7 @@ export class UsuariesAdapter {
     }
 
     adaptToApi(usuarie: Usuarie) :UsuarieApi {
-        return new UsuarieApi(usuarie._id, usuarie.nombre, usuarie.apellido, usuarie.activo, usuarie.userName,
+        return new UsuarieApi(usuarie.id, usuarie.nombre, usuarie.apellido, usuarie.activo, usuarie.userName,
              usuarie.password, usuarie.especialidadId, usuarie.token );
     }
 

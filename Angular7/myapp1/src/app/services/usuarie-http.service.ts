@@ -35,7 +35,7 @@ export class UsuarieHttpService {
   getById(id: string) : Observable<Usuarie> {
           //const url = this.url + '/' + id.toString();
           const url = `${this.url}/${id}`; /*interpolacion */
-          return this.HttpClient.get<UsuarieApi>(url)
+          return this.HttpClient.get<UsuarieApi>(url) 
           .pipe(
             map(usuarieApi =>
               this.usuariesAdapter.adapt(usuarieApi)
@@ -64,7 +64,7 @@ export class UsuarieHttpService {
   update(usuarie: Usuarie): Observable<void>{
       // var index = this.usuaries.findIndex(a => a.id === usuarie.id);
       // this.usuaries[index] = usuarie;
-      const url = `${this.url}/${usuarie._id}`; /*interpolacion */
+      const url = `${this.url}/${usuarie.id}`; /*interpolacion */
       /* */
       return this.HttpClient.put<void>(url, this.usuariesAdapter.adaptToApi(usuarie))
       .pipe(tap(() =>{return this.getAll()}));

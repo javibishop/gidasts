@@ -5,8 +5,7 @@ export class EspecialidadApi {
     constructor(
         public _id: string,
         public nombre: string
-    ){
-    }
+    ){}
 }
 
 // si aca solo pongo @Injectable me da un error de que nadie lo provee, y se debe poner el en providers del module.ts Entonces se pone el root como abajo

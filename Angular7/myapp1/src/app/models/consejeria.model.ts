@@ -1,3 +1,5 @@
+import { Usuaria } from './usuaria.model';
+import { Usuarie } from './usuarie.model';
 
 export class Consejeria {
     constructor(
@@ -5,9 +7,9 @@ export class Consejeria {
         public numero :number,
         public fechaIngreso: Date,
         public observacion :string,
-        public usuariaId :string,
-        public usuarie1Id :string,
-        public usuarie2Id :string
+        public usuariaId :Usuaria,
+        public usuarie1Id :Usuarie,
+        public usuarie2Id :Usuarie
         )
         {}
 }

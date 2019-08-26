@@ -7,12 +7,12 @@ import { ProvinciaHttpService } from '../../services/provincia-http.service';
 import { PartidoHttpService } from '../../services/partido-http.service';
 import { LocalidadHttpService } from '../../services/localidad-http.service';
 import { StateService } from '../../services/state.service';
-import { Pais } from '../../models/pais.model';
-import { Provincia } from '../../models/provincia.model';
-import { Partido } from '../../models/partido.model';
-import { Localidad } from '../../models/localidad.model';
 import {NivelEstudioListService, EstadoEstudioListService} from '../../services/list-item.service'
 import { ListItem } from '../../models/list-item.model';
+import { Pais } from 'src/app/models/pais.model';
+import { Provincia } from 'src/app/models/provincia.model';
+import { Localidad } from 'src/app/models/localidad.model';
+import { Partido } from 'src/app/models/partido.model';
 
 @Component({
   selector: 'app-usuaria',
@@ -20,12 +20,11 @@ import { ListItem } from '../../models/list-item.model';
   styleUrls: ['./usuaria.component.scss']
 })
 export class UsuariaComponent implements OnInit {
-  @Input() usuariaId: number;
+  @Input() usuaria: Usuaria;
   @Output() usuariaIdInsert = new EventEmitter <number>();
   
-  usuaria: Usuaria;
   paises: Pais [];
-  provincias: Provincia [];
+  provincias: Provincia[];
   partidos: Partido[];
   localidades: Localidad[];
   nivelEstudios: ListItem[];
@@ -42,26 +41,28 @@ export class UsuariaComponent implements OnInit {
     this.paisHttpService.getAll();
     this.provinciaHttpService.getPorPais("1");
     
-    if(this.usuariaId > 0){
-      this.consejeriaService.getUsuariaById(this.usuariaId).subscribe(usuariaRequest => this.usuaria = usuariaRequest);
+    // if(this.usuariaId != undefined){
+    //   this.consejeriaService.getUsuariaById(this.usuariaId).subscribe(usuariaRequest => this.usuaria = usuariaRequest);
+    // }
+    // else{
+    //   this.usuaria = new Usuaria(0,'','',0, true, new Date(),'','','','','','', false, false, false, false, false, false, false, false, false, false, false, '','',0,0,'');
+    // }
+    if(this.usuaria == undefined){
+      this.usuaria = new Usuaria('','','',0, true, new Date(),'','','','','','', false, false, false, false, false, false, false, false, false, false, false, '','',0,0,'');
     }
-    else{
-      this.usuaria = new Usuaria(0,'','',0, true, new Date(),'','','','','','', false, false, false, false, false, false, false, false, false, false, false, '','',0,0,'');
-    }
-
     this.stateService.paises$.subscribe(paises => this.paises = paises);
     this.stateService.provincias$.subscribe(provincias => this.provincias = provincias);
   }
 
   guardarUsuaria(form: any) {
-    if(this.usuariaId > 0){
+    if(this.usuaria != undefined && this.usuaria.id !== '') {
       this.consejeriaService.updateUsuaria(this.usuaria).subscribe(
         (_) => {}
       ); 
    }else{
     this.consejeriaService.insertUsuaria(this.usuaria).subscribe(
-      (result: Usuaria) => {
-        this.usuariaIdInsert.emit(result.id);    
+      (result: any) => {
+        this.usuariaIdInsert.emit(result.usuaria);    
       }
     ); 
    }

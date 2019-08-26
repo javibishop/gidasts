@@ -3,18 +3,18 @@ import { Injectable } from '@angular/core';
 
 export class UsuariaApi {
     constructor(
-        public id: number,
+        public id: string,
         public nombre: string,
         public apellido: string,
         public edad: number,
         public activo: boolean,
         public fechaNacimiento: Date,
-        public nacionalidadId: number,
+        public nacionalidadId: string,
         public telefono: string,
         public direccion: string,
         public documento: string,
-        public provinciaId: number,
-        public partidoId: number,
+        public provinciaId: string,
+        public partidoId: string,
         public usuarioCentroSalud: boolean,
         public parejaConViviente : boolean,
         public parejaNoConViviente : boolean,
@@ -31,7 +31,7 @@ export class UsuariaApi {
 
         public nivelInstruccion : number,
         public nivelInstruccionEstado : number,
-        public localidadId: number,
+        public localidadId: string,
     ){
     }
 }

@@ -12,9 +12,7 @@ app.get('/especialidad/:id', verificaToken, (req, res)  => {
         if(err){
             return res.status(400).json({ok: false, err});
         }else{
-            Especialidad.count((err, cantidad) =>{
-                return res.json(especialidad);
-            })
+            return res.json(especialidad);
             
         }
     });   
@@ -32,15 +30,15 @@ app.get('/especialidad', verificaToken, (req, res)  => {
     Especialidad.find()
     .skip(desde) /* salta los 5 registros por get */
     .limit(hasta) /* 5 registros por get */
-    .exec((err, especialidad) => {
+    .exec((err, especialidades) => {
         
         if(err){
             return res.status(400).json({ok: false, err});
         }else{
-            Especialidad.count((err, cantidad) =>{
-                return res.json(especialidad);
-            })
-            
+            // Especialidad.count((err, cantidad) =>{
+            //     return res.json(especialidad);
+            // })
+            return res.json(especialidades);
         }
     });     
 })

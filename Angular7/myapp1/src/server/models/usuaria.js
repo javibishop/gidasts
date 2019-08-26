@@ -105,14 +105,18 @@ let usuariaSchema = new Shcema({
         type:Boolean,
         default:true
     }
+},
+{
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
 });
 
-usuariaSchema.methods.toJSON = function (){
-    let user = this;
-    let userObject = user.toObject();
-    delete userObject.password;
-    return userObject;
-}
+// usuariaSchema.methods.toJSON = function (){
+//     let user = this;
+//     let userObject = user.toObject();
+//     delete userObject.password;
+//     return userObject;
+// }
 
 usuariaSchema.plugin(uniqueValidator, {message:'{PATH} debe de ser unico'});
 

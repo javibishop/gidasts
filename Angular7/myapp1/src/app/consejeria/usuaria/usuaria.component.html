@@ -43,16 +43,31 @@
     </mat-grid-tile>
   </mat-grid-list>
   <mat-grid-list cols="4" rowHeight="50">
-      <mat-grid-tile>
-          <mat-form-field >
-              <input  matInput
-                      required
-                      name="direccion"
-                      placeholder="Direccion"
-                      [(ngModel)]="usuaria.direccion">
-              <mat-error>Debe ingresar la Direccion</mat-error>
-            </mat-form-field>
-      </mat-grid-tile>
+    <mat-grid-tile>
+        <mat-form-field >
+        <input  matInput
+                required
+                name="documento"
+                placeholder="Documento"
+                [(ngModel)]="usuaria.documento">
+        <mat-error>Debe ingresar el Documento</mat-error>
+        </mat-form-field>
+    </mat-grid-tile>
+</mat-grid-list>
+  <mat-grid-list cols="4" rowHeight="50">
+    <mat-grid-tile>
+        <mat-form-field  class="all-width">
+            <mat-select
+                placeholder="Nacionalidad"
+                [(ngModel)]="usuaria.nacionalidadId"
+                name="nacionalidadId">
+                <mat-option *ngFor="let pais of paises"
+                [value] = "pais.id">
+                {{pais.nombre}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-grid-tile>
       <mat-grid-tile>
         <mat-form-field  class="all-width">
             <mat-select (selectionChange)="selectProvincia($event.value)"
@@ -95,18 +110,16 @@
   </mat-grid-list>
   <mat-grid-list cols="4" rowHeight="50">
     <mat-grid-tile>
-        <mat-form-field  class="all-width">
-            <mat-select
-                placeholder="Nacionalidad"
-                [(ngModel)]="usuaria.nacionalidadId"
-                name="nacionalidadId">
-                <mat-option *ngFor="let pais of paises"
-                [value] = "pais.id">
-                {{pais.nombre}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
+        <mat-form-field >
+            <input  matInput
+                    required
+                    name="direccion"
+                    placeholder="Direccion"
+                    [(ngModel)]="usuaria.direccion">
+            <mat-error>Debe ingresar la Direccion</mat-error>
+            </mat-form-field>
     </mat-grid-tile>
+    
     <mat-grid-tile>
         <mat-form-field >
             <input  matInput
