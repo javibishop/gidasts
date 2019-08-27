@@ -40,12 +40,14 @@ export class GestaActualComponent implements OnInit {
   guardarGestaActual(form: any) {
     if(this.consejeriaId != '' && this.gestaActual.id != ''){
       this.consejeriaService.updateGestaActual(this.gestaActual).subscribe(
-        (_) => {}
+        (gesta) => {
+          this.gestaActual = gesta;
+        }
       ); 
    }else{
     this.consejeriaService.insertGestaActual(this.gestaActual).subscribe(
-      (_) => {
-        //this.usuariaIdInsert.emit(result.id);    
+      (gesta) => {
+        this.gestaActual = gesta;
       }
     ); 
    }

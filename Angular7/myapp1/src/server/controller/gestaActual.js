@@ -16,6 +16,18 @@ app.get('/gestaactual/:id', verificaToken, (req, res)  => {
     });   
 })
 
+app.get('/gestaactual/porconsejeria/:id', verificaToken, (req, res)  => {
+    GestaActual.findOne({consejeriaId: req.params.id})
+    .exec((err, gesta) => {
+        
+        if(err){
+            return res.status(400).json({ok: false, err});
+        }else{
+            return res.json(gesta);   
+        }
+    });   
+})
+
 //cada vez q hago un get, se ejecuta el middleware
 app.get('/gestaactual', verificaToken, (req, res)  => {
 
@@ -40,42 +52,38 @@ app.get('/gestaactual', verificaToken, (req, res)  => {
 
 app.post('/gestaactual', verificaToken,  (req, res) => {
     let gestaactual = new GestaActual({
-        eco1Observacion :req.body.eco1Observacion,
-        eco1Fecha: req.body.eco1Fecha,
-        eco1EG :req.body.eco1EG,
-        eco1LFC :req.body.eco1LFC,
-        eco1Embrion :req.body.eco1Embrion,
-        eco1Saco :req.body.eco1Saco,
-        eco1Ubicacion :req.body.eco1Ubicacion,
-        eco1Normoincerto :req.body.eco1Normoincerto,
-        eco1Ectopico :req.body.eco1Ectopico,
-        eco1HMR :req.body.eco1HMR,
-        eco2Observacion :req.body.eco2Observacion,
-        eco2Fecha: req.body.eco2Fecha,
-        eco2EG :req.body.eco2EG,
-        eco2LFC :req.body.eco2LFC,
-        eco2Embrion :req.body.eco2.eco2Embrion,
-        eco2Saco :req.body.eco2.eco2Saco,
-        eco2Ubicacion :req.body.eco2.eco2Ubicacion,
-        eco2Normoincerto :req.body.eco2Normoincerto,
-        eco2Ectopico :req.body.eco2Ectopico,
-        eco2HMR :req.body.eco2HMR,
-        labFecha: req.body.labFecha,
-        labGB :req.body.labGB,
-        labGR :req.body.labGR,
-        labHb :req.body.labHb,
-        labHto :req.body.labHto,
-        labGrupo :req.body.labGrupo,
-        labFactor :req.body.labFactor,
-        consejeriaId :req.body.consejeriaId,
-        fecha: req.body.fecha
+        enteroPorTestOrina :req.body.enteroPorTestOrina,
+        enteroPorTestOrinaObservaciones :req.body.enteroPorTestOrinaObservaciones,
+        enteroFecha: req.body.enteroFecha,
+        fum : req.body.fum,
+        egfum :req.body.egfum,
+        intentoSuprimir :req.body.intentoSuprimir,
+        intentoSuprimirObservaciones :req.body.intentoSuprimirObservaciones,
+        loComento :req.body.loComento,
+        loComentoAQuien :req.body.loComentoAQuien,
+        causaSaludIntegral :req.body.causaSaludIntegral,
+        causaViolacion :req.body.causaViolacion,
+        causaSinVE :req.body.causaSinVE,
+        calendarioVacunacionCompleto :req.body.calendarioVacunacionCompleto,
+        calendarioVacunacionObservaciones :req.body.calendarioVacunacionObservaciones,
+        cUMSPACO :req.body.cUMSPACO,
+        cUMSPDisfuncionHepaticaSevera :req.body.cUMSPDisfuncionHepaticaSevera,
+        cUMSPEmbarazoEctopico :req.body.cUMSPEmbarazoEctopico,
+        cUMSPAlergiaMisoDiclo :req.body.cUMSPAlergiaMisoDiclo,
+        factorRiesgoHb7 :req.body.factorRiesgoHb7,
+        factorRiesgoCardiopatia :req.body.factorRiesgoCorticoterapia,
+        factorRiesgoDIU :req.body.factorRiesgoDIU,
+        factorRiesgoCardiovascular :req.body.factorRiesgoCardiovascular,
+        factorRiesgoCorticoterapia :req.body.factorRiesgoCardiopatia,
+        factorRiesgoOtros :req.body.factorRiesgoOtros,
+        consejeriaId :req.body.consejeriaId
     });
     
-    gestaactual.save((err, antecedenteDb) => {
+    gestaactual.save((err, gesta) => {
         if(err){
-            return res.status(400).json({ok: false, err});
+            return res.status(400).json({ok: false, error: err});
         }else{
-            return res.json(antecedenteDb);
+            return res.json(gesta);
         }
     })
 })
@@ -87,10 +95,16 @@ app.put('/gestaactual/:id', verificaToken,  (req, res) => {
     //new, es para que retorne el usuario actualizado. runV es para que corra las validaciones definidas antes de grabar. Sino no las corre
     let optionsMongoose = {
         new: true, 
-        runValidators:true
+        upsert: true,
+        runValidators: true,
+        setDefaultsOnInsert: true,
+        context: 'query'
     }
     
-    GestaActual.findByIdAndUpdate(id, req.body, (err, antecedenteDB) =>{
+    // delete req.body.id;
+    // delete req.body._id;
+
+    GestaActual.findByIdAndUpdate(id, req.body, optionsMongoose, (err, antecedenteDB) =>{
         if(err){
             return res.status(400).json({ok: false, err});
         }else{

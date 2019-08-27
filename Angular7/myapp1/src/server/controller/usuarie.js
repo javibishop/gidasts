@@ -86,7 +86,10 @@ app.put('/usuarie/:id', verificaToken,  (req, res) => {
     //new, es para que retorne el usuarie actualizado. runV es para que corra las validaciones definidas antes de grabar. Sino no las corre
     let optionsMongoose = {
         new: true, 
-        runValidators:true
+        upsert: true,
+        runValidators: true,
+        setDefaultsOnInsert: true,
+        context: 'query'
     }
     Usuarie.findByIdAndUpdate(id, body, optionsMongoose, (err, usuarieDB) =>{
         if(err){

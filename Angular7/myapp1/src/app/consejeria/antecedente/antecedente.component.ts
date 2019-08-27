@@ -39,13 +39,11 @@ export class AntecedenteComponent implements OnInit {
   guardarAntecedente(form: any) {
     if(this.consejeriaId != '' && this.antecedente.id  != ''){
       this.consejeriaService.updateAntecedente(this.antecedente).subscribe(
-        (_) => {}
+        (antece) => {this.antecedente = antece}
       ); 
    }else{
     this.consejeriaService.insertAntecedente(this.antecedente).subscribe(
-      (_) => {
-        //this.usuariaIdInsert.emit(result.id);    
-      }
+      (antece) => {this.antecedente = antece}
     ); 
    }
   }

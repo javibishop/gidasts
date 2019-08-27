@@ -20,12 +20,12 @@ import { StateService } from './state.service';
 })
 export class ConsejeriasHttpService {
   private url = environment.baseUrl;
-  private urlConsejeria = this.url + 'consejeria';
-  private urlEntrevista = this.url + 'entrevistaspostaborto';
-  private urlEstudio = this.url + 'estudiocomplementario';
-  private urlGestas = this.url + 'gestaactual';
-  private urlAntecedente = this.url + 'antecedente';
-  private urlUsuaria = this.url + 'usuaria';
+  private urlConsejeria = this.url + 'consejeria/';
+  private urlEntrevista = this.url + 'entrevistapostaborto/';
+  private urlEstudio = this.url + 'estudiocomplementario/';
+  private urlAntecedente = this.url + 'antecedente/';
+  private urlGestas  = this.url + 'gestaactual/';
+  private urlUsuaria = this.url + 'usuaria/';
   constructor(
     private HttpClient: HttpClient,
     private stateService: StateService,
@@ -66,7 +66,7 @@ export class ConsejeriasHttpService {
 }
 
   getById(id: string) : Observable<Consejeria> {
-    const url = `${this.urlConsejeria}/${id}`; /*interpolacion */
+    const url = `${this.urlConsejeria}${id}`; /*interpolacion */
     return this.HttpClient.get<ConsejeriaApi>(url)
     .pipe(
       map(consejeriaApi => this.consejeriasAdapter.adapt(consejeriaApi))
@@ -74,7 +74,7 @@ export class ConsejeriasHttpService {
   }
 
   getEntrevistaByConsejeriaId(idConsejeria: string) : Observable<EntrevistaPostAborto> {
-    const url = `${this.urlEntrevista}${idConsejeria}`; /*interpolacion */
+    const url = `${this.urlEntrevista}porconsejeria/${idConsejeria}`; /*interpolacion */
       return this.HttpClient.get<EntrevistaApi>(url)
       .pipe(
         map(entrevistaApi => this.entrevistaAdapter.adapt(entrevistaApi))
@@ -83,7 +83,7 @@ export class ConsejeriasHttpService {
 
   getEstudioByConsejeriaId(idConsejeria: string) : Observable<EstudioComplementario> {
     
-    const url = `${this.urlEstudio}${idConsejeria}`; /*interpolacion */
+    const url = `${this.urlEstudio}porconsejeria/${idConsejeria}`; /*interpolacion */
     return this.HttpClient.get<EstudioApi>(url)
     .pipe(
       map(estudioApi => this.estudioComplementarioAdapter.adapt(estudioApi))
@@ -92,7 +92,7 @@ export class ConsejeriasHttpService {
 
   getGestasByConsejeriaId(idConsejeria: string) : Observable<GestaActual> {
     
-    const url = `${this.urlGestas}${idConsejeria}`; /*interpolacion */
+    const url = `${this.urlGestas}porconsejeria/${idConsejeria}`; /*interpolacion */
     return this.HttpClient.get<GestaActualApi>(url)
     .pipe(
       map(gestaActualApi => this.gestaActualAdapter.adapt(gestaActualApi))
@@ -100,7 +100,7 @@ export class ConsejeriasHttpService {
   }
 
   getAntecedenteByConsejeriaId(idConsejeria: string) : Observable<Antecedente> {
-    const url = `${this.urlAntecedente}/porconsejeria/${idConsejeria}`; /*interpolacion */
+    const url = `${this.urlAntecedente}porconsejeria/${idConsejeria}`; /*interpolacion */
     return this.HttpClient.get<AntecedenteApi>(url)
     .pipe(
       map(antecedenteApi => this.antecedentesAdapter.adapt(antecedenteApi))
@@ -109,7 +109,7 @@ export class ConsejeriasHttpService {
 
   getUsuariaByConsejeriaId(idConsejeria: string) : Observable<Usuaria> {
     
-    const url = `${this.urlUsuaria}/${idConsejeria}`; /*interpolacion */
+    const url = `${this.urlUsuaria}porconsejeria/${idConsejeria}`; /*interpolacion */
     return this.HttpClient.get<UsuariaApi>(url)
     .pipe(
       map(usuariaApi => this.usuariasAdapter.adapt(usuariaApi))
@@ -117,74 +117,73 @@ export class ConsejeriasHttpService {
   }
 
   getUsuariaById(id: string) : Observable<Usuaria> {
-    const url = `${this.urlUsuaria}/${id}`; /*interpolacion */
+    const url = `${this.urlUsuaria}${id}`; /*interpolacion */
     return this.HttpClient.get<UsuariaApi>(url)
     .pipe(
       map(usuariaApi => this.usuariasAdapter.adapt(usuariaApi))
     )
   }
 
-  parseJsonDate(jsonDateString): Date {
-    return new Date(parseInt(jsonDateString.replace('/Date(', '')));
+parseJsonDate(jsonDateString): Date {
+  return new Date(parseInt(jsonDateString.replace('/Date(', '')));
 }
-    updateAntecedente(antecedente: Antecedente): Observable<void>{
-        const url = `${this.urlAntecedente}/${antecedente.id}`; /*interpolacion */
-        return this.HttpClient.put<void>(url, antecedente)
-        .pipe(tap(() =>{return this.getAll()}));
-    }
 
-    insertAntecedente(antecedente: Antecedente): Observable<void>{
-      return this.HttpClient.post<void>(this.urlAntecedente, antecedente);
-    }
-
-    updateEntrevista(entrevistaPostAborto: EntrevistaPostAborto): Observable<void>{
-      const url = `${this.urlEntrevista}/${entrevistaPostAborto.id}`; /*interpolacion */
-      return this.HttpClient.put<void>(url, entrevistaPostAborto)
-      .pipe(tap(() =>{return this.getAll()}));
-  }
-
-  insertEntrevista(entrevistaPostAborto: EntrevistaPostAborto): Observable<void>{
-    return this.HttpClient.post<void>(this.urlEntrevista, entrevistaPostAborto);
-  }
-
-  updateGestaActual(gestaActual: GestaActual): Observable<void>{
-    const url = `${this.urlGestas}/${gestaActual.id}`; /*interpolacion */
-    return this.HttpClient.put<void>(url, gestaActual)
-    .pipe(tap(() =>{return this.getAll()}));
-  }
-
-  insertGestaActual(gestaActual: GestaActual): Observable<void>{
-  return this.HttpClient.post<void>(this.urlGestas, gestaActual);
-  }
-
-  updateEstudio(estudioComplementario: EstudioComplementario): Observable<void>{
-    const url = `${this.urlEstudio}/${estudioComplementario.id}`; /*interpolacion */
-    return this.HttpClient.put<void>(url, estudioComplementario)
-    .pipe(tap(() =>{return this.getAll()}));
-  }
-
-  insertEstudio(estudioComplementario: EstudioComplementario): Observable<void>{
-    return this.HttpClient.post<void>(this.urlEstudio, estudioComplementario);
-  }
-
-  updateUsuaria(usuaria: Usuaria): Observable<void>{
-    const url = `${this.urlUsuaria}/${usuaria.id}`; /*interpolacion */
-    return this.HttpClient.put<void>(url, usuaria);
+updateAntecedente(antecedente: Antecedente): Observable<Antecedente>{
+    const url = `${this.urlAntecedente}${antecedente.id}`; /*interpolacion */
+    return this.HttpClient.put<Antecedente>(url, antecedente)
     //.pipe(tap(() =>{return this.getAll()}));
+}
+
+insertAntecedente(antecedente: Antecedente): Observable<Antecedente>{
+  return this.HttpClient.post<Antecedente>(this.urlAntecedente, antecedente);
+}
+
+updateEntrevista(entrevistaPostAborto: EntrevistaPostAborto): Observable<EntrevistaPostAborto>{
+  const url = `${this.urlEntrevista}${entrevistaPostAborto.id}`; /*interpolacion */
+  return this.HttpClient.put<EntrevistaPostAborto>(url, entrevistaPostAborto)
+  //.pipe(tap(() =>{return this.getAll()}));
+}
+
+  insertEntrevista(entrevistaPostAborto: EntrevistaPostAborto): Observable<EntrevistaPostAborto>{
+    return this.HttpClient.post<EntrevistaPostAborto>(this.urlEntrevista, entrevistaPostAborto);
+  }
+
+  updateGestaActual(gestaActual: GestaActual): Observable<GestaActual>{
+    const url = `${this.urlGestas}${gestaActual.id}`; /*interpolacion */
+    return this.HttpClient.put<GestaActual>(url, gestaActual)
+    //.pipe(tap(() =>{return this.getAll()}));
+  }
+
+  insertGestaActual(gestaActual: GestaActual): Observable<GestaActual>{
+    return this.HttpClient.post<GestaActual>(this.urlGestas, gestaActual);
+  }
+
+  updateEstudio(estudioComplementario: EstudioComplementario): Observable<EstudioComplementario>{
+    const url = `${this.urlEstudio}${estudioComplementario.id}`; /*interpolacion */
+    return this.HttpClient.put<EstudioComplementario>(url, estudioComplementario)
+  }
+
+  insertEstudio(estudioComplementario: EstudioComplementario): Observable<EstudioComplementario>{
+    return this.HttpClient.post<EstudioComplementario>(this.urlEstudio, estudioComplementario);
+  }
+
+  updateUsuaria(usuaria: Usuaria): Observable<Usuaria>{
+    const url = `${this.urlUsuaria}${usuaria.id}`; /*interpolacion */
+    return this.HttpClient.put<Usuaria>(url, usuaria);
   }
 
   insertUsuaria(usuaria: Usuaria): Observable<Usuaria>{
     return this.HttpClient.post<Usuaria>(this.urlUsuaria, usuaria);
   }
 
-  update(consejeria: Consejeria): Observable<void>{
-    const url = `${this.urlConsejeria}/${consejeria._id}`; /*interpolacion */
-    return this.HttpClient.put<void>(url, this.consejeriasAdapter.adaptToApi(consejeria))
+  update(consejeria: Consejeria): Observable<Consejeria>{
+    const url = `${this.urlConsejeria}${consejeria._id}`; /*interpolacion */
+    return this.HttpClient.put<Consejeria>(url, this.consejeriasAdapter.adaptToApi(consejeria))
     .pipe(tap(() =>{return this.getAll()}));
   }
 
-  insert(consejeria: Consejeria): Observable<void>{
-    return this.HttpClient.post<void>(this.urlConsejeria, this.consejeriasAdapter.adaptToApi(consejeria));
+  insert(consejeria: Consejeria): Observable<Consejeria>{
+    return this.HttpClient.post<Consejeria>(this.urlConsejeria, this.consejeriasAdapter.adaptToApi(consejeria));
   }
 
 }

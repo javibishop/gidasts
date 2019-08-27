@@ -23,12 +23,10 @@ let entrevistaPostAbortoSchema = new Shcema({
         default:false
     },
     procedimientoNoOtro:{
-        type:String,
-        required: [true, 'El nombre es requerido']
+        type:String
     },
     procedimientoNoOtro:{
-        type:Boolean,
-        default:false
+        type:String
     },
     procedimientoSiHecho:{
         type:Boolean,
@@ -39,8 +37,7 @@ let entrevistaPostAbortoSchema = new Shcema({
         default:false
     },
     procedimientoSiOtra:{
-        type:Boolean,
-        default:false
+        type:String
     },
     procedimientoSiViaV:{
         type:Boolean,
@@ -51,8 +48,7 @@ let entrevistaPostAbortoSchema = new Shcema({
         default:false
     },
     procedimientoSiOtro:{
-        type:Boolean,
-        default:false
+        type:String
     },
     accedioPorFarmacia:{
         type:Boolean,

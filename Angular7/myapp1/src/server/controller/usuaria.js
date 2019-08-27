@@ -45,6 +45,18 @@ app.get('/usuaria/:id', verificaToken, (req, res)  => {
     });   
 })
 
+app.get('/usuaria/porconsejeria/:id', verificaToken, (req, res)  => {
+    Usuaria.findOne({consejeriaId: req.params.id})
+    .exec((err, usuaria) => {
+        
+        if(err){
+            return res.status(400).json({ok: false, err});
+        }else{
+            return res.json(usuaria);   
+        }
+    });   
+})
+
 //  app.post('/usuaria', [verificaToken, verificaRol],  (req, res) => {
 app.post('/usuaria', verificaToken, (req, res) => {
     //req.body es lo que parseo el body parser.
@@ -91,7 +103,7 @@ app.post('/usuaria', verificaToken, (req, res) => {
     })
 })
 
-app.put('/usuaria/:id', verificaToken,  (req, res) => {
+app.put('/usuaria/:id', verificaToken, (req, res) => {
     //el :id aparece en params, si es otro nombre, aparece otro nombre.
     let id = req.params.id;
     //una forma de quitar el pass y el role para que no se modifiquen es:
@@ -104,7 +116,10 @@ app.put('/usuaria/:id', verificaToken,  (req, res) => {
     //new, es para que retorne el usuaria actualizado. runV es para que corra las validaciones definidas antes de grabar. Sino no las corre
     let optionsMongoose = {
         new: true, 
-        runValidators:true
+        upsert: true,
+        runValidators: true,
+        setDefaultsOnInsert: true,
+        context: 'query'
     }
     Usuaria.findByIdAndUpdate(id, req.body, optionsMongoose, (err, usuariaDB) =>{
         if(err){

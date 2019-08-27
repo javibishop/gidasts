@@ -41,13 +41,11 @@ export class EstudioComplementarioComponent implements OnInit {
   guardarEstudioComplementario(form: any) {
     if(this.consejeriaId != '' && this.estudioComplementario.id != ''){
       this.consejeriaService.updateEstudio(this.estudioComplementario).subscribe(
-        (_) => {}
+        (estudio) => {this.estudioComplementario = estudio}
       ); 
    }else{
     this.consejeriaService.insertEstudio(this.estudioComplementario).subscribe(
-      (_) => {
-        //this.usuariaIdInsert.emit(result.id);    
-      }
+      (estudio) => {this.estudioComplementario = estudio}
     ); 
    }
   }

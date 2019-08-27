@@ -25,7 +25,7 @@ export class EntrevistaPostAborto {
         public procedimientoNoOtro :string,
         public procedimientoSiHecho: boolean,
         public procedimientoSiInformado :boolean,
-        public procedimientoSiOtra :number,
+        public procedimientoSiOtra :string,
         public procedimientoSiViaV :boolean,
         public procedimientoSiViaSL :boolean,
         public procedimientoSiOtro :string,

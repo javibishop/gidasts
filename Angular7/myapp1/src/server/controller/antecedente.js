@@ -88,10 +88,13 @@ app.put('/antecedente/:id', verificaToken,  (req, res) => {
     //new, es para que retorne el usuario actualizado. runV es para que corra las validaciones definidas antes de grabar. Sino no las corre
     let optionsMongoose = {
         new: true, 
-        runValidators:true
+        upsert: true,
+        runValidators: true,
+        setDefaultsOnInsert: true,
+        context: 'query'
     }
     
-    Antecedente.findByIdAndUpdate(id, req.body, (err, antecedenteDB) =>{
+    Antecedente.findByIdAndUpdate(id, req.body, optionsMongoose, (err, antecedenteDB) =>{
         if(err){
             return res.status(400).json({ok: false, err});
         }else{

@@ -70,20 +70,23 @@ app.post('/consejeria', verificaToken,  (req, res) => {
     })
 })
 
-app.put('/consejeria/:id', verificaToken,  (req, res) => {
+app.put('/consejeria/:id', verificaToken, (req, res) => {
     //el :id aparece en params, si es otro nombre, aparece otro nombre.
     let id = req.params.id;
     
     //new, es para que retorne el usuario actualizado. runV es para que corra las validaciones definidas antes de grabar. Sino no las corre
     let optionsMongoose = {
         new: true, 
-        runValidators:true
+        upsert: true,
+        runValidators: true,
+        setDefaultsOnInsert: true,
+        context: 'query'
     }
     let consejeria = req.body;
     consejeria.usuariaId = consejeria.usuariaId.id;
     consejeria.usuarie1Id = consejeria.usuarie1Id.id;
     consejeria.usuarie2Id = consejeria.usuarie2Id.id;
-    Consejeria.findByIdAndUpdate(id, consejeria, (err, consejeriaDB) =>{
+    Consejeria.findByIdAndUpdate(id, consejeria,optionsMongoose, (err, consejeriaDB) =>{
         if(err){
             return res.status(400).json({ok: false, err});
         }else{

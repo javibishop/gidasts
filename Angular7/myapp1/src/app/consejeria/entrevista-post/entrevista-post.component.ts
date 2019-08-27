@@ -34,20 +34,18 @@ export class EntrevistaPostComponent implements OnInit {
   }
 
   inicializar(consejeriaId: string){
-    this.entrevista =  new EntrevistaPostAborto('',new Date(),'',false,false,false,'',false,false,0,false,false,'',false,false,false,false,false,false,false,false,
+    this.entrevista =  new EntrevistaPostAborto('',new Date(),'',false,false,false,'',false,false,'',false,false,'',false,false,false,false,false,false,false,false,
     false,false,false,'',false,false,false,'',false,new Date(),false,false,false,false,false,false,false,false,false,false,false,false,false,false,false, consejeriaId);
   }
 
   guardarEntrevista(form: any) {
     if(this.consejeriaId != '' && this.entrevista.id != ''){
       this.consejeriaService.updateEntrevista(this.entrevista).subscribe(
-        (_) => {}
+        (entre) => {this.entrevista = entre}
       ); 
    }else{
     this.consejeriaService.insertEntrevista(this.entrevista).subscribe(
-      (_) => {
-        //this.usuariaIdInsert.emit(result.id);    
-      }
+      (entre) => {this.entrevista = entre}
     ); 
    }
   }

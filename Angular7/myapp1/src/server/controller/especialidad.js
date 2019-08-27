@@ -58,14 +58,17 @@ app.post('/especialidad', [verificaToken],  (req, res) => {
     })
 })
 
-app.put('/especialidad/:id', [verificaToken],  (req, res) => {
+app.put('/especialidad/:id', [verificaToken], (req, res) => {
     //el :id aparece en params, si es otro nombre, aparece otro nombre.
     let id = req.params.id;
     let body = _.pick(req.body, ['nombre']);
     //new, es para que retorne el usuario actualizado. runV es para que corra las validaciones definidas antes de grabar. Sino no las corre
     let optionsMongoose = {
         new: true, 
-        runValidators:true
+        upsert: true,
+        runValidators: true,
+        setDefaultsOnInsert: true,
+        context: 'query'
     }
     Especialidad.findByIdAndUpdate(id, body, optionsMongoose, (err, especialidadDB) =>{
         if(err){

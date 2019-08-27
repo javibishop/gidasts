@@ -16,6 +16,18 @@ app.get('/estudiocomplementario/:id', verificaToken, (req, res)  => {
     });   
 })
 
+app.get('/estudiocomplementario/porconsejeria/:id', verificaToken, (req, res)  => {
+    EstudioComplementario.findOne({consejeriaId: req.params.id})
+    .exec((err, estudio) => {
+        
+        if(err){
+            return res.status(400).json({ok: false, err});
+        }else{
+            return res.json(estudio);   
+        }
+    });   
+})
+
 //cada vez q hago un get, se ejecuta el middleware
 app.get('/estudiocomplementario', verificaToken, (req, res)  => {
 
@@ -54,9 +66,9 @@ app.post('/estudiocomplementario', verificaToken,  (req, res) => {
         eco2Fecha: req.body.eco2Fecha,
         eco2EG :req.body.eco2EG,
         eco2LFC :req.body.eco2LFC,
-        eco2Embrion :req.body.eco2.eco2Embrion,
-        eco2Saco :req.body.eco2.eco2Saco,
-        eco2Ubicacion :req.body.eco2.eco2Ubicacion,
+        eco2Embrion :req.body.eco2Embrion,
+        eco2Saco :req.body.eco2Saco,
+        eco2Ubicacion :req.body.eco2Ubicacion,
         eco2Normoincerto :req.body.eco2Normoincerto,
         eco2Ectopico :req.body.eco2Ectopico,
         eco2HMR :req.body.eco2HMR,
@@ -87,10 +99,13 @@ app.put('/estudiocomplementario/:id', verificaToken,  (req, res) => {
     //new, es para que retorne el usuario actualizado. runV es para que corra las validaciones definidas antes de grabar. Sino no las corre
     let optionsMongoose = {
         new: true, 
-        runValidators:true
+        upsert: true,
+        runValidators: true,
+        setDefaultsOnInsert: true,
+        context: 'query'
     }
     
-    EstudioComplementario.findByIdAndUpdate(id, req.body, (err, antecedenteDB) =>{
+    EstudioComplementario.findByIdAndUpdate(id, req.body, optionsMongoose,(err, antecedenteDB) =>{
         if(err){
             return res.status(400).json({ok: false, err});
         }else{

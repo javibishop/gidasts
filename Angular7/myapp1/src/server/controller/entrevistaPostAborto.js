@@ -16,6 +16,18 @@ app.get('/entrevistapostaborto/:id', verificaToken, (req, res)  => {
     });   
 })
 
+app.get('/entrevistapostaborto/porconsejeria/:id', verificaToken, (req, res)  => {
+    EntrevistaPostAborto.findOne({consejeriaId: req.params.id})
+    .exec((err, entrevista) => {
+        
+        if(err){
+            return res.status(400).json({ok: false, err});
+        }else{
+            return res.json(entrevista);   
+        }
+    });   
+})
+
 //cada vez q hago un get, se ejecuta el middleware
 app.get('/entrevistapostaborto', verificaToken, (req, res)  => {
 
@@ -97,17 +109,20 @@ app.post('/entrevistapostaborto', verificaToken,  (req, res) => {
     })
 })
 
-app.put('/entrevistapostaborto/:id', verificaToken,  (req, res) => {
+app.put('/entrevistapostaborto/:id', verificaToken, (req, res) => {
     //el :id aparece en params, si es otro nombre, aparece otro nombre.
     let id = req.params.id;
     
     //new, es para que retorne el usuario actualizado. runV es para que corra las validaciones definidas antes de grabar. Sino no las corre
     let optionsMongoose = {
         new: true, 
-        runValidators:true
+        upsert: true,
+        runValidators: true,
+        setDefaultsOnInsert: true,
+        context: 'query'
     }
     
-    EntrevistaPostAborto.findByIdAndUpdate(id, req.body, (err, antecedenteDB) =>{
+    EntrevistaPostAborto.findByIdAndUpdate(id, req.body, optionsMongoose, (err, antecedenteDB) =>{
         if(err){
             return res.status(400).json({ok: false, err});
         }else{
