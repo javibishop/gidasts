@@ -22,8 +22,8 @@ export class ConsejeriasHttpService {
   private url = environment.baseUrl;
   private urlConsejeria = this.url + 'consejeria';
   private urlEntrevista = this.url + 'entrevistaspostaborto';
-  private urlEstudio = this.url + 'estudioscomplementario';
-  private urlGestas = this.url + 'gestasactuales';
+  private urlEstudio = this.url + 'estudiocomplementario';
+  private urlGestas = this.url + 'gestaactual';
   private urlAntecedente = this.url + 'antecedente';
   private urlUsuaria = this.url + 'usuaria';
   constructor(
@@ -35,10 +35,7 @@ export class ConsejeriasHttpService {
     private estudioComplementarioAdapter: EstudioComplementarioAdapter,
     private antecedentesAdapter: AntecedentesAdapter,
     private usuariasAdapter: UsuariasAdapter,
-
-  ) {
-    
-   }
+  ) {}
 
   getAll() {
     return this.HttpClient.get<ConsejeriaApi[]>(this.urlConsejeria)
@@ -76,41 +73,41 @@ export class ConsejeriasHttpService {
     )
   }
 
-  getEntrevistaByConsejeriaId(idConsejeria: number) : Observable<EntrevistaPostAborto> {
-    const url = `${this.url}${idConsejeria}/entrevistaspostabortos`; /*interpolacion */
+  getEntrevistaByConsejeriaId(idConsejeria: string) : Observable<EntrevistaPostAborto> {
+    const url = `${this.urlEntrevista}${idConsejeria}`; /*interpolacion */
       return this.HttpClient.get<EntrevistaApi>(url)
       .pipe(
         map(entrevistaApi => this.entrevistaAdapter.adapt(entrevistaApi))
       )
   }
 
-  getEstudioByConsejeriaId(idConsejeria: number) : Observable<EstudioComplementario> {
+  getEstudioByConsejeriaId(idConsejeria: string) : Observable<EstudioComplementario> {
     
-    const url = `${this.url}${idConsejeria}/estudioscomplementarios`; /*interpolacion */
+    const url = `${this.urlEstudio}${idConsejeria}`; /*interpolacion */
     return this.HttpClient.get<EstudioApi>(url)
     .pipe(
       map(estudioApi => this.estudioComplementarioAdapter.adapt(estudioApi))
     )
 }
 
-  getGestasByConsejeriaId(idConsejeria: number) : Observable<GestaActual> {
+  getGestasByConsejeriaId(idConsejeria: string) : Observable<GestaActual> {
     
-    const url = `${this.url}${idConsejeria}/gestasactuales`; /*interpolacion */
+    const url = `${this.urlGestas}${idConsejeria}`; /*interpolacion */
     return this.HttpClient.get<GestaActualApi>(url)
     .pipe(
       map(gestaActualApi => this.gestaActualAdapter.adapt(gestaActualApi))
     )
   }
 
-  getAntecedenteByConsejeriaId(idConsejeria: number) : Observable<Antecedente> {
-    const url = `${this.url}${idConsejeria}/antecedentes`; /*interpolacion */
+  getAntecedenteByConsejeriaId(idConsejeria: string) : Observable<Antecedente> {
+    const url = `${this.urlAntecedente}/porconsejeria/${idConsejeria}`; /*interpolacion */
     return this.HttpClient.get<AntecedenteApi>(url)
     .pipe(
       map(antecedenteApi => this.antecedentesAdapter.adapt(antecedenteApi))
     )
   }
 
-  getUsuariaByConsejeriaId(idConsejeria: number) : Observable<Usuaria> {
+  getUsuariaByConsejeriaId(idConsejeria: string) : Observable<Usuaria> {
     
     const url = `${this.urlUsuaria}/${idConsejeria}`; /*interpolacion */
     return this.HttpClient.get<UsuariaApi>(url)
@@ -130,9 +127,6 @@ export class ConsejeriasHttpService {
   parseJsonDate(jsonDateString): Date {
     return new Date(parseInt(jsonDateString.replace('/Date(', '')));
 }
-  
-  
-  
     updateAntecedente(antecedente: Antecedente): Observable<void>{
         const url = `${this.urlAntecedente}/${antecedente.id}`; /*interpolacion */
         return this.HttpClient.put<void>(url, antecedente)

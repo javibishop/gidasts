@@ -43,9 +43,7 @@ app.get('/consejeria', verificaToken, (req, res)  => {
         if(err){
             return res.status(400).json({ok: false, err});
         }else{
-            Consejeria.count((err, cantidad) =>{
-                return res.json(consejeria);
-            })
+            return res.json(consejeria);
             
         }
     });     
@@ -67,7 +65,7 @@ app.post('/consejeria', verificaToken,  (req, res) => {
         if(err){
             return res.status(400).json({ok: false, err});
         }else{
-            return res.json({ok: true, usuarie: consejeriaDB});
+            return res.json(consejeriaDB);
         }
     })
 })
@@ -90,7 +88,7 @@ app.put('/consejeria/:id', verificaToken,  (req, res) => {
             return res.status(400).json({ok: false, err});
         }else{
             //usuarioDB.password = null;
-            return res.json({ok: true, usuario: consejeriaDB});
+            return res.json(consejeriaDB);
         }
     })
     

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 export class AntecedenteApi {
     constructor(
-        public id :number,
+        public id :string,
         public gestas :number,
         public partosVaginal :number,
         public cesareas :number,
@@ -19,7 +19,7 @@ export class AntecedenteApi {
         public noUsoMAC :boolean,
         public aHEMAC :number,
         public observaciones: string,
-        public consejeriaId :number,
+        public consejeriaId :string,
         public fecha: Date,
         public antecedentesPersonales: string 
     ){

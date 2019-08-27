@@ -9,13 +9,13 @@ import { EstudioComplementario } from '../../models/consejeria.model';
 })
 export class EstudioComplementarioComponent implements OnInit {
 
-  @Input() consejeriaId: number;
+  @Input() consejeriaId: string;
   estudioComplementario: EstudioComplementario;
   
   constructor(private consejeriaService: ConsejeriasHttpService) { }
 
   ngOnInit() {
-    if(this.consejeriaId > 0){
+    if(this.consejeriaId !=''){
       let estudio = null;
       this.consejeriaService.getEstudioByConsejeriaId(this.consejeriaId).subscribe(estudioRequest => 
         {
@@ -33,13 +33,13 @@ export class EstudioComplementarioComponent implements OnInit {
     
   }
 
-  inicializar(consejeriaId: number){
-    this.estudioComplementario = new EstudioComplementario(0,'',new Date(), '', false, 0, false, '', false, false, false, '', new Date(), '', false, 0, false, '', false, false, false, 
+  inicializar(consejeriaId: string){
+    this.estudioComplementario = new EstudioComplementario('','',new Date(), '', false, 0, false, '', false, false, false, '', new Date(), '', false, 0, false, '', false, false, false, 
     new Date(), '', '', '','', '', '', consejeriaId, new Date());
   }
 
   guardarEstudioComplementario(form: any) {
-    if(this.consejeriaId > 0 && this.estudioComplementario.id > 0){
+    if(this.consejeriaId != '' && this.estudioComplementario.id != ''){
       this.consejeriaService.updateEstudio(this.estudioComplementario).subscribe(
         (_) => {}
       ); 

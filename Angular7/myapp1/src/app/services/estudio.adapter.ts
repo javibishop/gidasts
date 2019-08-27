@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 
 export class EstudioApi {
     constructor(
-        public id :number,
+        public id :string,
         public eco1Observacion :string,
         public eco1Fecha: Date,
         public eco1EG :string,
@@ -32,7 +32,7 @@ export class EstudioApi {
         public labHto :string,
         public labGrupo :string,
         public labFactor :string,
-        public consejeriaId :number,
+        public consejeriaId :string,
         public fecha: Date
     ){
     }

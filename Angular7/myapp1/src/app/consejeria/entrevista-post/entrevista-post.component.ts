@@ -9,13 +9,13 @@ import { EntrevistaPostAborto } from '../../models/consejeria.model';
 })
 export class EntrevistaPostComponent implements OnInit {
 
-  @Input() consejeriaId: number;
+  @Input() consejeriaId: string;
   entrevista: EntrevistaPostAborto;
 
   constructor(private consejeriaService: ConsejeriasHttpService) { }
 
   ngOnInit() {
-    if(this.consejeriaId > 0){
+    if(this.consejeriaId != ''){
       let ante = null;
       this.consejeriaService.getEntrevistaByConsejeriaId(this.consejeriaId).subscribe(antecedenteRequest => 
         {
@@ -33,13 +33,13 @@ export class EntrevistaPostComponent implements OnInit {
     
   }
 
-  inicializar(consejeriaId: number){
-    this.entrevista =  new EntrevistaPostAborto(0,new Date(),'',false,false,false,'',false,false,0,false,false,'',false,false,false,false,false,false,false,false,
+  inicializar(consejeriaId: string){
+    this.entrevista =  new EntrevistaPostAborto('',new Date(),'',false,false,false,'',false,false,0,false,false,'',false,false,false,false,false,false,false,false,
     false,false,false,'',false,false,false,'',false,new Date(),false,false,false,false,false,false,false,false,false,false,false,false,false,false,false, consejeriaId);
   }
 
   guardarEntrevista(form: any) {
-    if(this.consejeriaId > 0 && this.entrevista.id > 0){
+    if(this.consejeriaId != '' && this.entrevista.id != ''){
       this.consejeriaService.updateEntrevista(this.entrevista).subscribe(
         (_) => {}
       ); 

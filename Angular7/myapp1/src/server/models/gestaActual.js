@@ -98,15 +98,19 @@ let gestaActualSchema = new Shcema({
     consejeriaId:{
         type:String
     }
+},
+{
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
 });
 
-gestaActualSchema.methods.toJSON = function (){
-    let user = this;
-    let userObject = user.toObject();
-    delete userObject.password;
-    return userObject;
-}
+// gestaActualSchema.methods.toJSON = function (){
+//     let user = this;
+//     let userObject = user.toObject();
+//     delete userObject.password;
+//     return userObject;
+// }
 
 gestaActualSchema.plugin(uniqueValidator, {message:'{PATH} debe de ser unico'});
 
-module.exports = mongoose.model('Usuarias', gestaActualSchema);
+module.exports = mongoose.model('GestasActuales', gestaActualSchema);

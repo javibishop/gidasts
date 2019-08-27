@@ -66,19 +66,24 @@ let antecedenteSchema = new Shcema({
     antecedentesPersonales:{
         type:String
     },
-    
+    observaciones:{
+        type:String
+    },
     consejeriaId:{
         type:String
     }
+},
+{
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
 });
-
-antecedenteSchema.methods.toJSON = function (){
-    let user = this;
-    let userObject = user.toObject();
-    delete userObject.password;
-    return userObject;
-}
+// antecedenteSchema.methods.toJSON = function (){
+//     let user = this;
+//     let userObject = user.toObject();
+//     delete userObject.password;
+//     return userObject;
+// }
 
 antecedenteSchema.plugin(uniqueValidator, {message:'{PATH} debe de ser unico'});
 
-module.exports = mongoose.model('Usuarias', antecedenteSchema);
+module.exports = mongoose.model('Antecedentes', antecedenteSchema);

@@ -186,6 +186,10 @@ let entrevistaPostAbortoSchema = new Shcema({
     consejeriaId:{
         type:String
     }
+},
+{
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
 });
 
 entrevistaPostAbortoSchema.methods.toJSON = function (){
@@ -197,4 +201,4 @@ entrevistaPostAbortoSchema.methods.toJSON = function (){
 
 entrevistaPostAbortoSchema.plugin(uniqueValidator, {message:'{PATH} debe de ser unico'});
 
-module.exports = mongoose.model('Usuarias', entrevistaPostAbortoSchema);
+module.exports = mongoose.model('EntrevistasPostAbortos', entrevistaPostAbortoSchema);

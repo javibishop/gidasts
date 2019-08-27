@@ -8,13 +8,13 @@ import { ConsejeriasHttpService } from '../../services/consejerias-http.service'
   styleUrls: ['./antecedente.component.scss']
 })
 export class AntecedenteComponent implements OnInit {
-  @Input() consejeriaId: number;
+  @Input() consejeriaId: string;
   antecedente: Antecedente;
 
   constructor(private consejeriaService: ConsejeriasHttpService) { }
 
   ngOnInit() {
-    if(this.consejeriaId > 0){
+    if(this.consejeriaId != ''){
       let ante = null;
       this.consejeriaService.getAntecedenteByConsejeriaId(this.consejeriaId).subscribe(antecedenteRequest => 
         {
@@ -32,12 +32,12 @@ export class AntecedenteComponent implements OnInit {
     
   }
 
-  inicializar(consejeriaId: number){
-    this.antecedente =  new Antecedente(0,0,0,0,0,0,false,false,false,false,false,false,false,false,0,'',consejeriaId, new Date(), '');
+  inicializar(consejeriaId: string){
+    this.antecedente =  new Antecedente('',0,0,0,0,0,false,false,false,false,false,false,false,false,0,'',consejeriaId, new Date(), '');
   }
 
   guardarAntecedente(form: any) {
-    if(this.consejeriaId > 0 && this.antecedente.id > 0){
+    if(this.consejeriaId != '' && this.antecedente.id  != ''){
       this.consejeriaService.updateAntecedente(this.antecedente).subscribe(
         (_) => {}
       ); 

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 export class GestaActualApi {
     constructor(
-        public id :number,
+        public id :string,
         public enteroPorTestOrina :boolean,
         public enteroPorTestOrinaObservaciones :string,
         public enteroFecha: Date,
@@ -28,7 +28,7 @@ export class GestaActualApi {
         public factorRiesgoCardiovascular :boolean,
         public factorRiesgoCorticoterapia :boolean,
         public factorRiesgoOtros :string,
-        public consejeriaId :number
+        public consejeriaId :string
     ){
     }
 }

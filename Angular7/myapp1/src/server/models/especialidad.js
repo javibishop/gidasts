@@ -7,6 +7,10 @@ let especialidadSchema = new Shcema({
         type:String,
         required: [true, 'El nombre es requerido']
     }
+},
+{
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
 });
 
 // especialidadSchema.methods.toJSON = function (){

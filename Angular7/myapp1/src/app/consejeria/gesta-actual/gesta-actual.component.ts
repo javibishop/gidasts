@@ -9,13 +9,13 @@ import { GestaActual } from '../../models/consejeria.model';
 })
 export class GestaActualComponent implements OnInit {
 
-  @Input() consejeriaId: number;
+  @Input() consejeriaId: string;
   gestaActual: GestaActual;
   
   constructor(private consejeriaService: ConsejeriasHttpService) { }
 
   ngOnInit() {
-    if(this.consejeriaId > 0){
+    if(this.consejeriaId != ''){
       let gesta = null;
       this.consejeriaService.getGestasByConsejeriaId(this.consejeriaId).subscribe(gestaRequest => 
         {
@@ -33,12 +33,12 @@ export class GestaActualComponent implements OnInit {
     
   }
 
-  inicializar(consejeriaId: number){
-    this.gestaActual = new GestaActual(0,false,'',new Date(),new Date(),new Date(),false,'',false,'',false,false,false,false,'',false,false,false,false,false,false,false,false,false,'', consejeriaId);
+  inicializar(consejeriaId: string){
+    this.gestaActual = new GestaActual('',false,'',new Date(),new Date(),new Date(),false,'',false,'',false,false,false,false,'',false,false,false,false,false,false,false,false,false,'', consejeriaId);
   }
 
   guardarGestaActual(form: any) {
-    if(this.consejeriaId > 0 && this.gestaActual.id > 0){
+    if(this.consejeriaId != '' && this.gestaActual.id != ''){
       this.consejeriaService.updateGestaActual(this.gestaActual).subscribe(
         (_) => {}
       ); 

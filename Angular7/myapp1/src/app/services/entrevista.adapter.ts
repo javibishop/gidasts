@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 
 export class EntrevistaApi {
     constructor(
-        public id:number,
+        public id:string,
         public fecha: Date,
         public procedimientoObservaciones :string,
         public procedimientoHecho: boolean,
@@ -54,7 +54,7 @@ export class EntrevistaApi {
 
         public consejeriaMACACOLactancia :boolean,
 
-        public consejeriaId :number
+        public consejeriaId :string
     ){
     }
 }

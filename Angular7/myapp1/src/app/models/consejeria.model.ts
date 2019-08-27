@@ -16,7 +16,7 @@ export class Consejeria {
 export class EntrevistaPostAborto {
     constructor(
 
-        public id:number,
+        public id:string,
         public fecha: Date,
         public procedimientoObservaciones :string,
         public procedimientoHecho: boolean,
@@ -66,13 +66,13 @@ export class EntrevistaPostAborto {
 
         public consejeriaMACACOLactancia :boolean,
 
-        public consejeriaId :number
+        public consejeriaId :string
     ){}
 }
 
 export class EstudioComplementario {
     constructor (
-    public id :number,
+    public id :string,
     public eco1Observacion :string,
     public eco1Fecha: Date,
     public eco1EG :string,
@@ -100,14 +100,14 @@ export class EstudioComplementario {
     public labHto :string,
     public labGrupo :string,
     public labFactor :string,
-    public consejeriaId :number,
+    public consejeriaId :string,
     public fecha: Date
   ){} 
 }
 
 export class GestaActual {
     constructor (
-        public id :number,
+        public id :string,
         public enteroPorTestOrina :boolean,
         public enteroPorTestOrinaObservaciones :string,
         public enteroFecha: Date,
@@ -132,13 +132,13 @@ export class GestaActual {
         public factorRiesgoCardiovascular :boolean,
         public factorRiesgoCorticoterapia :boolean,
         public factorRiesgoOtros :string,
-        public consejeriaId :number
+        public consejeriaId :string
   ) {}
 }
 
 export class Antecedente{
     constructor (
-        public id :number,
+        public id :string,
         public gestas :number,
         public partosVaginal :number,
         public cesareas :number,
@@ -154,7 +154,7 @@ export class Antecedente{
         public noUsoMAC :boolean,
         public aHEMAC :number,
         public observaciones: string,
-        public consejeriaId :number,
+        public consejeriaId :string,
         public fecha: Date,
         public antecedentesPersonales: string
       ){}
